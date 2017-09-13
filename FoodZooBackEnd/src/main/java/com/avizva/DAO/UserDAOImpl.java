@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.avizva.Model.Users;
 
-@Repository("us")
+@Repository
 public class UserDAOImpl implements UserDAO {
 
 	@Autowired
@@ -67,7 +67,7 @@ public class UserDAOImpl implements UserDAO {
 		return flag;
 	}
 
-	@Override
+	
 	public boolean valid(String username, String password) {
 		boolean flag = false;
 		Session session = null;
@@ -94,7 +94,7 @@ public class UserDAOImpl implements UserDAO {
 
 	}
 
-	@Override
+	
 	public boolean deactivateUser(String username) {
 		boolean flag=false;
 		Session session=null;
@@ -120,7 +120,7 @@ public class UserDAOImpl implements UserDAO {
 		return flag;
 	}
 
-	@Override
+	
 	public Users viewUser(String username) {
 		boolean flag = false;
 		Session session = null;

@@ -17,7 +17,6 @@ public class ServiceDAOImpl implements ServiceDAO{
 	UserDAOImpl userDAOImpl;
 	
 
-	@Override
 	public boolean saveService(Users user) {
 		if(userDAOImpl.saveUser(user)){
 			
@@ -38,13 +37,11 @@ public class ServiceDAOImpl implements ServiceDAO{
 		
 	}
 
-	@Override
 	public boolean updateService(Users user) {
 		
 		return false;
 	}
 
-	@Override
 	public boolean mailService(HttpServletRequest request) {
 		
 		String from = request.getParameter("from");
@@ -58,7 +55,6 @@ public class ServiceDAOImpl implements ServiceDAO{
 		return true;
 	}
 
-	@Override
 	public boolean loginService(HttpServletRequest request) {
 		String user = request.getParameter("username");
 		String pass = request.getParameter("password");
@@ -72,7 +68,6 @@ public class ServiceDAOImpl implements ServiceDAO{
 		
 	}
 
-	@Override
 	public boolean validity(String username, String password) {
 		boolean check = userDAOImpl.valid(username, password);
 		if(check){
@@ -83,7 +78,6 @@ public class ServiceDAOImpl implements ServiceDAO{
 		}
 	}
 
-	@Override
 	public boolean deactivateService(String username) {
 			boolean check = userDAOImpl.deactivateUser(username);
 			if(check){
@@ -110,7 +104,6 @@ public class ServiceDAOImpl implements ServiceDAO{
 			}
 	}
 
-	@Override
 	public Users viewUserService(String username) {
 		Users user=userDAOImpl.viewUser(username);
 		
