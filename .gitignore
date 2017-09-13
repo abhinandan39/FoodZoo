@@ -6,3 +6,4 @@ FoodZooBackEnd/.classpath
 FoodZooBackEnd/.project
 FoodZooBackEnd/.settings/
 FoodZooBackEnd/target/**
+.DS_Store/**

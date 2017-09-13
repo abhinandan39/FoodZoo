@@ -22,7 +22,7 @@
 				</div>
 				<ul class="nav navbar-nav">
 					<li class="nav-item active">
-						<a class="nav-link" href="home">Home   <span class="glyphicon glyphicon-home"></span></a>
+						<a class="nav-link" href="home">Home <span class="glyphicon glyphicon-home"></span></a>
 					</li>
 				
 					<li class="nav-item">
@@ -34,7 +34,7 @@
 				
 					<li class="nav-item barss" >
 						<div class="dropdown">
-						  <span>Menu <i class="fa fa-bars" aria-hidden="true"></i></span>
+						  <span> Menu <i class="fa fa-bars" aria-hidden="true"></i></span>
 						 	 <div class="dropdown-content">
 						     <p>North Indian</p>
 					     	 <p>South Indian</p>
@@ -60,7 +60,7 @@
 				</ul>
 
 				<ul class= "nav navbar-nav navbar-right">
-				
+				<li><a href=""><span class="glyphicon glyphicon-shopping-cart"></span> Cart </a> </li>
 				<li><a href="signup"><span class="glyphicon glyphicon-user"></span>  Sign Up</a></li>
 				<li><a href="signup"><span class="glyphicon glyphicon-log-in"></span>  Log In</a></li>
 				
