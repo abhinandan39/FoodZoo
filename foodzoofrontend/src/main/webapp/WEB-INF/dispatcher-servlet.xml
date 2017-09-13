@@ -29,22 +29,7 @@
 		<property name="prefix" value="/WEB-INF/views/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
-	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-		<property name="host" value="smtp.gmail.com"></property>
-		<property name="username" value="gabhinandan80@gmail.com" />
-		<property name="password" value="21757533"></property>
-		<property name="javaMailProperties">
-			<props>
-				<prop key="mail.smtp.auth">true</prop>
-				<prop key="mail.smtp.socketFactory.port">465</prop>
-				<prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</prop>
-				<prop key="mail.smtp.port">465</prop>
-			</props>
-		</property>
-	</bean>
-	<bean id="sendEmail" class="com.foodzoo.controller.SendEmail">
-		<property name="mailSender" ref="mailSender"></property>
-	</bean>
+	
 	<bean id="messageSource"
 		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
 

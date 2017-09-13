@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,26 +14,25 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.avizva.DAO.UserDAOImpl;
 import com.avizva.Model.Users;
+import com.avizva.service.ServiceDAO;
 
 @Controller
 public class MyController {
+	
+	@Autowired
+	ServiceDAO serviceDao;
 
-	@Autowired
-	UserDAOImpl userDAOImpl;
-	
-	@Autowired
-	SendEmail mail;
-	
 	@RequestMapping("/")
 	public ModelAndView indexcall() {
 
 		return new ModelAndView("index");
-
 	}
 
 	@RequestMapping("/home")
@@ -43,6 +43,33 @@ public class MyController {
 	public ModelAndView getRgistration(){
 		return new ModelAndView("register");
 	}
+	
+	@RequestMapping("/loginhere")
+	public ModelAndView login(){
+		return new ModelAndView("login");
+	}
+	@RequestMapping("/login")
+	public ModelAndView logedin(HttpServletRequest request){
+
+		boolean check = serviceDao.loginService(request);
+		if(check){
+			HttpSession session = request.getSession(false); 
+			session.setAttribute("sessionusername", request.getParameter("username"));
+			return new ModelAndView("index");
+		}
+		else{
+			return new ModelAndView("login").addObject("errormsg", "Invalid Credentials");
+		}
+		
+	}
+	
+	@RequestMapping("/logout")
+	public ModelAndView logout(HttpServletRequest request){
+		HttpSession session = request.getSession();
+		session.invalidate();
+		return new ModelAndView("index");
+	}
+	
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -51,30 +78,47 @@ public class MyController {
 	}
 	@RequestMapping("/registeruser")
 	public ModelAndView saveUser(@Valid @ModelAttribute Users user, BindingResult result){
+		
+		user.setEnabled(true);
 
 		if(result.hasErrors()){
 			
 			return new ModelAndView("register");
 		}
 		
-		if(userDAOImpl.saveUser(user))
+		if(serviceDao.saveService(user))
 		{
 			
-			String from = "FoodZoo";
-//			System.out.println(email);
-//			System.out.println(password);
-			String to = user.getEmail();
-			String subject = "Welcome To FoodZoo";
-			String msg = "Welcome We are glad to have you on Board. Now dig into the yummy food ";
-//			System.out.println("inside controller");
-		//	ApplicationContext context = new ClassPathXmlApplicationContext("application-context.xml");
-		//	SendEmail m = (SendEmail) context.getBean("sendEmail");
-			mail.sendMail(from, to, subject, msg);
 			return new ModelAndView("index").addObject("username","user");
 		}
 		else {
 			return new ModelAndView("register").addObject("msg","Error While Registering");
 		}
+	}
+	@RequestMapping("/deactivate")
+	public ModelAndView deactivate(){
+		return new ModelAndView("deactivate");
+	}
+	
+	@RequestMapping("/question")
+	public ModelAndView deactivate1(@RequestParam("username") String username){
+		return new ModelAndView("question");
+		}
+	@RequestMapping("/finaldeactivate")
+	public ModelAndView finaldeactivate(HttpServletRequest request){
+	HttpSession session = request.getSession();
+	String username = (String)session.getAttribute("sessionusername");
+	
+	boolean check = serviceDao.deactivateService(username);
+	if(check){
+		session.invalidate();
+//		HttpSession session = request.getSession();
+//		session.invalidate();
+		return new ModelAndView("index");
+	}
+	else{
+		return new ModelAndView("deactivate").addObject("deactivateerror","Error in deactivation");
+	}
 	}
 	
 	@RequestMapping("/aboutus")
@@ -95,16 +139,8 @@ public class MyController {
 	@RequestMapping("/contact1")
 	public ModelAndView send(HttpServletRequest request) {
 
-		String from = request.getParameter("from");
-		String to = "abhinandangupta39@gmail.com";
-		String subject = request.getParameter("subject");
-		String msg = request.getParameter("message");
-		System.out.println("inside controller");
-//		ApplicationContext context = new ClassPathXmlApplicationContext("application-context.xml");
-//		SendEmail m = (SendEmail) context.getBean("sendEmail");
+		serviceDao.mailService(request);
 
-		mail.sendMail(from, to, subject, msg);
-		System.out.println("after sendmail");
 		return new ModelAndView("success");
 
 	}

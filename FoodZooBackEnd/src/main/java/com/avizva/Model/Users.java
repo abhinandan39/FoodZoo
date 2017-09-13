@@ -2,6 +2,7 @@ package com.avizva.Model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.UniqueConstraint;
@@ -53,7 +54,8 @@ public class Users {
 	private Date dob;
 	
 	private String role;
-	private boolean enabled;
+	@Column(name="enabled", columnDefinition="boolean default true", nullable=false)
+	private boolean enabled =true;
 //	private Address address;
 	
 	public String getUsername() {
@@ -116,6 +118,12 @@ public class Users {
 	}
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
+	}
+	@Override
+	public String toString() {
+		return "Users [fname=" + fname + ", lname=" + lname + ", username=" + username + ", password=" + password
+				+ ", contact=" + contact + ", email=" + email + ", dob=" + dob + ", role=" + role + ", enabled="
+				+ enabled + "]";
 	}
 	
 	

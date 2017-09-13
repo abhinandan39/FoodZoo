@@ -159,7 +159,7 @@ ${exception}
 			 	
 			 	  
 			</div>
-			<div class="row">
+			<%-- <div class="row">
 				<div class="col-sm-2" style="margin-top: 20px">
 			 		
 			 	</div>
@@ -172,7 +172,7 @@ ${exception}
 			 	</div>
 			 	
 			 	  
-			</div>
+			</div> --%>
 	
 			<div class="row" style="margin-top: 30px">
 				

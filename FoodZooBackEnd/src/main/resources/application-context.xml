@@ -10,8 +10,8 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 
    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
    <property name="host" value="smtp.gmail.com"></property>
-   <property name="username" value="sharmaparul597@gmail.com" />
-   <property name="password" value="lurapbunbun@7"></property>
+   <property name="username" value="gabhinandan80@gmail.com" />
+   <property name="password" value="21757533"></property>
    <property name="javaMailProperties">
    <props>
    <prop key="mail.smtp.auth">true</prop>
@@ -21,7 +21,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
    </props>
    </property>
    </bean>
-   <bean id="sendEmail" class="com.avizva.controller.SendEmail">
+   <bean id="sendEmail" class="com.avizva.service.SendEmail">
    <property name="mailSender" ref="mailSender"></property>
    </bean>
    </beans>

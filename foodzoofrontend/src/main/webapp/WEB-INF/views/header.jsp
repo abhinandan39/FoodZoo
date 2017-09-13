@@ -99,6 +99,7 @@
 
 			<li class="nav-item barss">
 				<div class="dropdown">
+					
 					<span> Menu <i class="fa fa-bars" aria-hidden="true"></i></span>
 					<div class="dropdown-content">
 						<p>North Indian</p>
@@ -107,6 +108,7 @@
 						<p>Italian</p>
 						<p>Dessert</p>
 					</div>
+					
 				</div>
 			</li>
 			<li class="nav-item search">
@@ -134,13 +136,36 @@
 		</ul>
 
 		<ul class="nav navbar-nav navbar-right">
-			<li><a href=""><span
+			<c:if test="${ empty sessionusername}">
+				<li><a href=""><span
 					class="glyphicon glyphicon-shopping-cart"></span> Cart </a></li>
-			<li><a href="signup"><span class="glyphicon glyphicon-user"></span>
-					Sign Up</a></li>
-			<li><a href="signup"><span
-					class="glyphicon glyphicon-log-in"></span> Log In</a></li>
-
+				<li><a href="signup"><span class="glyphicon glyphicon-user"></span>
+						Sign Up</a></li>
+				<li><a href="loginhere"><span
+						class="glyphicon glyphicon-log-in"></span> Log In</a></li>
+				
+			</c:if>
+			
+			<c:if test="${not empty sessionusername}">
+				<li>
+					<a><span>${sessionusername}</span></a>
+				</li>
+				<li><a href=""><span
+					class="glyphicon glyphicon-shopping-cart"></span> Cart </a></li>
+				<li><a href="logout"><span class="glyphicons glyphicons-log-out"></span> Logout </a></li>
+				<li class="nav-item barss">
+					<div class="dropdown">
+				 <span> Settings <i class="fa fa-cog" aria-hidden="true"></i></span>
+						 	 <div class="dropdown-content">
+						     <a><p>update</p></a>
+					     	 <a href="deactivate"><p>deactivate</p></a>
+						 	 </div>
+					</div>
+				</li>
+				
+						
+		     	</c:if>
+			
 		</ul>
 
 	</div>

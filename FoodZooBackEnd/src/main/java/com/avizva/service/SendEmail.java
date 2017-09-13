@@ -1,10 +1,13 @@
-package com.foodzoo.controller;
+package com.avizva.service;
+
 
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+
+@Service
 public class SendEmail {
 	
 	private MailSender mailSender;
