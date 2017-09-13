@@ -53,21 +53,23 @@ public class MyController {
 	public ModelAndView saveUser(@Valid @ModelAttribute Users user, BindingResult result){
 
 		if(result.hasErrors()){
+			
 			return new ModelAndView("register");
 		}
-		else if(userDAOImpl.saveUser(user))
+		
+		if(userDAOImpl.saveUser(user))
 		{
 			
 			String from = "FoodZoo";
 //			System.out.println(email);
 //			System.out.println(password);
-//			String to = email;
+			String to = user.getEmail();
 			String subject = "Welcome To FoodZoo";
-//			String msg = "We are glad to have you on Board. Your login credentials are: "+email+" Password: "+password;
-			System.out.println("inside controller");
+			String msg = "Welcome We are glad to have you on Board. Now dig into the yummy food ";
+//			System.out.println("inside controller");
 		//	ApplicationContext context = new ClassPathXmlApplicationContext("application-context.xml");
 		//	SendEmail m = (SendEmail) context.getBean("sendEmail");
-		//	mail.sendMail(from, to, subject, msg);
+			mail.sendMail(from, to, subject, msg);
 			return new ModelAndView("index").addObject("username","user");
 		}
 		else {

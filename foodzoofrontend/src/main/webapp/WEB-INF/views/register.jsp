@@ -153,7 +153,21 @@ ${exception}
 			 		<spring:message code="label.dob"></spring:message>
 			 	</div>
 			 	<div class="col-sm-5" style="margin-top: 10px">
-				 	<input type="date" name="dob" placeholder="dd/mm/yyyy"  class="form-control"/>
+				 	<input type="date" name="dob" value="1995-09-25"  class="form-control"/>
+			 		<span class="err"><form:errors path="users.dob"></form:errors></span>
+			 	</div>
+			 	
+			 	  
+			</div>
+			<div class="row">
+				<div class="col-sm-2" style="margin-top: 20px">
+			 		
+			 	</div>
+			 	<div class="col-sm-2" style="text-align: left;margin-top: 10px">
+			 		<spring:message code="label.dob"></spring:message>
+			 	</div>
+			 	<div class="col-sm-5" style="margin-top: 10px">
+				 	<input type="date" name="dob" value="1995-09-25"  class="form-control"/>
 			 		<span class="err"><form:errors path="users.dob"></form:errors></span>
 			 	</div>
 			 	
