@@ -110,4 +110,37 @@ public class ServiceDAOImpl implements ServiceDAO{
 		return user;
 	}
 
+	@Override
+	public String questionService(String username) {
+		String question=userDAOImpl.securityque(username);
+        System.out.println("inside security que");
+        System.out.println(question);
+		return question;
+	}
+
+	@Override
+	public boolean answerService(String securityans, String username) {
+		if(userDAOImpl.securityans(securityans,username))
+        {
+        	return true;
+        }
+		else{
+		return false;
+		}
+	}
+
+	@Override
+	public boolean passwordService(String username, String password) {
+
+		if(userDAOImpl.updatepassword(password,username))
+    	{
+    	  
+          return true;
+    	}
+		else{
+			return false;
+		}
+	}
+	
+
 }

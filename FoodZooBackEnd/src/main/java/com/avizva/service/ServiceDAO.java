@@ -13,5 +13,8 @@ public interface ServiceDAO {
 	public boolean validity(String username, String password);
 	public boolean deactivateService(String username);
 	public Users viewUserService(String username);
+	public String questionService(String username);
+	public boolean answerService(String securityans,String username);
+	public boolean passwordService(String username, String password);
 	
 }

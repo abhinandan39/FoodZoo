@@ -23,15 +23,19 @@
 	background-color: #1f7a1f;
 	color: white;
 }
+.navbar-right{
+	padding-right:10px;
+}
 
-.navbar .nav>.active>a {
+/* .navbar .nav>.active>a {
 	background-color: #1f7a1f;
 	opacity: 0.7;
 	color: white;
-}
+} */
 
 .dropdown {
 	position: relative;
+	cursor: default;
 	margin-top: 12px;
 	color: #404040;
 	text-align: center;
@@ -41,12 +45,15 @@
 .dropdown-content {
 	display: none;
 	position: absolute;
+	cursor: default;
+	opacity:0.9;
 	background-color: white;
 	min-width: 160px;
 	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
 	padding: 12px 16px;
 	z-index: 1;
 }
+
 
 .dropdown:hover {
 	color: green;
@@ -62,6 +69,8 @@
 }
 
 .dropdown:hover .dropdown-content {
+	right:0;
+	left:auto;
 	display: block;
 }
 
@@ -75,7 +84,63 @@
 
 .searchbutton {
 	
+	
 }
+#sessionuser{
+	margin-top:14px;
+} 
+.search-form .form-group {
+  float: right !important;
+  transition: all 0.35s, border-radius 0s;
+  width: 32px;
+  height: 32px;
+  margin-top:12px;
+  background-color: #fff;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+  border-radius: 25px;
+  border: 1px solid #ccc;
+}
+.search-form .form-group input.form-control {
+  padding-right: 20px;
+  border: 0 none;
+  background: transparent;
+  box-shadow: none;
+  display:block;
+}
+.search-form .form-group input.form-control::-webkit-input-placeholder {
+  display: none;
+}
+.search-form .form-group input.form-control:-moz-placeholder {
+  /* Firefox 18- */
+  display: none;
+}
+.search-form .form-group input.form-control::-moz-placeholder {
+  /* Firefox 19+ */
+  display: none;
+}
+.search-form .form-group input.form-control:-ms-input-placeholder {
+  display: none;
+}
+.search-form .form-group:hover,
+.search-form .form-group.hover {
+  width: 100%;
+  border-radius: 4px 25px 25px 4px;
+}
+.search-form .form-group span.form-control-feedback {
+  position: absolute;
+  top: -1px;
+  right: -2px;
+  z-index: 2;
+  display: block;
+  width: 34px;
+  height: 34px;
+  line-height: 34px;
+  text-align: center;
+  color: #000;
+  left: initial;
+  font-size: 14px;
+}
+
 </style>
 </head>
 <body>
@@ -86,19 +151,19 @@
 			<img src="${images}/foodlogo.png" height="50px">
 		</div>
 		<ul class="nav navbar-nav">
-			<li class="nav-item active"><a class="nav-link" href="home">Home
+			<li class="nav-item ${homeactive}"><a class="nav-link" href="home">Home
 					<span class="glyphicon glyphicon-home"></span>
 			</a></li>
 
-			<li class="nav-item"><a class="nav-link" href="contact">Contact
+			<li class="nav-item ${contactactive}"><a class="nav-link" href="contact">Contact
 					<span class="glyphicon glyphicon-user"></span>
 			</a></li>
-			<li class="nav-item"><a class="nav-link" href="aboutus">About
+			<li class="nav-item ${aboutusactive}"><a class="nav-link" href="aboutus">About
 					Us <i class="fa fa-info-circle" aria-hidden="true"></i></i>
 			</a></li>
 
 			<li class="nav-item barss">
-				<div class="dropdown">
+				<div class="dropdown menn">
 					
 					<span> Menu <i class="fa fa-bars" aria-hidden="true"></i></span>
 					<div class="dropdown-content">
@@ -111,17 +176,30 @@
 					
 				</div>
 			</li>
-			<li class="nav-item search">
-				<form class='navbar-form'>
-					<div class='input-group'>
-						<input class='form-control' type='text' name='search'
-							placeholder='Cuisine, Dishes' /> <span class="input-group-btn">
+			</ul>
+        	<div class="col-sm-2 col-md-2">
+	            <form action="" class="search-form">
+	                <div class="form-group has-feedback">
+	            		<label for="search" class="sr-only">Search</label>
+	            		<input type="text" class="form-control" name="search" id="search" placeholder="Cuisine, Dishes">
+	              		<span class="glyphicon glyphicon-search form-control-feedback"></span>
+	            	</div>
+	            </form>
+        	</div>
+        
+			<!-- <div class="col-sm-3 col-md-3">
+				<form class="navbar-form">
+					<div class="input-group">
+						<input class="form-control" type="text" name="search"
+						 placeholder='Cuisine, Dishes' /> <div class="input-group-btn">
 							<button type='submit' class='btn btn-default searchbutton'>
-								<span class='glyphicon glyphicon-search'></span>
+								<i class="glyphicon glyphicon-search"></i>
 							</button>
-						</span>
+						</div>
 
 					</div>
+				</form>
+			</div> -->
 				<!-- 	<div class='form-group'>
 						<input class='form-control' type='text' name='search'
 							placeholder='Cuisine, Dishes' /> 
@@ -131,36 +209,37 @@
 						
 
 					</div> -->
-				</form>
-			</li>
-		</ul>
+				
+			
+		
 
 		<ul class="nav navbar-nav navbar-right">
+			
 			<c:if test="${ empty sessionusername}">
-				<li><a href=""><span
+				<li class="nav-item ${cartactive}"><a href=""><span
 					class="glyphicon glyphicon-shopping-cart"></span> Cart </a></li>
-				<li><a href="signup"><span class="glyphicon glyphicon-user"></span>
+				<li class="nav-item ${registeractive}"><a href="signup"><span class="glyphicon glyphicon-user"></span>
 						Sign Up</a></li>
-				<li><a href="loginhere"><span
+				<li class="nav-item ${loginactive}"><a href="loginhere"><span
 						class="glyphicon glyphicon-log-in"></span> Log In</a></li>
 				
 			</c:if>
 			
 			<c:if test="${not empty sessionusername}">
-				<li>
-					<a><span>${sessionusername}</span></a>
+				<li class="nav-item" id="sessionuser">
+					<p>${sessionusername}</p>
 				</li>
-				<li><a href=""><span
+				<li class="nav-item ${cartactive}"><a href=""><span
 					class="glyphicon glyphicon-shopping-cart"></span> Cart </a></li>
-				<li><a href="logout"><span class="glyphicons glyphicons-log-out"></span> Logout </a></li>
+				<li class="nav-item"><a href="logout"><span class="glyphicons glyphicons-log-out"></span> Logout </a></li>
 				<li class="nav-item barss">
-					<div class="dropdown">
+				<div class="dropdown">
 				 <span> Settings <i class="fa fa-cog" aria-hidden="true"></i></span>
 						 	 <div class="dropdown-content">
-						     <a><p>update</p></a>
-					     	 <a href="deactivate"><p>deactivate</p></a>
-						 	 </div>
-					</div>
+						     <p><a>update</a></p>
+					     	 <p><a href="deactivate">deactivate</a></p>
+			   		 		 </div>
+				</div>
 				</li>
 				
 						

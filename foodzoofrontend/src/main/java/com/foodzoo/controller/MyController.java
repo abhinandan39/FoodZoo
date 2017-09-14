@@ -32,21 +32,21 @@ public class MyController {
 	@RequestMapping("/")
 	public ModelAndView indexcall() {
 
-		return new ModelAndView("index");
+		return new ModelAndView("index").addObject("homeactive","active");
 	}
 
 	@RequestMapping("/home")
 	public ModelAndView getHome(){
-		return new ModelAndView("index");
+		return new ModelAndView("index").addObject("homeactive","active");
 	}
 	@RequestMapping("/signup")
 	public ModelAndView getRgistration(){
-		return new ModelAndView("register");
+		return new ModelAndView("register").addObject("registeractive","active");
 	}
 	
 	@RequestMapping("/loginhere")
 	public ModelAndView login(){
-		return new ModelAndView("login");
+		return new ModelAndView("login").addObject("loginactive","active");
 	}
 	@RequestMapping("/login")
 	public ModelAndView logedin(HttpServletRequest request){
@@ -55,10 +55,12 @@ public class MyController {
 		if(check){
 			HttpSession session = request.getSession(false); 
 			session.setAttribute("sessionusername", request.getParameter("username"));
-			return new ModelAndView("index");
+			return new ModelAndView("redirect:/");
 		}
 		else{
-			return new ModelAndView("login").addObject("errormsg", "Invalid Credentials");
+			return new ModelAndView("login")
+					.addObject("errormsg", "Invalid Credentials")
+					.addObject("loginactive","active");
 		}
 		
 	}
@@ -67,7 +69,7 @@ public class MyController {
 	public ModelAndView logout(HttpServletRequest request){
 		HttpSession session = request.getSession();
 		session.invalidate();
-		return new ModelAndView("index");
+		return new ModelAndView("redirect:/");
 	}
 	
 	@InitBinder
@@ -77,22 +79,27 @@ public class MyController {
 
 	}
 	@RequestMapping("/registeruser")
-	public ModelAndView saveUser(@Valid @ModelAttribute Users user, BindingResult result){
+	public ModelAndView saveUser(@Valid @ModelAttribute Users user, 
+			BindingResult result, HttpServletRequest request){
 		
 		user.setEnabled(true);
 
 		if(result.hasErrors()){
 			
-			return new ModelAndView("register");
+			return new ModelAndView("register").addObject("registeractive","active");
 		}
 		
 		if(serviceDao.saveService(user))
 		{
 			
-			return new ModelAndView("index").addObject("username","user");
+			HttpSession session = request.getSession();
+			session.setAttribute("sessionusername",user.getUsername());
+			return new ModelAndView("redirect:/");
 		}
 		else {
-			return new ModelAndView("register").addObject("msg","Error While Registering");
+			return new ModelAndView("register")
+					.addObject("msg","Error While Registering")
+					.addObject("registeractive","active");
 		}
 	}
 	@RequestMapping("/deactivate")
@@ -124,7 +131,7 @@ public class MyController {
 	@RequestMapping("/aboutus")
 	public ModelAndView Aboutuscall() {
 
-		return new ModelAndView("aboutus1");
+		return new ModelAndView("aboutus1").addObject("aboutusactive","active");
 
 	}
 
@@ -132,7 +139,7 @@ public class MyController {
 	public ModelAndView Contactuscall() {
 
 	
-		return new ModelAndView("contact");
+		return new ModelAndView("contact").addObject("contactactive","active");
 
 	}
 
@@ -142,6 +149,40 @@ public class MyController {
 		serviceDao.mailService(request);
 
 		return new ModelAndView("success");
+
+	}
+	
+	@RequestMapping("/forgot")
+	public ModelAndView fotgot(){
+		return new ModelAndView("forgetpassword");
+	}
+	
+	@RequestMapping("/forgetpassword")
+	public ModelAndView Forgetpasswordcall(@RequestParam("username") String username )
+    {
+		System.out.println("Username: "+username);
+        String question = serviceDao.questionService(username);
+		return new ModelAndView("forgetpassword1").addObject("securityque",question);
+
+	}
+	
+	@RequestMapping("/forgetvalid")
+	public ModelAndView Forgetvalidcall(@RequestParam("securityans") String securityans,@RequestParam("username") String username,@RequestParam("password") String password )
+    {
+		
+		System.out.println("username"+ username +"Ans "+securityans);
+		
+        if(serviceDao.answerService(securityans, username))
+        {
+        	if(serviceDao.passwordService(username, password))
+        	{
+        	  
+              return	new ModelAndView("login").addObject("passwordreset", "your password is reset now login");
+        	}
+        }
+        
+        	return new ModelAndView("forgetpassword1").addObject("msg", "Please Enter Correct Answer!");
+        
 
 	}
 
