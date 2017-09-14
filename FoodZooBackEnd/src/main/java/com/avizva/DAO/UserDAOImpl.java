@@ -20,7 +20,6 @@ public class UserDAOImpl implements UserDAO {
 	public Session getSession() {
 		return sessionFactory.openSession();
 	}
-
 	public boolean saveUser(Users user) {
 
 		boolean flag = false;
@@ -45,7 +44,6 @@ public class UserDAOImpl implements UserDAO {
 		return flag;
 
 	}
-
 	public boolean updateUser(String username) {
 
 		boolean flag = false;
@@ -67,7 +65,7 @@ public class UserDAOImpl implements UserDAO {
 		return flag;
 	}
 
-	@Override
+	
 	public boolean valid(String username, String password) {
 		boolean flag = false;
 		Session session = null;
@@ -94,7 +92,7 @@ public class UserDAOImpl implements UserDAO {
 
 	}
 
-	@Override
+	
 	public boolean deactivateUser(String username) {
 		boolean flag=false;
 		Session session=null;
@@ -120,7 +118,7 @@ public class UserDAOImpl implements UserDAO {
 		return flag;
 	}
 
-	@Override
+
 	public Users viewUser(String username) {
 		boolean flag = false;
 		Session session = null;

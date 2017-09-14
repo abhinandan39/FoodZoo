@@ -10,14 +10,204 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="http://cdn.bootcss.com/animate.css/3.5.1/animate.min.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="${css}/styleindex.css">
+	<c:url var="css" value="/resources/css"></c:url>
+	<c:url var="images" value="/resources/images"></c:url>
 <title>Insert title here</title>
 </head>
-
 <style>
+ * {
+  box-sizing: border-box;
+ 
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+.wrapper {
+  height: 500px;
+  width: 350px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+.wrapper .switch-status p {
+  font-size: 50px;
+  text-align: center;
+  color: #888;
+  margin: 0 0 60px 0;
+}
+
+.wrapper p {
+  font-size: 21px;
+  padding-top: 50px;
+  text-align: center;
+  color: #666;
+}
+
+.wrapper p a {
+  font-weight: bold;
+  color: #29B5CD;
+}
+
+.wrapper .btn-body {
+  width: 350px;
+  height: 120px;
+  border-radius: 60px;
+  background-color: #c6c6c6;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3) inset;
+  position: relative;
+  transition: all 1s ease-in-out;
+}
+
+.wrapper .btn-body img {
+  width: 200px;
+  position: absolute;
+  cursor: pointer;
+  top: -50px;
+  left: -50px;
+}
+
+.wrapper .btn-body img.sad-face {
+  z-index: 1;
+}
+
+.wrapper .btn-body img.happy-face {
+  z-index: 0;
+}
+
+.wrapper .btn-body img.shadow {
+  -webkit-filter: drop-shadow(0px 5px 5px black);
+          filter: drop-shadow(0px 5px 5px black);
+}
+
+@-webkit-keyframes sadAnimationOn {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+    left: -50px;
+    opacity: 1;
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+    left: 250px;
+    opacity: 0;
+  }
+}
+
+@keyframes sadAnimationOn {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+    left: -50px;
+    opacity: 1;
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+    left: 250px;
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes happyAnimationOn {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+    left: -50px;
+    opacity: 0;
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+    left: 250px;
+    opacity: 1;
+  }
+}
+
+@keyframes happyAnimationOn {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+    left: -50px;
+    opacity: 0;
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+    left: 250px;
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes sadAnimationOff {
+  from {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+    left: 250px;
+    opacity: 1;
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+    left: -50px;
+    opacity: 0;
+  }
+}
+
+@keyframes sadAnimationOff {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+    left: 250px;
+    opacity: 1;
+  }
+  to {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+    left: -50px;
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes happyAnimationOff {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+    left: 250px;
+    opacity: 0;
+  }
+  to {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+    left: -50px;
+    opacity: 1;
+  }
+}
+
+@keyframes happyAnimationOff {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+    left: 250px;
+    opacity: 0;
+  }
+  to {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+    left: -50px;
+    opacity: 1;
+  }
+} 
+
 /* Full-width input fields */
-#email1,#password1{
+#username1,#password1{
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -27,18 +217,30 @@
 }
 
 /* Set a style for all buttons */
-#button1 {
+#button1{
     background-color: #4CAF50;
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
     border: none;
     cursor: pointer;
-    width: 100%;
+    width: 50%;
+    margin-left: 700px;
+    margin-top:350px;
+    margin-bottom:350px;
+}
+#button2 {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 50%;
+    margin-left:200px;
 }
 
-
-/* Float cancel and signup buttons and add an equal width */
+/* Float deactivate buttons and add an equal width */
 .deactivate{margin-left: 200px;width:50%}
 
 /* Add padding to container elements */
@@ -57,7 +259,7 @@
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    background-color: 	grey;
     padding-top: 60px;
 }
 
@@ -70,7 +272,7 @@
 }
 
 /* The Close Button (x) */
-.close {
+#close {
     position: absolute;
     right: 35px;
     top: 15px;
@@ -79,50 +281,62 @@
     font-weight: bold;
 }
 
-.close:hover,
-.close:focus {
+#close:hover,
+#close:focus {
     color: red;
     cursor: pointer;
 }
 
 /* Clear floats */
-.clearfix::after {
+/* .clearfix::after {
     content: "";
     clear: both;
     display: table;
-}
+} */
 
-/* Change styles for cancel button and signup button on extra small screens */
+/* Change styles for deactivate button on extra small screens */
 @media screen and (max-width: 300px) {
      .deactivate{
        width: 50%;
-       margin-left: 20px;
+       margin-left: 70px;
 
     }
+    
 }
+#footer1
+{
+margin-top: 400px;
+}
+
+
 </style>
 <body>
 <jsp:include page="header.jsp"></jsp:include>
+
+
 <button id="button1" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Deactivate</button>
 <div id="id01" class="modal">
-  <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">×</span>
+  <span onclick="document.getElementById('id01').style.display='none'" id="close" title="Close Modal">×</span>
   <form class="modal-content" action="question">
     <div class="container">
       <label><b>Username</b></label>
-      <input type="text" placeholder="Enter UserName" name="username" id="username" required>
+      <input type="text" placeholder="Enter UserName" name="username" id="username1" required>
 
       <label><b>Password</b></label>
       <input type="password" placeholder="Enter Password" name="password" id="password1" required>
-          <div class="clearfix">
+          <div >
         
-        <button  type="submit" class="deactivate">Deactivate</button>
+        <button id="button2" type="submit" class="deactivate">Deactivate</button>
       </div>
-      <span>${deactivateerror}</span>
+      <%-- <span>${deactivateerror}</span> --%>
 </div>
-          </div>
+         
 </form>
 </div>
-<jsp:include page="footer.jsp"></jsp:include>
+
+
+<jsp:include page="footer.jsp" ></jsp:include>
+
 
 </body>
 </html>
