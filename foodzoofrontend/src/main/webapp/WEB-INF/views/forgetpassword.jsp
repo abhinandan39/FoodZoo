@@ -42,6 +42,11 @@
 	background-size: cover;
 	opacity: 0.8;
 }
+#message{
+	
+	text-align:center;
+	padding: 10px;
+}
 </style>
 </head>
 <body>
@@ -55,8 +60,24 @@ ${msg}
 </form> --%>
 
 <jsp:include page="header.jsp"></jsp:include>
-	<font color='red'> <br> ${exception}
-	</font>
+	
+	<c:if test="${not empty msg}">
+		<div class="row" id="message">
+			<div class="col-md-3"></div>
+			<div class="col-md-6">
+				<div class="alert alert-dismissable alert-danger">
+					 
+					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+						×
+					</button>
+					<p>
+						${msg}
+					</p> 
+				</div>
+			</div>
+			<div class="col-md-3"></div>
+		</div>
+	</c:if>
 	<div class="backgroundimage">
 		
 		<form id="regform" action="forgetpassword"

@@ -34,11 +34,33 @@
 	background-size: cover;
 	opacity: 0.8;
 }
+#message{
+	
+	text-align:center;
+	padding: 10px;
+}
 </style>
 </head>
 <body>
 
 	<jsp:include page="header.jsp"></jsp:include>
+	<c:if test="${not empty existmsg}">
+		<div class="row" id="message">
+			<div class="col-md-3"></div>
+			<div class="col-md-6">
+				<div class="alert alert-dismissable alert-danger">
+					 
+					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+						×
+					</button>
+					<p>
+						${existmsg}
+					</p> 
+				</div>
+			</div>
+			<div class="col-md-3"></div>
+		</div>
+	</c:if>
 	<font color='red'> <br> ${exception}
 	</font>
 

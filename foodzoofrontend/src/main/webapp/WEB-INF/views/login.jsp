@@ -38,17 +38,54 @@
 	background-size: cover;
 	opacity: 0.8;
 }
+#message{
+	
+	text-align:center;
+	padding: 10px;
+}
 </style>
 </head>
 <body>
 <jsp:include page="header.jsp"></jsp:include>
-
+	<c:if test="${not empty msg}">
+		<div class="row" id="message">
+			<div class="col-md-3"></div>
+			<div class="col-md-6">
+				<div class="alert alert-dismissable alert-success">
+					 
+					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+						×
+					</button>
+					<p>
+						${msg}
+					</p> 
+				</div>
+			</div>
+			<div class="col-md-3"></div>
+		</div>
+	</c:if>
+	
+	<c:if test="${not empty errormsg}">
+		<div class="row" id="message">
+			<div class="col-md-3"></div>
+			<div class="col-md-6">
+				<div class="alert alert-dismissable alert-danger">
+					 
+					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+						×
+					</button>
+					<p>
+						${errormsg}
+					</p> 
+				</div>
+			</div>
+			<div class="col-md-3"></div>
+		</div>
+	</c:if>
+	
 <div class="backgroundimage">
-		<!-- <div class="jumbotron container" style="text-align: center; " >
-			<h1>Sign Up</h1>
-			<p>Sign Up with us to get the latest updates and offers </p>
-		</div> -->
-		${passwordreset}
+		
+		
 		<form id="loginform" action="login" method="post">
 			<div class="row">
 				<div class="col-sm-3">
@@ -62,7 +99,7 @@
 						<span style="color:green;">${passwordreset}</span>
 						<h1>Log In</h1>
 						<p>Get back to your account and enjoy tasty food </p>
-					</div>
+						</div>
 					</div>
 				
 					<div class="row">
@@ -114,6 +151,7 @@
 
 						<div class="col-sm-7">
 							<a href="forgot"> Forgot Password ? Click Here</a>
+						</div>
 						<div class="col-sm-3" style="text-align: left; margin-top: 20px">
 
 						</div>
@@ -129,9 +167,7 @@
 			</div>
 		</form>
 
-
-
-	</div>
+</div>
 
 
 <jsp:include page="footer.jsp"></jsp:include>
