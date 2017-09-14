@@ -20,7 +20,6 @@ public class UserDAOImpl implements UserDAO {
 	public Session getSession() {
 		return sessionFactory.openSession();
 	}
-
 	public boolean saveUser(Users user) {
 
 		boolean flag = false;
@@ -45,7 +44,6 @@ public class UserDAOImpl implements UserDAO {
 		return flag;
 
 	}
-
 	public boolean updateUser(String username) {
 
 		boolean flag = false;
@@ -120,7 +118,7 @@ public class UserDAOImpl implements UserDAO {
 		return flag;
 	}
 
-	
+
 	public Users viewUser(String username) {
 		boolean flag = false;
 		Session session = null;

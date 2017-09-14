@@ -17,6 +17,7 @@ public class ServiceDAOImpl implements ServiceDAO{
 	UserDAOImpl userDAOImpl;
 	
 
+
 	public boolean saveService(Users user) {
 		if(userDAOImpl.saveUser(user)){
 			
@@ -36,6 +37,7 @@ public class ServiceDAOImpl implements ServiceDAO{
 		}
 		
 	}
+
 
 	public boolean updateService(Users user) {
 		
@@ -68,6 +70,7 @@ public class ServiceDAOImpl implements ServiceDAO{
 		
 	}
 
+
 	public boolean validity(String username, String password) {
 		boolean check = userDAOImpl.valid(username, password);
 		if(check){
@@ -77,6 +80,7 @@ public class ServiceDAOImpl implements ServiceDAO{
 			return false;
 		}
 	}
+
 
 	public boolean deactivateService(String username) {
 			boolean check = userDAOImpl.deactivateUser(username);
@@ -104,13 +108,13 @@ public class ServiceDAOImpl implements ServiceDAO{
 			}
 	}
 
+
 	public Users viewUserService(String username) {
 		Users user=userDAOImpl.viewUser(username);
 		
 		return user;
 	}
 
-	@Override
 	public String questionService(String username) {
 		String question=userDAOImpl.securityque(username);
         System.out.println("inside security que");
@@ -118,7 +122,6 @@ public class ServiceDAOImpl implements ServiceDAO{
 		return question;
 	}
 
-	@Override
 	public boolean answerService(String securityans, String username) {
 		if(userDAOImpl.securityans(securityans,username))
         {
@@ -129,7 +132,6 @@ public class ServiceDAOImpl implements ServiceDAO{
 		}
 	}
 
-	@Override
 	public boolean passwordService(String username, String password) {
 
 		if(userDAOImpl.updatepassword(password,username))
