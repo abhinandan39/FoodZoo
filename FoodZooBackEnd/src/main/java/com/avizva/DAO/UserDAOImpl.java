@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.avizva.Model.Users;
 
-@Repository("us")
+@Repository
 public class UserDAOImpl implements UserDAO {
 
 	@Autowired
@@ -133,6 +133,98 @@ public class UserDAOImpl implements UserDAO {
 		
 
 
+	}
+	public String securityque(String username)
+	{
+		
+		String flag=null;
+		Session session=null;
+		Transaction transaction =null;
+		try{
+		session = getSession();
+		transaction = session.beginTransaction();
+		Query q =  session.createQuery("select securityque from Users where username=:username");
+		 q.setParameter("username", username);
+		List<String> securityLlist = q.list();
+		
+		flag=securityLlist.get(0);
+		System.out.println("flag:" + flag);
+		transaction.commit();
+	
+		}
+		catch(Exception e){
+			transaction.rollback();
+		}
+		finally{
+			session.close();
+			
+		}
+		return flag;
+		
+		
+	}
+	public boolean securityans(String answer,String username)
+	{
+		String result=null;
+		boolean flag=false;
+		Session session=null;
+		Transaction transaction =null;
+		try{
+		session = getSession();
+		transaction = session.beginTransaction();
+		Query q =  session.createQuery("select securityans from Users where username=:username");
+		 q.setParameter("username", username);
+		List<String> securityLlist = q.list();
+		
+		result=securityLlist.get(0);
+		System.out.println("flag:" + flag);
+		if(result.equalsIgnoreCase(answer))
+		{
+			flag=true;
+		
+		transaction.commit();
+		}
+		}
+		catch(Exception e){
+			transaction.rollback();
+		}
+		finally{
+			session.close();
+			
+		}
+		return flag;
+		
+	}
+	
+	
+	public boolean updatepassword(String password,String username)
+	{
+		System.out.println(password+" "+username);
+		String result=null;
+		boolean flag=false;
+		Session session=null;
+		Transaction transaction =null;
+		try{
+		session = getSession();
+		transaction = session.beginTransaction();
+		
+		Query q =  session.createQuery("UPDATE Users set password =:password WHERE username =:username");
+		 q.setParameter("username", username);
+		 q.setParameter("password", password);
+		int result1= q.executeUpdate();
+		flag=true;
+		System.out.println("password updated"+ result1);
+		transaction.commit();
+		}
+		catch(Exception e){
+			transaction.rollback();
+		}
+		finally{
+			session.close();
+			
+		}
+		return flag;
+		
 	}
 
 }

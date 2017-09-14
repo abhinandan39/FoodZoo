@@ -17,7 +17,7 @@ public class ServiceDAOImpl implements ServiceDAO{
 	UserDAOImpl userDAOImpl;
 	
 
-	
+
 	public boolean saveService(Users user) {
 		if(userDAOImpl.saveUser(user)){
 			
@@ -44,7 +44,6 @@ public class ServiceDAOImpl implements ServiceDAO{
 		return false;
 	}
 
-
 	public boolean mailService(HttpServletRequest request) {
 		
 		String from = request.getParameter("from");
@@ -58,7 +57,6 @@ public class ServiceDAOImpl implements ServiceDAO{
 		return true;
 	}
 
-	
 	public boolean loginService(HttpServletRequest request) {
 		String user = request.getParameter("username");
 		String pass = request.getParameter("password");
@@ -72,7 +70,7 @@ public class ServiceDAOImpl implements ServiceDAO{
 		
 	}
 
-	
+
 	public boolean validity(String username, String password) {
 		boolean check = userDAOImpl.valid(username, password);
 		if(check){
@@ -110,11 +108,41 @@ public class ServiceDAOImpl implements ServiceDAO{
 			}
 	}
 
-	
+
 	public Users viewUserService(String username) {
 		Users user=userDAOImpl.viewUser(username);
 		
 		return user;
 	}
+
+	public String questionService(String username) {
+		String question=userDAOImpl.securityque(username);
+        System.out.println("inside security que");
+        System.out.println(question);
+		return question;
+	}
+
+	public boolean answerService(String securityans, String username) {
+		if(userDAOImpl.securityans(securityans,username))
+        {
+        	return true;
+        }
+		else{
+		return false;
+		}
+	}
+
+	public boolean passwordService(String username, String password) {
+
+		if(userDAOImpl.updatepassword(password,username))
+    	{
+    	  
+          return true;
+    	}
+		else{
+			return false;
+		}
+	}
+	
 
 }

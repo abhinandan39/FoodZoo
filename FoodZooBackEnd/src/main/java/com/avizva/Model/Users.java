@@ -58,6 +58,10 @@ public class Users {
 	private boolean enabled =true;
 //	private Address address;
 	
+	private String securityque;
+	
+	private String securityans;
+	
 	public String getUsername() {
 		return username;
 	}
@@ -118,6 +122,19 @@ public class Users {
 	}
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
+	}
+	
+	public String getSecurityque() {
+		return securityque;
+	}
+	public void setSecurityque(String securityque) {
+		this.securityque = securityque;
+	}
+	public String getSecurityans() {
+		return securityans;
+	}
+	public void setSecurityans(String securityans) {
+		this.securityans = securityans;
 	}
 	@Override
 	public String toString() {

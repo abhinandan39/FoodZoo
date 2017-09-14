@@ -8,4 +8,7 @@ public interface UserDAO {
 	public boolean valid(String username, String password);
 	public boolean deactivateUser(String username);
 	public Users viewUser(String username);
+	public String securityque(String username);
+	public boolean securityans(String securityans,String username);
+	public boolean updatepassword(String username, String password);
 }

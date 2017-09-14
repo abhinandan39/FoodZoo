@@ -128,12 +128,14 @@ input[type=submit]:hover {
 	margin-left: 20px;
 }
 
-.container {
-	margin-left: 1000px;
+.contaier {
+	
 	border-radius: 5px;
-	background-color: #f2f2f2;
-	padding: 20px;
-	margin-top: 10px;
+	width:100%;
+	margin-top:50px;
+	padding-left:50px;
+	background-color: #ffffff;
+	
 }
 .formarea{
 padding: 30px;
@@ -161,7 +163,7 @@ padding: 30px;
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
-	<div class="container">
+	<div class="container-fluid fld">
 	<form action="contact1" method="post" name="myForm">
 		<div class="row">
 			<div class="col-sm-6">
