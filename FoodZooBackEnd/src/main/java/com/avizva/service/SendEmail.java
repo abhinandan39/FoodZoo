@@ -1,6 +1,7 @@
 package com.avizva.service;
 
 
+import org.apache.log4j.Logger;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Component;
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class SendEmail {
-	
+	Logger logger=Logger.getLogger(SendEmail.class);
 	private MailSender mailSender;
 
 	public void setMailSender(MailSender mailSender) {
@@ -35,7 +36,7 @@ public class SendEmail {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("exception");
+			logger.error(e);
 		}
 		return false;
 
