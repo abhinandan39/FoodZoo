@@ -48,6 +48,7 @@
 			<h1>Sign Up</h1>
 			<p>Sign Up with us to get the latest updates and offers </p>
 		</div> -->
+		${passwordreset}
 		<form id="loginform" action="login" method="post">
 			<div class="row">
 				<div class="col-sm-3">

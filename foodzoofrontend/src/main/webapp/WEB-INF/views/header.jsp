@@ -236,7 +236,7 @@
 				<div class="dropdown">
 				 <span> Settings <i class="fa fa-cog" aria-hidden="true"></i></span>
 						 	 <div class="dropdown-content">
-						     <p><a>update</a></p>
+						     <p><a href="profile">Profile</a></p>
 					     	 <p><a href="deactivate">deactivate</a></p>
 			   		 		 </div>
 				</div>

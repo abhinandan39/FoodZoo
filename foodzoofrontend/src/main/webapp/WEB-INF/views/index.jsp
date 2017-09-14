@@ -24,7 +24,10 @@
 <!--NavBar-->
 <jsp:include page="header.jsp"></jsp:include>
 
-
+<!-- Messages are Displayed here -->
+${userregister}
+${userdeactivated}
+${userupdated}
 <!-- Image Carousel -->
 <div class="container-fluid">
 

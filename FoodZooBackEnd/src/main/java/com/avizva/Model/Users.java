@@ -140,8 +140,10 @@ public class Users {
 	public String toString() {
 		return "Users [fname=" + fname + ", lname=" + lname + ", username=" + username + ", password=" + password
 				+ ", contact=" + contact + ", email=" + email + ", dob=" + dob + ", role=" + role + ", enabled="
-				+ enabled + "]";
+				+ enabled + ", securityque=" + securityque + ", securityans=" + securityans + "]";
 	}
+
+	
 	
 	
 	
