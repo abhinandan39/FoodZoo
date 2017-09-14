@@ -2,6 +2,7 @@ package com.avizva.DAO;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -10,9 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.avizva.Model.Users;
+import com.avizva.service.ServiceDAOImpl;
 
 @Repository
 public class UserDAOImpl implements UserDAO {
+	Logger logger=Logger.getLogger(ServiceDAOImpl.class);
 
 	@Autowired
 	SessionFactory sessionFactory;
@@ -21,7 +24,7 @@ public class UserDAOImpl implements UserDAO {
 		return sessionFactory.openSession();
 	}
 	public boolean saveUser(Users user) {
-
+       logger.info("------inside dao:saveuser method------");
 		boolean flag = false;
 		Session session = null;
 		Transaction transaction = null;
@@ -34,8 +37,9 @@ public class UserDAOImpl implements UserDAO {
 			transaction.commit();
 			flag = true;
 		} catch (Exception e) {
+			logger.error("exception occured:"+ e);
 			transaction.rollback();
-			System.out.println(e);
+			
 		} finally {
 			session.close();
 		}
@@ -56,6 +60,7 @@ public class UserDAOImpl implements UserDAO {
 			transaction.commit();
 			flag = true;
 		} catch (Exception e) {
+			logger.error("exception occured:"+ e);
 			transaction.rollback();
 		} finally {
 			session.close();
@@ -66,27 +71,38 @@ public class UserDAOImpl implements UserDAO {
 
 	
 	public boolean valid(String username, String password) {
+		logger.info("------entered into userdao:valid method-----");
+		
 		boolean flag = false;
 		Session session = null;
 		Transaction transaction = null;
-
+		try
+		{
 		session = getSession();
 		transaction = session.beginTransaction();
-
 		Query query = session.createQuery("from Users where username =:username AND password =:password ");
 		query.setParameter("username", username);
 		query.setParameter("password", password);
 		List<Users> list = query.list();
 		if (list.isEmpty()) {
 
+			logger.info("----query result empty----");
 			flag = false;
 		}
 		else{
-			flag=true;
+			
+			flag=true;}
+		}
+		catch(Exception e){
+			logger.error("exception occured:"+ e);
+			transaction.rollback();
 		}
 
+		finally
+		{
 		session.close();
-
+		}
+       
 		return flag;
 
 	}
@@ -96,18 +112,19 @@ public class UserDAOImpl implements UserDAO {
 		boolean flag=false;
 		Session session=null;
 		Transaction transaction =null;
-		System.out.println("Inside Deactivate UserDAOIMPl "+username);
+		logger.info("Inside Deactivate UserDAOIMPl "+username);
 		try{
 		session = getSession();
 		transaction = session.beginTransaction();
 		Users user = session.get(Users.class, username);
 		user.setEnabled(false);
-		System.out.println("Inside Deactivate UserDAOIMPl. Getting user "+user);
+		logger.info("Inside Deactivate UserDAOIMPl. Getting user "+user);
 		session.update(user);
 		transaction.commit();
 		flag = true;
 		}
 		catch(Exception e){
+			logger.error("exception occured:"+ e);
 			transaction.rollback();
 		}
 		finally{
@@ -122,16 +139,13 @@ public class UserDAOImpl implements UserDAO {
 		boolean flag = false;
 		Session session = null;
 		Transaction transaction = null;
-
 		session = getSession();
 		transaction = session.beginTransaction();
-
 		Users user=session.get(Users.class, username);
+	     
 		session.close();
 		return user;
-		
-
-
+	
 	}
 	public String securityque(String username)
 	{
@@ -147,11 +161,12 @@ public class UserDAOImpl implements UserDAO {
 		List<String> securityLlist = q.list();
 		
 		flag=securityLlist.get(0);
-		System.out.println("flag:" + flag);
+		logger.info("security question is:" + flag);
 		transaction.commit();
 	
 		}
 		catch(Exception e){
+			logger.error("exception occured:"+ e);
 			transaction.rollback();
 		}
 		finally{
@@ -176,7 +191,7 @@ public class UserDAOImpl implements UserDAO {
 		List<String> securityLlist = q.list();
 		
 		result=securityLlist.get(0);
-		System.out.println("flag:" + flag);
+		logger.info("security answer: " + flag);
 		if(result.equalsIgnoreCase(answer))
 		{
 			flag=true;
@@ -185,6 +200,7 @@ public class UserDAOImpl implements UserDAO {
 		}
 		}
 		catch(Exception e){
+			logger.error("exception occured:"+ e);
 			transaction.rollback();
 		}
 		finally{
@@ -216,6 +232,7 @@ public class UserDAOImpl implements UserDAO {
 		transaction.commit();
 		}
 		catch(Exception e){
+			logger.error("exception occured:"+ e);
 			transaction.rollback();
 		}
 		finally{
