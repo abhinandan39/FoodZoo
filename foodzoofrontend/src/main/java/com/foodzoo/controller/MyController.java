@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -26,38 +27,51 @@ import com.avizva.service.ServiceDAO;
 @Controller
 public class MyController {
 	
+	Logger logger=Logger.getLogger(MyController.class);
 	@Autowired
 	ServiceDAO serviceDao;
 
 	@RequestMapping("/")
 	public ModelAndView indexcall() {
-
+		
+        logger.info("----calling index-----");
 		return new ModelAndView("index").addObject("homeactive","active");
+		
 	}
 
 	@RequestMapping("/home")
 	public ModelAndView getHome(){
+		
+		logger.info("-----calling index------");
 		return new ModelAndView("index").addObject("homeactive","active");
 	}
 	@RequestMapping("/signup")
 	public ModelAndView getRgistration(){
+		logger.info("---------redirecting to signup page----");
 		return new ModelAndView("register").addObject("registeractive","active");
 	}
 	
 	@RequestMapping("/loginhere")
 	public ModelAndView login(){
+		logger.info("-------redirecting to login page-------");
 		return new ModelAndView("login").addObject("loginactive","active");
 	}
 	@RequestMapping("/login")
 	public ModelAndView logedin(HttpServletRequest request){
-
+		
+		
+		logger.info("---entered into controller logedin method-------");
+		logger.info("----calling loginService method-----");
 		boolean check = serviceDao.loginService(request);
 		if(check){
+			
 			HttpSession session = request.getSession(false); 
 			session.setAttribute("sessionusername", request.getParameter("username"));
+			logger.info("---login Successful---");
 			return new ModelAndView("redirect:/");
 		}
 		else{
+			logger.info("----login unsucessful----");
 			return new ModelAndView("login")
 					.addObject("errormsg", "Invalid Credentials")
 					.addObject("loginactive","active");
@@ -67,8 +81,10 @@ public class MyController {
 	
 	@RequestMapping("/logout")
 	public ModelAndView logout(HttpServletRequest request){
+		logger.info("----inside controller logout method-----");
 		HttpSession session = request.getSession();
 		session.invalidate();
+		logger.info("-----session invalidated-------");
 		return new ModelAndView("redirect:/");
 	}
 	
@@ -81,22 +97,26 @@ public class MyController {
 	@RequestMapping("/registeruser")
 	public ModelAndView saveUser(@Valid @ModelAttribute Users user, 
 			BindingResult result, HttpServletRequest request){
+		logger.info("----inside controller:saveuser method-------");
 		
 		user.setEnabled(true);
 
 		if(result.hasErrors()){
-			
+			logger.info("---form data is not binded properly-----");
 			return new ModelAndView("register").addObject("registeractive","active");
 		}
 		
 		if(serviceDao.saveService(user))
 		{
+			logger.info("---calling service:saveservice method---");
 			
 			HttpSession session = request.getSession();
 			session.setAttribute("sessionusername",user.getUsername());
+			logger.info("---registration success-------");
 			return new ModelAndView("redirect:/");
 		}
 		else {
+			logger.info("-----registration failed------");
 			return new ModelAndView("register")
 					.addObject("msg","Error While Registering")
 					.addObject("registeractive","active");
@@ -118,19 +138,21 @@ public class MyController {
 	
 	boolean check = serviceDao.deactivateService(username);
 	if(check){
+		logger.info("------user deactivation success-----");
 		session.invalidate();
 //		HttpSession session = request.getSession();
 //		session.invalidate();
 		return new ModelAndView("index");
 	}
 	else{
+		logger.info("------ user deactivation failed-----");
 		return new ModelAndView("deactivate").addObject("deactivateerror","Error in deactivation");
 	}
 	}
 	
 	@RequestMapping("/aboutus")
 	public ModelAndView Aboutuscall() {
-
+ 
 		return new ModelAndView("aboutus1").addObject("aboutusactive","active");
 
 	}
@@ -147,21 +169,22 @@ public class MyController {
 	public ModelAndView send(HttpServletRequest request) {
 
 		serviceDao.mailService(request);
-
 		return new ModelAndView("success");
 
 	}
 	
 	@RequestMapping("/forgot")
 	public ModelAndView fotgot(){
+		logger.info("---calling forgetpassword page----");
 		return new ModelAndView("forgetpassword");
 	}
 	
 	@RequestMapping("/forgetpassword")
 	public ModelAndView Forgetpasswordcall(@RequestParam("username") String username )
     {
-		System.out.println("Username: "+username);
+		logger.info("Username is: "+username);
         String question = serviceDao.questionService(username);
+        logger.info("----security question is fetched------:"+ question);
 		return new ModelAndView("forgetpassword1").addObject("securityque",question);
 
 	}
@@ -170,17 +193,19 @@ public class MyController {
 	public ModelAndView Forgetvalidcall(@RequestParam("securityans") String securityans,@RequestParam("username") String username,@RequestParam("password") String password )
     {
 		
-		System.out.println("username"+ username +"Ans "+securityans);
+		logger.info("username"+ username +"Ans "+securityans);
 		
         if(serviceDao.answerService(securityans, username))
         {
+        	logger.info("---security answer is validated-----");
         	if(serviceDao.passwordService(username, password))
         	{
-        	  
+        		logger.info("---password is reset-----");
               return	new ModelAndView("login").addObject("passwordreset", "your password is reset now login");
         	}
         }
         
+            logger.info("---security answer validation failed----");
         	return new ModelAndView("forgetpassword1").addObject("msg", "Please Enter Correct Answer!");
         
 
