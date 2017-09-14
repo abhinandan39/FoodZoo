@@ -31,8 +31,7 @@ public class UserDAOImpl implements UserDAO {
 		try {
 			session = getSession();
 			transaction = session.beginTransaction();
-
-			System.out.println(user);
+			user.setRole("ROLE_USER");
 			user.setEnabled(true);
 			session.save(user);
 			transaction.commit();
@@ -48,15 +47,15 @@ public class UserDAOImpl implements UserDAO {
 		return flag;
 
 	}
-	public boolean updateUser(String username) {
-
+	public boolean updateUser(Users user) {
+		System.out.println("Inside userDAOIMPL: "+user);
 		boolean flag = false;
 		Session session = null;
 		Transaction transaction = null;
 		try {
 			session = getSession();
 			transaction = session.beginTransaction();
-			Users user = session.get(Users.class, username);
+//			Users user = session.get(Users.class, username);
 			session.update(user);
 			transaction.commit();
 			flag = true;

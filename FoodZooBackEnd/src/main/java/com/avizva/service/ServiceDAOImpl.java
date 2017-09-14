@@ -46,8 +46,14 @@ public class ServiceDAOImpl implements ServiceDAO{
 
 
 	public boolean updateService(Users user) {
+		if(userDAOImpl.updateUser(user))
+		{
+			return true;
+		}
+		else{
+			return false;
+		}
 		
-		return false;
 	}
 
 	public boolean mailService(HttpServletRequest request) {

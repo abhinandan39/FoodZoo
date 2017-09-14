@@ -15,12 +15,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.avizva.DAO.UserDAOImpl;
 import com.avizva.Model.Users;
 import com.avizva.service.ServiceDAO;
 
@@ -35,6 +33,7 @@ public class MyController {
 	public ModelAndView indexcall() {
 		
         logger.info("----calling index-----");
+
 		return new ModelAndView("index").addObject("homeactive","active");
 		
 	}
@@ -51,6 +50,9 @@ public class MyController {
 		return new ModelAndView("register").addObject("registeractive","active");
 	}
 	
+
+	
+
 	@RequestMapping("/loginhere")
 	public ModelAndView login(){
 		logger.info("-------redirecting to login page-------");
@@ -113,7 +115,7 @@ public class MyController {
 			HttpSession session = request.getSession();
 			session.setAttribute("sessionusername",user.getUsername());
 			logger.info("---registration success-------");
-			return new ModelAndView("redirect:/");
+			return new ModelAndView("redirect:/","userregister","Your registration was Successfull");
 		}
 		else {
 			logger.info("-----registration failed------");
@@ -122,6 +124,47 @@ public class MyController {
 					.addObject("registeractive","active");
 		}
 	}
+	
+	/**
+	 * 
+	 * This method will fetch the User Object from databas and populate it to the Update Page
+	 * Where the fileds will be auto filled
+	 * 
+	 * 
+	 */
+	 @RequestMapping("/update")
+	public ModelAndView getUpdate(HttpServletRequest request){
+		
+		HttpSession session = request.getSession();
+		String username = (String) session.getAttribute("sessionusername");
+		Users user = serviceDao.viewUserService(username);
+		System.out.println("Inside profile "+user);
+		return new ModelAndView("updatepage","command",user);
+	}
+	 
+	 /**
+	  * User details are fetched and then the user is updated in the database
+	  * 
+	  * @param user
+	  * @return
+	  */
+	 @RequestMapping("/updateuser")
+		    public ModelAndView updateUser(@ModelAttribute Users user){
+		 System.out.println("Inside controller: "+user);
+			boolean check = serviceDao.updateService(user);
+			if(check)
+				{
+					return new ModelAndView("redirect:/","userupdated","Your details have been updated");
+				}
+			else{
+				return new ModelAndView("redirect:/","error","Some erroe");
+			}
+			
+			
+		}
+		
+	
+	
 	@RequestMapping("/deactivate")
 	public ModelAndView deactivate(){
 		return new ModelAndView("deactivate");
@@ -142,7 +185,7 @@ public class MyController {
 		session.invalidate();
 //		HttpSession session = request.getSession();
 //		session.invalidate();
-		return new ModelAndView("index");
+		return new ModelAndView("redirect:/","userdeactivated","Your deactivation request was successfull");
 	}
 	else{
 		logger.info("------ user deactivation failed-----");
@@ -201,7 +244,8 @@ public class MyController {
         	if(serviceDao.passwordService(username, password))
         	{
         		logger.info("---password is reset-----");
-              return	new ModelAndView("login").addObject("passwordreset", "your password is reset now login");
+return	new ModelAndView("login").addObject("passwordreset", "Password reset successful");
+
         	}
         }
         
@@ -210,5 +254,27 @@ public class MyController {
         
 
 	}
+	
+	
+	/**
+	 * 
+	 * This method redirects the click of profile from a page to Profile Page with user details
+	 * 
+	 * @param request Takes the HttpSession from this request parameter to fetch username
+	 * 
+	 */
+	@RequestMapping("/profile")
+	public ModelAndView getprofile(HttpServletRequest request){
+		HttpSession session = request.getSession();
+		String username = (String) session.getAttribute("sessionusername");
+		Users user = serviceDao.viewUserService(username);
+		Date d = user.getDob();
+		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+		String date = sdf.format(d);
+		return new ModelAndView("profilepage").addObject("user",user).addObject("date",date);
+	} 
+
+
+	
 
 }
