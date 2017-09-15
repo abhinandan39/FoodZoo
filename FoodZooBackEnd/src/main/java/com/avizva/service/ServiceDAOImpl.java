@@ -177,7 +177,7 @@ public class ServiceDAOImpl implements ServiceDAO{
 	}
 
 	/**
-	 * vieUserService calls the userDAOImpl's viewUser method that returns the user object 
+	 * viewUserService calls the userDAOImpl's viewUser method that returns the user object 
 	 * and this method is further used by deactivate service method for sending the deactivation mail
 	 * @param username
 	 * @return user

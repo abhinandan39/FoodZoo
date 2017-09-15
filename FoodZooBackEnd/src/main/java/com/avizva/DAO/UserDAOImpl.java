@@ -20,9 +20,27 @@ public class UserDAOImpl implements UserDAO {
 	@Autowired
 	SessionFactory sessionFactory;
 
+	/**
+	 * getSession method is used to open/create a session from the auto-wired object of sessionFactory.
+	 * @return Session
+	 */
 	public Session getSession() {
 		return sessionFactory.openSession();
 	}
+	
+	
+	
+	/**
+	 * saveUser method gets the user object as parameter from ServiceDAOImpl's saveService method
+	 * and will begin a transaction with the help of current session.During this transaction user data will be saved
+	 * using session's save method followed by commitment of transaction and closing of session.
+	 * on saving user data successfully it will return true to the serviceDAOImpl's saveService method.
+	 * or else it returns false
+	 * @param user : Object of user class that contains data of a user for a particular session.
+	 * @return true or false
+	 * 
+	 */
+	
 	public boolean saveUser(Users user) {
        logger.info("------inside dao:saveuser method------");
 		boolean flag = false;
@@ -35,7 +53,7 @@ public class UserDAOImpl implements UserDAO {
 			user.setEnabled(true);
 			session.save(user);
 			transaction.commit();
-			flag = true;
+			flag = true;		
 		} catch (Exception e) {
 			logger.error("exception occured:"+ e);
 			transaction.rollback();
@@ -47,6 +65,21 @@ public class UserDAOImpl implements UserDAO {
 		return flag;
 
 	}
+	
+	
+	/**
+	 * updateUser method gets the user object as parameter from ServiceDAOImpl's updateService method
+	 * and will begin a transaction with the help of current session.During this transaction user data will 
+	 * be updated using session's update method followed by commitment of transaction and closing of session.
+	 * On updating user data successfully it will return true to the serviceDAOImpl's updateService method.
+	 * or else it returns false
+	 * @param user : Object of user class that contains data of a user for a particular session.
+	 * @return true or false
+	 * 
+	 */
+	
+	
+	
 	public boolean updateUser(Users user) {
 
 		boolean flag = false;
@@ -68,7 +101,21 @@ public class UserDAOImpl implements UserDAO {
 		}
 		return flag;
 	}
+	
 
+	/**
+	 * valid method gets the username and password as parameters from ServiceDAOImpl's validity method,
+	 * and will begin a transaction with the help of current session.During this transaction username and password will 
+	 * be validated using session's query which will return a list only if current username and password is existing in DB.
+	 * followed by closing of session.
+	 * On validating user data successfully it will return true to the serviceDAOImpl's validity method.
+	 * or else it returns false
+	 * @param username : username of a user entered by user at the time of login.
+	 * @param password : password of a user entered by user at the time of login.
+	 * @return true or false
+	 * 
+	 */
+	
 	
 	public boolean valid(String username, String password) {
 		logger.info("------entered into userdao:valid method-----");
@@ -106,7 +153,18 @@ public class UserDAOImpl implements UserDAO {
 		return flag;
 
 	}
+	
+	
 
+	/**
+	 * deactivateUser method will get control and username for a particular session from ServiceDAOImpl's deactivateService method,
+	 * and will begin a transaction with the help of current session.During this transaction username will be set in user object and
+	 * for that particular object enabled status will be set as "false" followed by updating user data. After commiting transaction
+	 * user will be deactivated and it will return true or else false.
+	 * @param username : username for current session 
+	 * @return true or false
+	 */
+	
 	
 	public boolean deactivateUser(String username) {
 		boolean flag=false;
@@ -134,6 +192,13 @@ public class UserDAOImpl implements UserDAO {
 		return flag;
 	}
 
+	/**
+	 * viewUser method will get username as parameter from ServiceDAOImpl's viewUserService method.
+	 * it will then pass it in session.get() method as primary key and will fetch the user record on
+	 * the basis of that primary key will return that data.
+	 * @param username: username for current session.
+	 * @return object of Users class
+	 */
 
 	public Users viewUser(String username) {
 		Session session = null;
@@ -145,6 +210,17 @@ public class UserDAOImpl implements UserDAO {
 		return user;
 	
 	}
+	
+	
+	/**
+	 * securityque method will get username as parameter from ServiceDAOImpl's questionService method,
+	 * and will begin a transaction with the help of current session.During this transaction it will
+	 * use username primary key and will fetch the securityque for that particular username using query.
+	 * followed by commitment of transaction and closing of session.
+	 *@param username username for a particular session
+	 *@return String
+	 */
+		
 	public String securityque(String username)
 	{
 		
@@ -175,6 +251,17 @@ public class UserDAOImpl implements UserDAO {
 		
 		
 	}
+	
+	/**
+	 * securityans method will get answer and username as parameter from ServiceDAOImpl's answerService method,
+	 * and will begin a transaction with the help of current session.During this transaction it will
+	 * use username primary key and will fetch the security answer for that particular username using query.
+	 * After this it will check whether the parameter answer and result obtained from query are same or not.if 
+	 * they are it will return true or else it will return false.
+	 *@param username username for a particular session
+	 *@answer answer  security answer entered by the user for a particular session
+	 *@return true or false
+	 */
 	public boolean securityans(String answer,String username)
 	{
 		String result=null;
@@ -209,6 +296,14 @@ public class UserDAOImpl implements UserDAO {
 		
 	}
 	
+	/***
+	 *  updatepassword method will get password and username from ServiceDAOImpl's  passwordService method,
+	 *  and will begin a transaction with the help of current session.During this transaction it will set the 
+	 *  new password  as password parameter.this will be done by a query using username as primary key.
+	 * @param password  new-password entered by the user.
+	 * @param username  username for a particular session.
+	 * @return true or false 
+	 */
 	
 	public boolean updatepassword(String password,String username)
 	{
