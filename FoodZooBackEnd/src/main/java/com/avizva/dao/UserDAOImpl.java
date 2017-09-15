@@ -1,4 +1,4 @@
-package com.avizva.DAO;
+package com.avizva.dao;
 
 import java.util.List;
 
@@ -10,8 +10,10 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.avizva.Model.Users;
+import com.avizva.model.Users;
 import com.avizva.service.ServiceDAOImpl;
+
+
 
 @Repository
 public class UserDAOImpl implements UserDAO {

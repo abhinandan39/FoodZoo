@@ -2,7 +2,7 @@ package com.avizva.service;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.avizva.Model.Users;
+import com.avizva.model.Users;
 
 public interface ServiceDAO {
 

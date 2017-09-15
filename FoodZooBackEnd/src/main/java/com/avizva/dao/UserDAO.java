@@ -1,6 +1,6 @@
-package com.avizva.DAO;
+package com.avizva.dao;
 
-import com.avizva.Model.Users;
+import com.avizva.model.Users;
 
 public interface UserDAO {
 	

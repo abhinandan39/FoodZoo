@@ -190,6 +190,8 @@
 
 		<ul class="nav navbar-nav navbar-right">
 			
+			
+			
 			<c:if test="${ empty sessionusername}">
 				<li class="nav-item ${cartactive}"><a href=""><span
 					class="glyphicon glyphicon-shopping-cart"></span> Cart </a></li>
@@ -202,20 +204,46 @@
 			
 			<c:if test="${not empty sessionusername}">
 				<li class="nav-item" id="sessionuser">
-					<span class="glyphicon glyphicon-user"> </span> ${sessionusername}
+					<span class="glyphicon glyphicon-user">  </span>  ${sessionusername}
 				</li>
-				<li class="nav-item ${cartactive}"><a href=""><span
-					class="glyphicon glyphicon-shopping-cart"></span> Cart </a></li>
+				<c:if test="${adminRole == 'ROLE_ADMIN' }">
+				<li class="nav-item barss" style="margin-left:9px;">
+				<div class="dropdown">
+				 <span> Manage <i class="fa fa-cog" aria-hidden="true"></i></span> 
+						 	 <div class="dropdown-content">
+						     <p><a href=""> Categories </a></p>
+					     	 <p><a href=""> Suppliers </a></p>
+					     	 <p><a href=""> Products </a></p>
+			   		 		 </div>
+				</div>
+				</li>
+				</c:if>
+				<li class="nav-item ${cartactive}"><a href="">
+				<span class="glyphicon glyphicon-shopping-cart"></span> Cart </a></li>
 				<li class="nav-item"><a href="logout"><span class="glyphicons glyphicons-log-out"></span> Logout </a></li>
+				<c:if test="${sessionrole == 'ROLE_USER'}">
 				<li class="nav-item barss">
 				<div class="dropdown">
 				 <span> Settings <i class="fa fa-cog" aria-hidden="true"></i></span>
 						 	 <div class="dropdown-content">
 						     <p><a href="profile">Profile</a></p>
-					     	 <p><a href="deactivate">deactivate</a></p>
+					     	 <p><a href="deactivate">Deactivate</a></p>
 			   		 		 </div>
 				</div>
 				</li>
+				</c:if>
+				<c:if test="${sessionrole == 'ROLE_ADMIN'}">
+				<li class="nav-item barss">
+				<div class="dropdown">
+				 <span> Settings <i class="fa fa-cog" aria-hidden="true"></i></span>
+						 	 <div class="dropdown-content">
+						     <p><a href="profile">Profile</a></p>
+					     	 <p><a href="deactivate">Deactivate</a></p>
+					     	 <p><a href="adminPanel">Admin Panel</a></p>
+			   		 		 </div>
+				</div>
+				</li>
+				</c:if>
 				
 						
 		     	</c:if>
