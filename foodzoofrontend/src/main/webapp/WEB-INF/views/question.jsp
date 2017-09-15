@@ -160,9 +160,9 @@ width:100%;
 }
 #regform1
 {
-
+align:center;
 margin-top:200px;
-margin-left:20px;
+margin-left:0px;
 }
 
 </style>
@@ -181,7 +181,7 @@ margin-left:20px;
 		</div>
 		<div class="col-sm-4 img-hover" style="text-align: center">
 				<img src="${images}/sademoji.jpg" class="img-rounded"
-					style="width: 100%; height: 250px;margin-left: 650px">
+					style="width: 100%; height: 250px;margin-left: 650px;">
 				<div class="middle">
 					<div class="text">
 					
@@ -195,10 +195,10 @@ margin-left:20px;
 		<form id="regform1" action="finaldeactivate" onsubmit="return check()"
 			method="post">
 			<div class="row">
-				<div class="col-sm-3">
+				<!-- <div class="col-sm-3">
 					
 				</div>
-
+ -->
 				<div class="col-sm-6"
 					style="background: #ffffff; padding: 5px; margin-top: 100px; margin-bottom: 100px; border-radius: 10px;">
 					<div class="row">
