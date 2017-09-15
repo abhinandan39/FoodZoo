@@ -6,8 +6,8 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.avizva.DAO.CategoryDAOImpl;
-import com.avizva.Model.Categories;
+import com.avizva.dao.CategoryDAOImpl;
+import com.avizva.model.Categories;
 
 @Service
 public class CategoryServiceDaoImpl implements CategoryServiceDAO {

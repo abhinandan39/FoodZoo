@@ -1,4 +1,4 @@
-package com.avizva.Model;
+package com.avizva.model;
 
 import javax.persistence.Entity;
 import javax.validation.constraints.NotEmpty;

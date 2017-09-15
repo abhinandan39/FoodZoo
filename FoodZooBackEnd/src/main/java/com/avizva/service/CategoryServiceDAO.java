@@ -2,7 +2,7 @@ package com.avizva.service;
 
 import java.util.List;
 
-import com.avizva.Model.Categories;
+import com.avizva.model.Categories;
 
 public interface CategoryServiceDAO {
 

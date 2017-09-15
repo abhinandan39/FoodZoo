@@ -4,9 +4,9 @@ import java.util.Date;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import com.avizva.DAO.UserDAOImpl;
-import com.avizva.Model.Users;
 import com.avizva.config.ApplicationContextConfig;
+import com.avizva.dao.UserDAOImpl;
+import com.avizva.model.Users;
 
 /**
  * Hello world!

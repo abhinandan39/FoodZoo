@@ -7,9 +7,10 @@ import java.util.Date;
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import com.avizva.DAO.UserDAOImpl;
-import com.avizva.Model.Users;
+import com.avizva.dao.UserDAOImpl;
+import com.avizva.model.Users;
 import com.avizva.config.TestContextConfig;
+
 
 public class UserDAOTest {
 	/**

@@ -1,4 +1,4 @@
-package com.avizva.DAO;
+package com.avizva.dao;
 
 import java.util.List;
 
@@ -8,16 +8,11 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 
-import com.avizva.Model.Categories;
+import com.avizva.model.Suppliers;
 import com.avizva.service.CategoryServiceDaoImpl;
-@Controller
-public class CategoryDAOImpl implements CategoryDAO{
-	/**
-	 * for keeping the log of this class
-	 */
-	
+
+public class SupplierDAOImpl implements SupplierDAO {
 	Logger logger=Logger.getLogger(CategoryServiceDaoImpl.class);
 
 	@Autowired
@@ -33,16 +28,16 @@ public class CategoryDAOImpl implements CategoryDAO{
 	
 	
 	/**
-	 * savecategory method gets the category object as parameter from CategoryServiceDAOImpl's saveCategoryService method
-	 * and will begin a transaction with the help of current session.During this transaction category data will be saved
+	 * saveSupplier method gets the supplier object as parameter from SupplierServiceDAOImpl's saveSupplierService method
+	 * and will begin a transaction with the help of current session.During this transaction transaction data will be saved
 	 * using session's save method followed by commitment of transaction and closing of session.
-	 * on saving category data successfully it will return true to the CategoryServiceDAOImpl's saveCategoryService method.
+	 * on saving supplier data successfully it will return true to the SupplierServiceDAOImpl's saveSupplierService method.
 	 * or else it returns false
-	 * @param user : Object of categories class that contains data of a category for a particular session.
+	 * @param supplier : Object of suppliers class that contains data of a supplier for a particular session.
 	 * @return true or false
 	 * 
 	 */
-	public boolean saveCategory(Categories category) {
+	public boolean saveSupplier(Suppliers supplier) {
 	       logger.info("------inside dao:saveuser method------");
 			boolean flag = false;
 			Session session = null;
@@ -50,7 +45,7 @@ public class CategoryDAOImpl implements CategoryDAO{
 			try {
 				session = getSession();
 				transaction = session.beginTransaction();
-				session.save(category);
+				session.save(supplier);
 				transaction.commit();
 				flag = true;		
 			} catch (Exception e) {
@@ -66,16 +61,16 @@ public class CategoryDAOImpl implements CategoryDAO{
 		}
 
 	/**
-	 * updateCategory method get the category object from CategoryServiceDAOImpl's updateCategoryService method
+	 * updateSupplier method get the supplier object from SupplierServiceDAOImpl's updateSupplierService method
 	 * and will begin transaction with the help of current session.During this transaction data will be updated
 	 * using session's update method followed by commitment of transaction and closing of session
-	 * on updating category successfully it will return true to CategoryServiceDAOImpl's updateCategoryService method
+	 * on updating category successfully it will return true to SupplierServiceDAOImpl's updateSupplierService method
 	 * or else it returns false
-	 * @param category:object of Categories class that contains data of category for a particular session
+	 * @param supplier:object of Suppliers class that contains data of supplier for a particular session
 	 * @return true or false
 	 * 
 	 */
-	public boolean updateCategory(Categories category) {
+	public boolean updateSupplier(Suppliers supplier) {
 		boolean flag = false;
 		Session session = null;
 		Transaction transaction = null;
@@ -83,7 +78,7 @@ public class CategoryDAOImpl implements CategoryDAO{
 			session = getSession();
 			transaction = session.beginTransaction();
 
-			session.update(category);
+			session.update(supplier);
 			transaction.commit();
 			flag = true;
 		} catch (Exception e) {
@@ -97,23 +92,23 @@ public class CategoryDAOImpl implements CategoryDAO{
 	}
 
 	/**
-	 * deleteCategory method get the category object from CategoryServiceDAOImpl's deleteCategoryService method
+	 * deleteSupplier method get the supplier object from SupplierServiceDAOImpl's deleteSupplierService method
 	 * and will begin transaction with the help of current session.During this transaction data will be deleted
 	 * using session's delete method followed by commitment of transaction and closing of session
-	 * on deleting category successfully it will return true to CategoryServiceDAOImpl's deleteCategoryService method
+	 * on deleting category successfully it will return true to SupplierServiceDAOImpl's deleteSupplierService method
 	 * or else it returns false
-	 * @param category:object of Categories class that contains data of category for a particular session
+	 * @param supplier:object of Suppliers class that contains data of supplier for a particular session
 	 * @return true or false
 	 * 
 	 */
-	public boolean deleteCategory(Categories category) {
+	public boolean deleteSupplier(Suppliers supplier) {
 		boolean flag=false;
 		Session session=null;
 		Transaction transaction =null;
 		try{
 		session = getSession();
 	transaction = session.beginTransaction();
-		session.delete(category);
+		session.delete(supplier);
 	transaction.commit();
 		flag = true;
 	}
@@ -128,44 +123,43 @@ public class CategoryDAOImpl implements CategoryDAO{
 	}
 
 	/**
-	 * viewCategoryById method get the category_id  from CategoryServiceDAOImpl's viewCategryByIdService method
+	 * viewSupplierById method get the supplier_id  from SupplierServiceDAOImpl's viewSupplierByIdService method
 	 * and will begin transaction with the help of current session.During this transaction, it will show the data related to that
-	 * category id
-	 * using session's get with parameters passed category class and category id
+	 * supplier id
+	 * using session's get with parameters passed supplier class and supplier id
 	 * that will actually function for showing data from class with that id
 	 *  method followed by commitment of transaction and closing of session
-	 * on showing category successfully it will return true to CategoryServiceDAOImpl's viewCategoryByIdService method
+	 * on showing supplier successfully it will return true to SupplierServiceDAOImpl's viewSupplierByIdService method
 	 * or else it returns false
-	 * @param category_id:parameter category_id of Categories class that contains data of category for a particular session
+	 * @param supplier_id:parameter supplier_id of Suppliers class that contains data of supplier for a particular session
 	 * @return true or false
 	 * 
 	 */
-	public Categories viewCategoryById(String category_id) {
+	public Suppliers viewSupplierById(String supplier_id) {
 		Session session = getSession();
-		Categories category= session.get(Categories.class, category_id);
+		Suppliers supplier= session.get(Suppliers.class, supplier_id);
 		session.close();
-		return category;
+		return supplier;
 	}
 
 	/**
-	 * viewCategory method get the list of category present in the Categories class from CategoryServiceDAOImpl's vieCategoryService method
-	 * and will begin the transction with the help of session.During this transaction it will show all the data present in the database of categories
-	 * Criteria helps in getting all the data of class with further funcationalities
-	 * @param category:object of Categories class that contains  the data for particular session
+	 * viewSupplier method get the list of supplier present in the Suppliers class from SuppliersServiceDAOImpl's vieSupplierService method
+	 * and will begin the transaction with the help of session.During this transaction it will show all the data present in the database of categories
+	 * Criteria helps in getting all the data of class with further functionalities
+	 * @param supplier:object of Suppliers class that contains  the data for particular session
 	 * @return list
 	 */
-	public List<Categories> viewCategory(Categories category) {
-		List<Categories> list = null;
+	public List<Suppliers> viewSupplier(Suppliers supplier) {
+		List<Suppliers> list = null;
 		Session session = getSession();
-		Criteria criteria = session.createCriteria(Categories.class);
+		Criteria criteria = session.createCriteria(Suppliers.class);
 		list= criteria.list();
 		session.close();
 		return list;
 	}
 
-	
 
 	
-	
-	
+
+
 }

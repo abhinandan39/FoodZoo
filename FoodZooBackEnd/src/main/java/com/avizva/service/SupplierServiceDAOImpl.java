@@ -5,8 +5,8 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.avizva.DAO.SupplierDAOImpl;
-import com.avizva.Model.Suppliers;
+import com.avizva.dao.SupplierDAOImpl;
+import com.avizva.model.Suppliers;
 
 
 

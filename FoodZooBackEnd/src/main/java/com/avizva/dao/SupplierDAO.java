@@ -1,8 +1,8 @@
-package com.avizva.DAO;
+package com.avizva.dao;
 
 import java.util.List;
 
-import com.avizva.Model.Suppliers;
+import com.avizva.model.Suppliers;
 
 public interface SupplierDAO {
 	/**
