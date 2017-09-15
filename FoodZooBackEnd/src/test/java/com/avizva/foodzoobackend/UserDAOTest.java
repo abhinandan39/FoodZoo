@@ -1,8 +1,6 @@
 package com.avizva.foodzoobackend;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.util.Date;
 
@@ -11,13 +9,13 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import com.avizva.DAO.UserDAOImpl;
 import com.avizva.Model.Users;
-import com.avizva.config.ApplicationContextConfig;
+import com.avizva.config.TestContextConfig;
 
 public class UserDAOTest {
 	/**
 	 * bean is used that is made through annotation
 	 */
-	AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ApplicationContextConfig.class);
+	AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(TestContextConfig.class);
 	
 	
 	/**
@@ -76,7 +74,7 @@ public class UserDAOTest {
 	{
 	
 		UserDAOImpl user=(UserDAOImpl) context.getBean("userDAOImpl");
-		boolean result=user.deactivateUser("Abhinandan26");
+		boolean result=user.deactivateUser("nandan261995");
 		assertTrue(result);
 		
 	}
@@ -92,7 +90,7 @@ public class UserDAOTest {
 	public void testValidUser()
 	{
 		UserDAOImpl user=(UserDAOImpl) context.getBean("userDAOImpl");
-		boolean result=user.valid("Abhinandan26", "nandu26");
+		boolean result=user.valid("nandan261995", "nandu26");
 		assertTrue(result);
 	}
 	
@@ -107,7 +105,7 @@ public class UserDAOTest {
 	public void testSecurityQuestion()
 	{
 		UserDAOImpl user=(UserDAOImpl) context.getBean("userDAOImpl");
-		String result=user.securityque("Abhinandan26");
+		String result=user.securityque("nandan261995");
 		assertEquals("what's your pet name", result);
 		
 		
@@ -124,7 +122,7 @@ public class UserDAOTest {
 	public void testSecurityAnswer()
 	{
 		UserDAOImpl user=(UserDAOImpl) context.getBean("userDAOImpl");
-		boolean result=user.securityans("buzo", "Abhinandan26");
+		boolean result=user.securityans("buzo", "nandan261995");
 		assertTrue(result);
 		
 		

@@ -62,5 +62,7 @@ public interface UserDAO {
 	 * @return true or false
 	 */
 	public boolean updatepassword(String username, String password);
+	
+	
 	public boolean existUser(String username);
 }
