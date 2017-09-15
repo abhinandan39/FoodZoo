@@ -12,4 +12,5 @@ public interface UserDAO {
 	public String securityque(String username);
 	public boolean securityans(String securityans,String username);
 	public boolean updatepassword(String username, String password);
+	public boolean existUser(String username);
 }

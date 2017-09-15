@@ -34,11 +34,33 @@
 	background-size: cover;
 	opacity: 0.8;
 }
+#displaymessage{
+	
+	text-align:center;
+	padding: 10px;
+}
 </style>
 </head>
 <body>
 
 	<jsp:include page="header.jsp"></jsp:include>
+	<c:if test="${not empty existmsg}">
+		<div class="row" id="displaymessage">
+			<div class="col-md-3"></div>
+			<div class="col-md-6">
+				<div class="alert alert-dismissable alert-danger">
+					 
+					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+						×
+					</button>
+					<p>
+						${existmsg}
+					</p> 
+				</div>
+			</div>
+			<div class="col-md-3"></div>
+		</div>
+	</c:if>
 	<font color='red'> <br> ${exception}
 	</font>
 
@@ -251,18 +273,9 @@
 	</div>
 	<jsp:include page="footer.jsp"></jsp:include>
 	<script>
-		var check = function() {
-			if (document.getElementById('passid').value == document
-					.getElementById('repassid').value) {
-				document.getElementById('message').style.color = 'green';
-				document.getElementById('message').innerHTML = 'Passwords Matched';
-				return true;
-			} else {
-				document.getElementById('message').style.color = 'red';
-				document.getElementById('message').innerHTML = 'Password Not matching';
-				return false;
-			}
-		}
+			
+			$("#displaymessage").delay(4000).hide('fast');
+			
 	</script>
 </body>
 </html>

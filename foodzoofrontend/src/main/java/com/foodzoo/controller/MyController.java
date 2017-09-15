@@ -105,7 +105,7 @@ public class MyController {
 			HttpSession session = request.getSession(false); 
 			session.setAttribute("sessionusername", request.getParameter("username"));
 			logger.info("---login Successful---");
-			return new ModelAndView("redirect:/");
+			return new ModelAndView("index","msg","Log In Successful").addObject("homeactive","active");
 		}
 		else{
 			logger.info("----login unsucessful----");
@@ -128,7 +128,7 @@ public class MyController {
 		HttpSession session = request.getSession();
 		session.invalidate();
 		logger.info("-----session invalidated-------");
-		return new ModelAndView("redirect:/");
+		return new ModelAndView("index","msg","Logout Successful").addObject("homeactive","active");
 	}
 	
 	@InitBinder
@@ -155,12 +155,18 @@ public class MyController {
 		logger.info("----inside controller:saveuser method-------");
 		
 		user.setEnabled(true);
-
+		String username = user.getUsername();
+		logger.info("----inside controller, username is "+username);
 		if(result.hasErrors()){
 			logger.info("---form data is not binded properly-----");
 			return new ModelAndView("register").addObject("registeractive","active");
 		}
-		
+		if(serviceDao.existUserService(username))
+		{	logger.info("---user already exists-----");
+			return new ModelAndView("register")
+					.addObject("existmsg","username already taken. Please use a different one")
+					.addObject("registeractive","active");
+		}
 		if(serviceDao.saveService(user))
 		{
 			logger.info("---calling service:saveservice method---");
@@ -168,7 +174,7 @@ public class MyController {
 			HttpSession session = request.getSession();
 			session.setAttribute("sessionusername",user.getUsername());
 			logger.info("---registration success-------");
-			return new ModelAndView("redirect:/","userregister","Your registration was Successfull");
+			return new ModelAndView("index","msg","Your registration was Successfull").addObject("homeactive", "active");
 		}
 		else {
 			logger.info("-----registration failed------");
@@ -205,10 +211,10 @@ public class MyController {
 			boolean check = serviceDao.updateService(user);
 			if(check)
 				{
-					return new ModelAndView("redirect:/","userupdated","Your details have been updated");
+					return new ModelAndView("index","msg","Your details have been updated").addObject("registeractive","active");
 				}
 			else{
-				return new ModelAndView("redirect:/","error","Some erroe");
+				return new ModelAndView("profilepage","error","Some error occured");
 			}
 			
 			
@@ -246,9 +252,8 @@ public class MyController {
 	if(check){
 		logger.info("------user deactivation success-----");
 		session.invalidate();
-//		HttpSession session = request.getSession();
-//		session.invalidate();
-		return new ModelAndView("redirect:/","userdeactivated","Your deactivation request was successfull");
+
+		return new ModelAndView("index","msg","Your deactivation request was successfull");
 	}
 	else{
 		logger.info("------ user deactivation failed-----");
@@ -311,10 +316,19 @@ public class MyController {
 	@RequestMapping("/forgetpassword")
 	public ModelAndView Forgetpasswordcall(@RequestParam("username") String username )
     {
+		
 		logger.info("Username is: "+username);
-        String question = serviceDao.questionService(username);
-        logger.info("----security question is fetched------:"+ question);
-		return new ModelAndView("forgetpassword1").addObject("securityque",question);
+		if(serviceDao.existUserService(username))
+		{	logger.info("---user exists true-----");
+			String question = serviceDao.questionService(username);
+	        logger.info("----security question is fetched------:"+ question);
+	        return new ModelAndView("forgetpassword1").addObject("securityque",question);
+			
+		}
+		else{
+		return new ModelAndView("forgetpassword")
+				.addObject("msg","Username does not exist. Please enter correct username ");
+		}
 
 	}
 	/**
@@ -338,7 +352,7 @@ public class MyController {
         	if(serviceDao.passwordService(username, password))
         	{
         		logger.info("---password is reset-----");
-return	new ModelAndView("login").addObject("passwordreset", "Password reset successful");
+        		return	new ModelAndView("login").addObject("msg", "Password reset successful");
 
         	}
         }
