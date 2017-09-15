@@ -27,7 +27,7 @@
 	<!--NavBar-->
 	<jsp:include page="header.jsp"></jsp:include>
 	<c:if test="${not empty msg}">
-		<div class="row" id="message">
+		<div class="row" id="displaymessage" >
 			<div class="col-md-3"></div>
 			<div class="col-md-6">
 				<div class="alert alert-dismissable alert-success">
@@ -176,24 +176,13 @@
 			</div>
 		</div>
 	</div>
-	<!-- Snackbar message here  -->
-	<div id="snackbar">
-		Some text some message..
-		<!-- Messages are Displayed here -->
-	
-	</div>
-
 
 	<!-- Social Media Footer -->
 	<jsp:include page="footer.jsp" />
 	<script>
-		function myFunction() {
-			var x = document.getElementById("snackbar")
-			x.className = "show";
-			setTimeout(function() {
-				x.className = x.className.replace("show", "");
-			}, 3000);
-		}
+			
+			$("#displaymessage").delay(4000).hide('fast');
+			
 	</script>
 </body>
 </html>

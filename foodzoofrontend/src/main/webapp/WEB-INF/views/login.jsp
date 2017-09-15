@@ -38,9 +38,10 @@
 	background-size: cover;
 	opacity: 0.8;
 }
-#message{
+#displaymessage{
 	
 	text-align:center;
+	
 	padding: 10px;
 }
 </style>
@@ -48,7 +49,7 @@
 <body>
 <jsp:include page="header.jsp"></jsp:include>
 	<c:if test="${not empty msg}">
-		<div class="row" id="message">
+		<div class="row" id="displaymessage">
 			<div class="col-md-3"></div>
 			<div class="col-md-6">
 				<div class="alert alert-dismissable alert-success">
@@ -171,6 +172,10 @@
 
 
 <jsp:include page="footer.jsp"></jsp:include>
-
+<script>
+			
+			$("#displaymessage").delay(4000).hide('fast');
+			
+	</script>
 </body>
 </html>
