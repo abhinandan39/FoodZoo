@@ -1,0 +1,77 @@
+.find > .fa{
+				background-color: black;
+	    		color: white;
+	    	}
+	    	#foot{
+	    		font-size: 16px
+	    		color: black;
+	    	}
+	    	.find{
+	    		color: black;
+	    	}
+	    	
+	    	.fa-facebook {
+	  	   		padding: 5px;
+	   		 	font-size: 18px;
+	   			 width: 30px;
+	   			 text-align: center;
+	  	 		 text-decoration: none;
+	  	 		 background: black;
+	  	 		 color: white;
+	  	 		 border-radius: 50%;
+			}
+			.fa-google {
+	  	   		padding: 5px;
+	   		 	font-size: 18px;
+	   			 width: 30px;
+	   			 text-align: center;
+	  	 		 text-decoration: none;
+	  	 		 background: black;
+	  	 		 color: white;
+	  	 		 border-radius: 50%;
+			}
+			.fa-instagram {
+	  	   		padding: 5px;
+	   		 	font-size: 18px;
+	   			 width: 30px;
+	   			 text-align: center;
+	  	 		 text-decoration: none;
+	  	 		 background: black;
+	  	 		 color: white;
+	  	 		 border-radius: 50%;
+			}
+			.fa-snapchat {
+	  	   		padding: 5px;
+	   		 	font-size: 18px;
+	   			 width: 30px;
+	   			 text-align: center;
+	  	 		 text-decoration: none;
+	  	 		 background: black;
+	  	 		 color: white;
+	  	 		 border-radius: 50%;
+			}
+			.fa-twitter {
+	  	   		padding: 5px;
+	   		 	font-size: 18px;
+	   			 width: 30px;
+	   			 text-align: center;
+	  	 		 text-decoration: none;
+	  	 		 background: black;
+	  	 		 color: white;
+	  	 		 border-radius: 50%;
+			}
+			.footstyle{
+				 background: #f2f2f2; 
+				 margin: 15px 10px 10px 10px;
+				 padding: 10px;
+			     border-radius: 10px;
+	
+			}
+			.payment {
+				height: 40px;
+				width: 80px;
+			}
+			.serv{
+				color: black;
+				font-size: 12px;
+			}
