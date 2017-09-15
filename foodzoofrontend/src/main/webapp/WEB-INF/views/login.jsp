@@ -125,7 +125,7 @@
 
 						</div>
 						<div class="col-sm-7" style="margin-top: 10px">
-							<input type="text" class="form-control" name="password"
+							<input type="password" class="form-control" name="password"
 								placeholder="<spring:message code='label.password'></spring:message>"
 								required="true" /> <span class="err"><form:errors
 									path="users.password"></form:errors></span>
