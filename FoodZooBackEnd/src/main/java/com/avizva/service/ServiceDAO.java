@@ -74,4 +74,11 @@ public interface ServiceDAO {
 	 */
 	public boolean passwordService(String username, String password);
 	
+	/**
+	 * existUserService method to check if user exists or not
+	 * @param username
+	 * @return true or false
+	 */
+	public boolean existUserService(String username);
+	
 }

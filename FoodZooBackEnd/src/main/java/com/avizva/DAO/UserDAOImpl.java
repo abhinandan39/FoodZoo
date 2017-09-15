@@ -81,7 +81,7 @@ public class UserDAOImpl implements UserDAO {
 	
 	
 	public boolean updateUser(Users user) {
-		System.out.println("Inside userDAOIMPL: "+user);
+
 		boolean flag = false;
 		Session session = null;
 		Transaction transaction = null;
@@ -201,13 +201,11 @@ public class UserDAOImpl implements UserDAO {
 	 */
 
 	public Users viewUser(String username) {
-		boolean flag = false;
 		Session session = null;
 		Transaction transaction = null;
 		session = getSession();
 		transaction = session.beginTransaction();
 		Users user=session.get(Users.class, username);
-	     
 		session.close();
 		return user;
 	
@@ -309,7 +307,7 @@ public class UserDAOImpl implements UserDAO {
 	
 	public boolean updatepassword(String password,String username)
 	{
-		System.out.println(password+" "+username);
+		
 		String result=null;
 		boolean flag=false;
 		Session session=null;
@@ -336,6 +334,33 @@ public class UserDAOImpl implements UserDAO {
 		}
 		return flag;
 		
+	}
+	
+	/**
+	 * existUser method returns true if user exists, else it returns false
+	 * @param username User is fetched from database using username
+	 */
+	public boolean existUser(String username){
+		boolean flag = false;
+		Session session = null;
+		Transaction transaction = null;
+		try {
+			session = getSession();
+			transaction = session.beginTransaction();
+			Users user = session.get(Users.class, username);
+			logger.info("Inside existUser  " + user);
+			if(user!=null){
+			logger.info("Inside existUser, value is true");	
+				flag = true;
+			}
+		} catch (Exception e) {
+			logger.error("exception occured:"+ e);
+			transaction.rollback();
+		} finally {
+			session.close();
+
+		}
+		return flag;
 	}
 
 }

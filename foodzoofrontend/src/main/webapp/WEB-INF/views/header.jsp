@@ -186,32 +186,7 @@
 	            	</div>
 	            </form>
         	</div>
-        
-			<!-- <div class="col-sm-3 col-md-3">
-				<form class="navbar-form">
-					<div class="input-group">
-						<input class="form-control" type="text" name="search"
-						 placeholder='Cuisine, Dishes' /> <div class="input-group-btn">
-							<button type='submit' class='btn btn-default searchbutton'>
-								<i class="glyphicon glyphicon-search"></i>
-							</button>
-						</div>
-
-					</div>
-				</form>
-			</div> -->
-				<!-- 	<div class='form-group'>
-						<input class='form-control' type='text' name='search'
-							placeholder='Cuisine, Dishes' /> 
-							<button type='submit' class='btn btn-default searchbutton'>
-								<span class='glyphicon glyphicon-search'></span>
-							</button>
-						
-
-					</div> -->
-				
-			
-		
+        		
 
 		<ul class="nav navbar-nav navbar-right">
 			
@@ -227,7 +202,7 @@
 			
 			<c:if test="${not empty sessionusername}">
 				<li class="nav-item" id="sessionuser">
-					<p>${sessionusername}</p>
+					<span class="glyphicon glyphicon-user"> </span> ${sessionusername}
 				</li>
 				<li class="nav-item ${cartactive}"><a href=""><span
 					class="glyphicon glyphicon-shopping-cart"></span> Cart </a></li>

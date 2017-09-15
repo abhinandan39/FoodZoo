@@ -79,8 +79,6 @@ public class UserDAOTest {
 		boolean result=user.deactivateUser("Abhinandan26");
 		assertTrue(result);
 		
-		
-		
 	}
 	
 	/**
