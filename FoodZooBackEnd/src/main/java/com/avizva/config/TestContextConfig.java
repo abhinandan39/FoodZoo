@@ -1,6 +1,8 @@
 package com.avizva.config;
 
 
+
+
 import java.util.Properties;
 
 import javax.sql.DataSource;
@@ -10,13 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.orm.hibernate5.HibernateTransactionManager;
-import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
+import org.springframework.orm.hibernate3.HibernateTransactionManager;
+import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import com.avizva.model.Users;
 
 
 
@@ -24,7 +24,6 @@ import com.avizva.model.Users;
 @ComponentScan("com")
 @Configuration
 @EnableTransactionManagement
-@Import({ApplicationContextConfig.class})
 public class TestContextConfig {
 	
 	@Bean(name = "dataSource")
@@ -33,7 +32,7 @@ public class TestContextConfig {
 	   
 	   // For MySQL
 	   dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-	    dataSource.setUrl("jdbc:mysql://localhost:3306/TestDatabase");
+	    dataSource.setUrl("jdbc:mysql://localhost:3306/test");
 	    dataSource.setUsername("root"); 
 	    dataSource.setPassword("root");
 
@@ -49,7 +48,7 @@ public class TestContextConfig {
 //		return properties;
 //		
 //	}
-
+//
 //	@Autowired
 //	@Bean(name = "sessionFactory")
 //	public SessionFactory getSessionFactory(DataSource dataSource) {
@@ -62,14 +61,14 @@ public class TestContextConfig {
 //	    
 //	    return sessionBuilder.buildSessionFactory();
 //	}
-
+//
 //	@Autowired
 //	@Bean(name = "transactionManager")
 //	public HibernateTransactionManager getTransactionManager(SessionFactory sessionFactory) {
 //        HibernateTransactionManager transactionManager = new   HibernateTransactionManager(sessionFactory);
 //	    return transactionManager;
 //	}
-	  
+//	  
 	
 
 }

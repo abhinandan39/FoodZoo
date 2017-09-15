@@ -1,6 +1,7 @@
 package com.avizva.model;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
 
 import org.springframework.stereotype.Component;
@@ -11,14 +12,14 @@ import org.springframework.stereotype.Component;
  * 
  *
  */
-@Entity
+
 /**
  * 
  * @author Parul.Sharma
  * makes the bean of class
  *
  */
-@Component
+
 /**
  * 
  * @author Parul.Sharma
@@ -28,24 +29,31 @@ import org.springframework.stereotype.Component;
  * This class is for getting the information of category
  *
  */
+
+@Entity
+@Component
 public class Categories {
 	/**
 	 * @NotEmpty annotation is validation that means that field should not be empty above which it is applied
 	 */
-	@NotEmpty
+	
 	/**
 	 * category_id specifies category's id
 	 */
-	private String category_id;
 	@NotEmpty
+	@Id
+	private String category_id;
+	
 	/**
 	 * category_name specifies category's name
 	 */
-	private String category_name;
 	@NotEmpty
+	private String category_name;
+	
 	/**
 	 * category_description specifies category's description
 	 */
+	@NotEmpty
 	private String category_description;
 	public String getCategory_id() {
 		return category_id;
