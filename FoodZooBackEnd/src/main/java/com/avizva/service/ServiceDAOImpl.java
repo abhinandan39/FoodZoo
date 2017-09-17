@@ -242,7 +242,7 @@ public class ServiceDAOImpl implements ServiceDAO{
 		}
 	}
 
-	@Override
+	
 	public boolean existUserService(String username) {
 		if(userDAOImpl.existUser(username))
 		{
