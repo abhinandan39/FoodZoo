@@ -108,16 +108,20 @@ public class MyController {
 		
 		logger.info("---entered into controller logedin method-------");
 		
-		logger.info("----Checking the Role of the User----");
 		
-		String username = request.getParameter("username");
-		Users user = serviceDao.viewUserService(username);
-		String role = user.getRole();
+		
+	
 		
 		logger.info("----calling loginService method to check validity-----");
 		
 		boolean check = serviceDao.loginService(request);
 		if(check){
+			
+			logger.info("----Checking the Role of the User----");
+			
+			String username = request.getParameter("username");
+			Users user = serviceDao.viewUserService(username);
+			String role = user.getRole();
 			
 			logger.info("---login Successful---");
 			
@@ -157,9 +161,15 @@ public class MyController {
 	 */
 	@RequestMapping("/loginadmin")
 	public ModelAndView loginAdmin(){
+		
 		return new ModelAndView("loginadmin");
 	}
 	
+	@RequestMapping("/loginerror")
+	public ModelAndView loginError(){
+		
+		return new ModelAndView("loginadmin","msg","Invalid Credentials");
+	}
 	
 	
 	/**
@@ -217,8 +227,9 @@ public class MyController {
 		{
 			logger.info("---calling service:saveservice method---");
 			
-			HttpSession session = request.getSession();
+			HttpSession session = request.getSession(false);
 			session.setAttribute("sessionusername",user.getUsername());
+			session.setAttribute("sessionrole", user.getRole());
 			logger.info("---registration success-------");
 			return new ModelAndView("index","msg","Your registration was Successfull").addObject("homeactive", "active");
 		}
@@ -252,11 +263,22 @@ public class MyController {
 	  * @return
 	  */
 	 @RequestMapping("/updateuser")
-		    public ModelAndView updateUser(@ModelAttribute Users user){
-		 System.out.println("Inside controller: "+user);
+		    public ModelAndView updateUser(@Valid @ModelAttribute Users user, BindingResult result){
+		 
+		 	logger.info("--Inside Controller : Update user");
+		 	
+		 	logger.info("---Checking Hibernate Validity---");
+		 	
+		 	if(result.hasErrors()){
+		 		
+		 		logger.info("---Error in Updating Database ---");
+		 		return new ModelAndView("updatepage","command",user);
+		 	}
+		 	
 			boolean check = serviceDao.updateService(user);
 			if(check)
 				{
+				logger.info("--- User Updated Successfully ---");
 					return new ModelAndView("index","msg","Your details have been updated").addObject("registeractive","active");
 				}
 			else{
@@ -278,8 +300,15 @@ public class MyController {
 	 * @return ModelAndView with question page
 	 */
 	@RequestMapping("/question")
-	public ModelAndView deactivate1(@RequestParam("username") String username){
-		return new ModelAndView("question");
+	public ModelAndView deactivate1(@RequestParam("username") String username, @RequestParam("password") String password){
+		boolean check = serviceDao.validity(username,password);
+		if(check){
+			return new ModelAndView("question");
+		}
+		else{
+			return new ModelAndView("deactivate","msg","Invalid Credentials");
+		}
+		
 		}
 	/**
 	 * when finaldeactivate action is performed calls the service's deactivate service method which returns true or false
@@ -387,14 +416,19 @@ public class MyController {
 	 * @return ModelAndView with login page and a password reset message
 	 */
 	@RequestMapping("/forgetvalid")
-	public ModelAndView Forgetvalidcall(@RequestParam("securityans") String securityans,@RequestParam("username") String username,@RequestParam("password") String password )
+	public ModelAndView Forgetvalidcall(@RequestParam("securityans") String securityans,@RequestParam("username") String username
+										,@RequestParam("password") String password)
     {
 		
-		logger.info("username"+ username +"Ans "+securityans);
+		
+		
+		logger.info("---username---"+ username +"-Ans- "+securityans);
 		
         if(serviceDao.answerService(securityans, username))
         {
         	logger.info("---security answer is validated-----");
+        	
+        	     	
         	if(serviceDao.passwordService(username, password))
         	{
         		logger.info("---password is reset-----");

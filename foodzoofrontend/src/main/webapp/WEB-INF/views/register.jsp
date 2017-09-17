@@ -66,8 +66,7 @@
 
 	<div class="backgroundimage">
 		
-		<form id="regform" action="registeruser" onsubmit="return check()"
-			method="post">
+		<form id="regform" action="registeruser" method="post">
 			<div class="row">
 				<div class="col-sm-3">
 					
@@ -134,8 +133,11 @@
 						<div class="col-sm-7">
 							<input type="Password" class="form-control" name="password"
 								placeholder="<spring:message code='label.password'></spring:message>"
-								id="passid" style="margin-top: 10px;" required> <span
+								id="passid" style="margin-top: 10px;" required><span
 								class="err"><form:errors path="users.password"></form:errors></span>
+								<span
+								id="passlength">
+								</span>
 						</div>
 						<div class="col-sm-3" style="text-align: left; margin-top: 20px">
 
@@ -148,8 +150,10 @@
 						<div class="col-sm-7">
 							<input type="Password" class="form-control" name="repassword"
 								placeholder="<spring:message code='label.repassword'></spring:message>"
-								id="repassid" style="margin-top: 10px;" required> <span
-								id=message></span>
+								id="repassid" style="margin-top: 10px;" required> 
+								<span
+								id="message">
+								</span>
 						</div>
 						<div class="col-sm-3" style="text-align: left; margin-top: 20px">
 
@@ -275,6 +279,28 @@
 	<script>
 			
 			$("#displaymessage").delay(4000).hide('fast');
+			$('#regform').submit(function(e) {
+				
+				if($('#passid').val().length < 6){
+					$('#passlength').css('color','red');
+					$('#passlength').text('Password Should be greater than 6 characters').show().fadeOut(3000);
+					return false;
+				}
+			
+				else{
+					
+					if ($('#passid').val() == $('#repassid').val()) {
+						
+					return true;
+						
+					} else {
+						$('#message').css('color','red');
+						$('#message').text('Passwords Not Matching').show().fadeOut(3000);
+						
+						return false;
+					}
+				}
+			});
 			
 	</script>
 </body>

@@ -152,7 +152,7 @@ opacity: 0.5;
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	background-size: cover;
-	opacity: 0.8;
+	opacity: 0.7;
 }
 #j1{
 width:100%;
@@ -268,19 +268,6 @@ margin-left:0px;
 
 	</div>
 	<jsp:include page="footer.jsp"></jsp:include>
-	<script>
-		var check = function() {
-			if (document.getElementById('passid').value == document
-					.getElementById('repassid').value) {
-				document.getElementById('message').style.color = 'green';
-				document.getElementById('message').innerHTML = 'Passwords Matched';
-				return true;
-			} else {
-				document.getElementById('message').style.color = 'red';
-				document.getElementById('message').innerHTML = 'Password Not matching';
-				return false;
-			}
-		}
-	</script>
+
 </body>
 </html>
