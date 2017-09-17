@@ -107,9 +107,6 @@ public class MyController {
 		
 		
 		logger.info("---entered into controller logedin method-------");
-		
-		
-		
 	
 		
 		logger.info("----calling loginService method to check validity-----");
@@ -236,7 +233,7 @@ public class MyController {
 		else {
 			logger.info("-----registration failed------");
 			return new ModelAndView("register")
-					.addObject("msg","Error While Registering")
+					.addObject("msg","E Mail already exists, please Log In.")
 					.addObject("registeractive","active");
 		}
 	}
