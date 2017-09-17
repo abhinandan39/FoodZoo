@@ -1,7 +1,9 @@
 package com.foodzoo.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -19,7 +21,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+
 import com.avizva.model.Users;
+
 import com.avizva.service.ServiceDAO;
 
 @Controller
@@ -47,8 +51,12 @@ public class MyController {
 		
         logger.info("----calling index-----");
 
-		return new ModelAndView("index").addObject("homeactive","active");
+     
+       
+	return new ModelAndView("index").addObject("homeactive","active");
+              
 		
+        
 	}
 
 	/**
