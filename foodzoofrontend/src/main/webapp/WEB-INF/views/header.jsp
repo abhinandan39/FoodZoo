@@ -79,7 +79,7 @@
 }
 
 .search {
-	margin-top: 0px;
+	
 }
 
 .searchbutton {
@@ -123,6 +123,7 @@
 }
 .search-form .form-group:hover,
 .search-form .form-group.hover {
+   
   width: 100%;
   border-radius: 4px 25px 25px 4px;
 }
@@ -204,7 +205,8 @@
 			
 			<c:if test="${not empty sessionusername}">
 				<li class="nav-item" id="sessionuser">
-					<span class="glyphicon glyphicon-user">  </span>  ${sessionusername}
+				 ${sessionusername}
+					<span class="glyphicon glyphicon-user">  </span> 
 				</li>
 				<c:if test="${adminRole == 'ROLE_ADMIN' }">
 				<li class="nav-item barss" style="margin-left:9px;">
@@ -219,7 +221,8 @@
 				</li>
 				</c:if>
 				<li class="nav-item ${cartactive}"><a href="">
-				<span class="glyphicon glyphicon-shopping-cart"></span> Cart </a></li>
+				Cart
+				<span class="glyphicon glyphicon-shopping-cart"></span>  </a></li>
 				<li class="nav-item"><a href="logout"><span class="glyphicons glyphicons-log-out"></span> Logout </a></li>
 				<c:if test="${sessionrole == 'ROLE_USER'}">
 				<li class="nav-item barss">
