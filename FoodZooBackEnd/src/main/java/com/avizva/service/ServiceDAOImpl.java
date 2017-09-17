@@ -8,8 +8,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
 
-import com.avizva.DAO.UserDAOImpl;
-import com.avizva.Model.Users;
+import com.avizva.dao.UserDAOImpl;
+import com.avizva.model.Users;
 
 
 @Service

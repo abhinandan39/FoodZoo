@@ -1,4 +1,4 @@
-package com.avizva.Model;
+package com.avizva.model;
 
 import java.util.Date;
 

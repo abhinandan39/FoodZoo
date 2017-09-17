@@ -22,7 +22,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 
-import com.avizva.Model.Users;
+import com.avizva.model.Users;
+
 import com.avizva.service.ServiceDAO;
 
 @Controller
@@ -97,6 +98,7 @@ public class MyController {
 	 * if it returns true then user is logged in successfully and its session is maintained
 	 * else
 	 * it redirects to login page with an error message
+	 * The role is binded in the session so that different navbar items can be shown according to the role
 	 * @param request
 	 * @return ModelAndView object with data according to the condition whether true or false
 	 */
@@ -105,14 +107,27 @@ public class MyController {
 		
 		
 		logger.info("---entered into controller logedin method-------");
-		logger.info("----calling loginService method-----");
+		
+		logger.info("----Checking the Role of the User----");
+		
+		String username = request.getParameter("username");
+		Users user = serviceDao.viewUserService(username);
+		String role = user.getRole();
+		
+		logger.info("----calling loginService method to check validity-----");
+		
 		boolean check = serviceDao.loginService(request);
 		if(check){
 			
-			HttpSession session = request.getSession(false); 
-			session.setAttribute("sessionusername", request.getParameter("username"));
 			logger.info("---login Successful---");
-			return new ModelAndView("index","msg","Log In Successful").addObject("homeactive","active");
+			
+			logger.info("--- Storing username and role in session---");
+			HttpSession session = request.getSession(false); 
+			session.setAttribute("sessionusername",username);
+			session.setAttribute("sessionrole", role);
+			
+			return new ModelAndView("index","msg","Log In Successful")
+					.addObject("homeactive","active");
 		}
 		else{
 			logger.info("----login unsucessful----");
@@ -122,6 +137,30 @@ public class MyController {
 		}
 		
 	}
+	
+	/**
+	 * This is the login page for Admin. It will redirect admin to the admin panel
+	 * 
+	 * @return
+	 */
+	@RequestMapping("/adminPanel")
+	public ModelAndView adminPanel(HttpSession session){
+		String adminRole = (String)session.getAttribute("sessionrole");
+		logger.info("-----calling adminPanel------");
+		return new ModelAndView("index").addObject("homeactive","active").addObject("adminRole",adminRole);
+	}
+	
+	/**
+	 * This method is to validate the Admin only.
+	 * 
+	 * @return
+	 */
+	@RequestMapping("/loginadmin")
+	public ModelAndView loginAdmin(){
+		return new ModelAndView("loginadmin");
+	}
+	
+	
 	
 	/**
 	 * when logout action is performed then it redirects to index page

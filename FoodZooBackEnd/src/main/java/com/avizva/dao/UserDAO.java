@@ -1,6 +1,6 @@
-package com.avizva.DAO;
+package com.avizva.dao;
 
-import com.avizva.Model.Users;
+import com.avizva.model.Users;
 
 public interface UserDAO {
 	
@@ -62,5 +62,7 @@ public interface UserDAO {
 	 * @return true or false
 	 */
 	public boolean updatepassword(String username, String password);
+	
+	
 	public boolean existUser(String username);
 }
