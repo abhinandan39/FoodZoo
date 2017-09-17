@@ -17,13 +17,14 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-
+import com.avizva.model.Categories;
 import com.avizva.model.Users;
-
+import com.avizva.service.CategoryServiceDAO;
 import com.avizva.service.ServiceDAO;
 
 @Controller
@@ -38,6 +39,8 @@ public class MyController {
 
 	@Autowired
 	ServiceDAO serviceDao;
+	@Autowired
+	CategoryServiceDAO categoryServiceDao;
 
 	/**
 	 * requestmapping annotation maps the user request to particular action 
@@ -462,7 +465,51 @@ public class MyController {
 		return new ModelAndView("profilepage").addObject("user",user).addObject("date",date);
 	} 
 
+   @RequestMapping("/manageCategory")
+   public ModelAndView callcategory(@ModelAttribute Categories category)
+   {
+	   List<Categories> list=new ArrayList<Categories>();
 
+	     list= categoryServiceDao.viewCategoryService(category);
+	     if(!list.isEmpty())
+	     return new ModelAndView("managecategory","command",new Categories()).addObject("list",list);
+	     else
+	    	 return new ModelAndView("managecategory","command",new Categories());
+	
+
+		  
+   }
+	@RequestMapping("/savecategory")
+	public ModelAndView saveCategory(@ModelAttribute Categories newcategory)
+	{
+		     if(categoryServiceDao.saveCategoryService(newcategory))
+		     return new ModelAndView("redirect:/manageCategory").addObject("msg","data is saved");
+		     else
+			     return new ModelAndView("redirect:/manageCategory").addObject("msg","data is not saved");
+ 
+    }
+
+	@RequestMapping("/categorydelete/{id}")
+	public ModelAndView delete(@PathVariable String id) {
+		Categories category=categoryServiceDao.viewCategoryByIdService(id);
+		if (categoryServiceDao.deleteCategoryService(category)) {
+			return new ModelAndView("redirect:/manageCategory");
+		} else {
+
+			return new ModelAndView("managecategory", "msg", "data not deleted");
+		}
+
+	}
+
+	@RequestMapping("/categoryupdate")
+	public ModelAndView categoryupdate(@ModelAttribute Categories updatedcategory)
+	{
+		categoryServiceDao.updateCategoryService(updatedcategory);
+		return new ModelAndView("redirect:/manageCategory");
+		
+	}
+	
+	
 	
 
 }
