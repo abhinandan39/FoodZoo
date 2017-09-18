@@ -6,7 +6,6 @@ import javax.validation.constraints.NotEmpty;
 
 import org.springframework.stereotype.Component;
 /**
- * @author Parul.Sharma
  * @Entity annotation for making table of that class above which it is applied
  * with default name
  * 
