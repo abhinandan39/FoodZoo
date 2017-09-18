@@ -32,24 +32,24 @@
 								     <h4 class="modal-title">Add a new Product</h4>
 								  </div>  
 								  <div class="modal-body">
-								  <form class="form-group">
-								      <input class="form-control" type="text" name="product_id"/><br>
-								  	  <input class="form-control" type="text" name="product_name"/><br>
-								      <input class="form-control" type="text" name="price"/><br>
-								      <input class="form-control" type="text" name="description"/><br>
-								      <input class="form-control" type="text" name="quantity"/><br>
+								  <form class="form-group" action="saveproduct">
+								      <input class="form-control" type="text" name="product_id" placeholder="Enter Product ID"/><br>
+								  	  <input class="form-control" type="text" name="product_name" placeholder="Enter Product Name"/><br>
+								      <input class="form-control" type="text" name="price" placeholder="Enter Product Price"/><br>
+								      <input class="form-control" type="text" name="description" placeholder="Enter Product Description"/><br>
+								      <input class="form-control" type="text" name="quantity"placeholder="Enter Product Quantity"/><br>
 								      <select class="form-control" name="category_name">
-								      <c:forEach var="x" items="${list1}">
-								      <option><c:out value="${x}"></c:out></option>
+								      <c:forEach var="x" items="${categorieslist}">
+								      <option><c:out value="${x.category_name}"></c:out></option>
 								      </c:forEach>
 								      </select><br>
 								       <select class="form-control" name="supplier_name">
-								      <c:forEach var="x" items="${list1}">
-								      <option><c:out value="${x}"></c:out></option>
+								      <c:forEach var="x" items="${supplierslist}">
+								      <option><c:out value="${x.supplier_name}"></c:out></option>
 								      </c:forEach>
 								      </select><br>
-								      <input class="form-control" type="file"/><br>
-								   <button type="button" class="btn btn-success" data-dismiss="modal">Save Product</button>
+								    <!--   <input class="form-control" type="file" name="image_file"/><br>
+								  -->  <button type="submit" class="btn btn-success">Save Product</button>
 								     
 								  </form>
 								  </div>
@@ -71,7 +71,19 @@
 		</tr>
 		
 		</thead>
-		
+		<c:forEach var="x" items="${productlist}">
+		<tr>
+		<td><c:out value="${x.product_id}"></c:out></td>
+		<td><c:out value="${x.product_name}"></c:out></td>
+		<td><c:out value="${x.price}"></c:out></td>
+		<td><c:out value="${x.description}"></c:out></td>
+		<td><c:out value="${x.quantity}"></c:out></td>
+		<td><c:out value="${x.category_name}"></c:out></td>
+		<td><c:out value="${x.supplier_name}"></c:out></td>
+		<td><i class="fa fa-trash-o" aria-hidden="true" id=""></i></td>
+		<td><i class="fa fa-pencil" aria-hidden="true" id=""></i></td>
+		</tr>
+		</c:forEach>
 		
 		</table>			
 					

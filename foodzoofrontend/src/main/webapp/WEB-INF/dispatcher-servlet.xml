@@ -13,7 +13,6 @@
 	<context:component-scan base-package="com" />
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 	<mvc:annotation-driven />
-
 	<mvc:interceptors>
 
 
@@ -40,6 +39,11 @@
 	<bean id="localeResolver"
 		class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
 		<property name="defaultLocale" value="en" />
+	</bean>
+
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		 <!-- setting maximum upload size -->
+		<property name="maxUploadSize" value="307200" />
 	</bean>
 
 </beans> 
