@@ -61,6 +61,23 @@
 			<div class="col-md-3"></div>
 		</div>
 	</c:if>
+	<c:if test="${not empty msg}">
+		<div class="row" id="displaymessage">
+			<div class="col-md-3"></div>
+			<div class="col-md-6">
+				<div class="alert alert-dismissable alert-danger">
+					 
+					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+						×
+					</button>
+					<p>
+						${msg}
+					</p> 
+				</div>
+			</div>
+			<div class="col-md-3"></div>
+		</div>
+	</c:if>
 	<font color='red'> <br> ${exception}
 	</font>
 
@@ -278,7 +295,7 @@
 	<jsp:include page="footer.jsp"></jsp:include>
 	<script>
 			
-			$("#displaymessage").delay(4000).hide('fast');
+			$("#displaymessage").delay(2000).hide('slow');
 			$('#regform').submit(function(e) {
 				
 				if($('#passid').val().length < 6){

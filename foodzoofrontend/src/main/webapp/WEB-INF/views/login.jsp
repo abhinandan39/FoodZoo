@@ -67,7 +67,7 @@
 	</c:if>
 	
 	<c:if test="${not empty errormsg}">
-		<div class="row" id="message">
+		<div class="row" id="displaymessage">
 			<div class="col-md-3"></div>
 			<div class="col-md-6">
 				<div class="alert alert-dismissable alert-danger">
@@ -174,7 +174,7 @@
 <jsp:include page="footer.jsp"></jsp:include>
 <script>
 			
-			$("#displaymessage").delay(2000).hide('slow');
+	$("#displaymessage").delay(2000).hide('slow');
 			
 	</script>
 </body>

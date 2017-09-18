@@ -27,7 +27,6 @@ import org.springframework.stereotype.Component;
 
 @Entity
 @Component
-
 public class Users {
 
 	/**
@@ -72,6 +71,7 @@ public class Users {
 	 * variable email is used for storing email of the user 
 	 * */
 	@NotEmpty
+	@Column(unique=true)
 	private String email;
 		
 	/**

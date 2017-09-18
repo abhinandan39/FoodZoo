@@ -27,12 +27,6 @@
 	padding-right:10px;
 }
 
-/* .navbar .nav>.active>a {
-	background-color: #1f7a1f;
-	opacity: 0.7;
-	color: white;
-} */
-
 .dropdown {
 	position: relative;
 	cursor: default;
@@ -82,10 +76,7 @@
 	
 }
 
-.searchbutton {
-	
-	
-}
+
 #sessionuser{
 	margin-top:14px;
 } 
@@ -123,6 +114,12 @@
 }
 .search-form .form-group:hover,
 .search-form .form-group.hover {
+   
+  width: 100%;
+  border-radius: 4px 25px 25px 4px;
+}
+.search-form .form-group:focus,
+.search-form .form-group.focus {
    
   width: 100%;
   border-radius: 4px 25px 25px 4px;
