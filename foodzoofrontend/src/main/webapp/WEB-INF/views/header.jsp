@@ -211,7 +211,7 @@
 				 <span> Manage <i class="fa fa-cog" aria-hidden="true"></i></span> 
 						 	 <div class="dropdown-content">
 						     <p><a href="manageCategory"> Categories </a></p>
-					     	 <p><a href=""> Suppliers </a></p>
+					     	 <p><a href="manageSupplier"> Suppliers </a></p>
 					     	 <p><a href=""> Products </a></p>
 			   		 		 </div>
 				</div>
