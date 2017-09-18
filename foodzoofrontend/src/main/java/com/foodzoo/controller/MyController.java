@@ -13,6 +13,8 @@ import javax.validation.Valid;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.http.converter.json.GsonBuilderUtils;
+import org.springframework.http.converter.json.GsonFactoryBean;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
@@ -21,14 +23,19 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.avizva.model.Categories;
+import com.avizva.model.Products;
 import com.avizva.model.Suppliers;
 import com.avizva.model.Users;
 import com.avizva.service.CategoryServiceDAO;
+import com.avizva.service.ProductServiceDAO;
 import com.avizva.service.ServiceDAO;
 import com.avizva.service.SupplierServiceDAO;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 @Controller
 public class MyController {
@@ -48,6 +55,8 @@ public class MyController {
 	SupplierServiceDAO supplierServiceDao;
 	@Autowired
 	ServletContext servletContext;
+	
+	ProductServiceDAO productServiceDao;
 
 
 	/**
@@ -569,8 +578,50 @@ public class MyController {
 		@RequestMapping("/categoryView")
 		public ModelAndView viewCategory()
 		{
-			return new ModelAndView("dummyCategoryView");
+			logger.info("Inside Json method");
+			List<Products> productlist = productServiceDao.viewProductsService();
+			logger.info("Fetched Product List");
+			Gson gSon = new GsonBuilder().create();
+			logger.info(productlist);
+			String products = gSon.toJson(productlist);
+			logger.info("products");
+			System.out.println(products);
+			return new ModelAndView("dummyCategoryView").addObject("products",products);
 		}
 		
+		
+		@RequestMapping("/manageProduct")
+		public ModelAndView manageproducts()
+		{
+			
+			List<Products> productlist;
+			Categories category=null;
+			Suppliers supplier=null;
+			List<Categories> categorieslist=categoryServiceDao.viewCategoryService(category);
+			System.out.println("category:"+categorieslist);
+			List<Suppliers> supplierslist=supplierServiceDao.viewSupplierService(supplier);
+			productlist=productServiceDao.viewProductsService();
+			return new ModelAndView("manageproducts").addObject("productlist",productlist).addObject("categorieslist",categorieslist).addObject("supplierslist",supplierslist);
+		}
+		@RequestMapping("/saveproduct")
+		public ModelAndView saveproducts(@Valid @ModelAttribute Products newproduct,BindingResult result)
+		{
+			System.out.print(newproduct);
+			if(result.hasErrors())
+			{
+				System.out.println("error");
+				return new ModelAndView("manageproducts");
+			}
+			//newproduct.getImage_file();
+			logger.info("inside save product");
+			if(productServiceDao.saveProductService(newproduct))
+			{
+				logger.info("inside save product");
+				return new ModelAndView("redirect:/manageProduct");
+			}
+			else
+				return new ModelAndView("manageproducts").addObject("msg","data is not saved");
+			
+		}
 		
 }

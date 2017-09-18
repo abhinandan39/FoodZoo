@@ -8,11 +8,13 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.avizva.model.Categories;
 import com.avizva.model.Products;
 import com.avizva.service.CategoryServiceDaoImpl;
 
+@Repository
 public class ProductsDAOImpl implements ProductsDAO {
 
 	/**

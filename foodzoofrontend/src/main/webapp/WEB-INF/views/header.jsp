@@ -225,7 +225,8 @@
 						 	 <div class="dropdown-content">
 						     <p><a href="manageCategory"> Categories </a></p>
 					     	 <p><a href="manageSupplier"> Suppliers </a></p>
-					     	 <p><a href="manageProducts"> Products </a></p>
+					     	 <p><a href="manageProduct"> Products </a></p>
+
 			   		 		 </div>
 				</div>
 				</li>

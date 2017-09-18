@@ -85,11 +85,11 @@ span.itemPrice {
 .img-hover img:hover {
 	-webkit-backface-visibility: hidden;
 	backface-visibility: hidden;
-	-webkit-transform: translateZ(0) scale(1.50); /* Safari and Chrome */
-	-moz-transform: scale(1.50); /* Firefox */
-	-ms-transform: scale(1.50); /* IE 9 */
-	-o-transform: translatZ(0) scale(1.50); /* Opera */
-	transform: translatZ(0) scale(1.50);
+	-webkit-transform: translateZ(0) scale(1.40); /* Safari and Chrome */
+	-moz-transform: scale(1.40); /* Firefox */
+	-ms-transform: scale(1.40); /* IE 9 */
+	-o-transform: translatZ(0) scale(1.40); /* Opera */
+	transform: translatZ(0) scale(1.40);
 	opacity: 0.9;
 }
 	
@@ -140,6 +140,7 @@ span.itemPrice {
 			</div>
 		</div>
 	</div>
+	${products}
 <jsp:include page="footer.jsp" />
 	
 	<script type="text/javascript">
