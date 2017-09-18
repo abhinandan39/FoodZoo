@@ -555,4 +555,17 @@ public class MyController {
 		}
 		
 		
+		@RequestMapping("/manageProduct")
+		public ModelAndView manageproducts()
+		{
+			List<String> list1=new ArrayList<String>();
+			List<String> list2=new ArrayList<String>();
+			
+			list1.add("southindian");
+			list1.add("northindian");
+			list1.add("thai");
+			return new ModelAndView("manageproducts").addObject("list1",list1).addObject("list2",list2);
+		}
+		
+		
 }
