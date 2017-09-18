@@ -138,6 +138,16 @@
   left: initial;
   font-size: 14px;
 }
+.dynamicCategories{
+	display:block;
+	padding: 5px;
+	color: black;
+}
+.dynamicCategories:focus , .dynamicCategories:hover{
+	display:block;
+	padding: 5px;
+	color: green !important; 
+}
 
 </style>
 </head>
@@ -165,11 +175,14 @@
 					
 					<span> Menu <i class="fa fa-bars" aria-hidden="true"></i></span>
 					<div class="dropdown-content">
-						<p>North Indian</p>
+						<c:forEach var="categories" items="${applicationScope['categoryList']}">
+							<a class="dynamicCategories" href="${categories.category_name}">	${categories.category_name}</a>
+						</c:forEach>
+						<!-- <p>North Indian</p>
 						<p>South Indian</p>
 						<p>Thailand</p>
 						<p>Italian</p>
-						<p>Dessert</p>
+						<p>Dessert</p> -->
 					</div>
 					
 				</div>
@@ -226,8 +239,8 @@
 				<div class="dropdown">
 				 <span> Settings <i class="fa fa-cog" aria-hidden="true"></i></span>
 						 	 <div class="dropdown-content">
-						     <p><a href="profile">Profile</a></p>
-					     	 <p><a href="deactivate">Deactivate</a></p>
+						     <a href="profile">Profile</a>
+					     	 <a href="deactivate">Deactivate</a>
 			   		 		 </div>
 				</div>
 				</li>
@@ -237,9 +250,9 @@
 				<div class="dropdown">
 				 <span> Settings <i class="fa fa-cog" aria-hidden="true"></i></span>
 						 	 <div class="dropdown-content">
-						     <p><a href="profile">Profile</a></p>
-					     	 <p><a href="deactivate">Deactivate</a></p>
-					     	 <p><a href="adminPanel">Admin Panel</a></p>
+						     <a class="dynamicCategories" href="profile">Profile</a>
+					     	 <a class="dynamicCategories" href="deactivate">Deactivate</a>
+					     	 <a class="dynamicCategories" href="adminPanel">Admin Panel</a>
 			   		 		 </div>
 				</div>
 				</li>

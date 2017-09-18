@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -45,6 +46,8 @@ public class MyController {
 	CategoryServiceDAO categoryServiceDao;
 	@Autowired
 	SupplierServiceDAO supplierServiceDao;
+	@Autowired
+	ServletContext servletContext;
 
 
 	/**
@@ -56,12 +59,15 @@ public class MyController {
 	 */
 	@RequestMapping("/")
 	public ModelAndView indexcall() {
-		
+		Categories category=null;
+		List<Categories> categoryList = categoryServiceDao.viewCategoryService(category);
+		Suppliers supplier = null;
+		List<Suppliers> supplierList = supplierServiceDao.viewSupplierService(supplier);
         logger.info("----calling index-----");
-
-     
+        servletContext.setAttribute("categoryList", categoryList);
+        servletContext.setAttribute("supplierList", supplierList);
        
-	return new ModelAndView("index").addObject("homeactive","active");
+        return new ModelAndView("index").addObject("homeactive","active");
               
 		
         
@@ -75,6 +81,12 @@ public class MyController {
 	@RequestMapping("/home")
 	public ModelAndView getHome(){
 		
+		Categories category=null;
+		List<Categories> categoryList = categoryServiceDao.viewCategoryService(category);
+		Suppliers supplier = null;
+		List<Suppliers> supplierList = supplierServiceDao.viewSupplierService(supplier);
+		servletContext.setAttribute("categoryList", categoryList);
+        servletContext.setAttribute("supplierList", supplierList);
 		logger.info("-----calling index------");
 		return new ModelAndView("index").addObject("homeactive","active");
 	}
@@ -552,6 +564,12 @@ public class MyController {
 			supplierServiceDao.updateSupplierService(suppliers);
 			return new ModelAndView("redirect:/manageSupplier");
 			
+		}
+		
+		@RequestMapping("/categoryView")
+		public ModelAndView viewCategory()
+		{
+			return new ModelAndView("dummyCategoryView");
 		}
 		
 		

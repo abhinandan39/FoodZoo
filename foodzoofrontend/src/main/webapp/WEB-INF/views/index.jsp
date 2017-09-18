@@ -177,6 +177,14 @@
 		</div>
 	</div>
 
+<c:forEach var="categories" items="${applicationScope['categoryList']}">
+	${categories.category_name}
+</c:forEach>	<br>
+<c:forEach var="suppliers" items="${applicationScope['supplierList']}">
+	${suppliers.supplier_name}
+</c:forEach>	
+<%-- ${applicationScope['categoryList'].get(0).category_name}<br>
+${applicationScope['supplierList']} --%>
 	<!-- Social Media Footer -->
 	<jsp:include page="footer.jsp" />
 	<script>
