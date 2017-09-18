@@ -48,8 +48,7 @@ public class MyController {
 	CategoryServiceDAO categoryServiceDao;
 	@Autowired
 	SupplierServiceDAO supplierServiceDao;
-	@Autowired
-	ProductServiceDAO productServiceDao;
+	
 
 
 	/**
@@ -560,38 +559,6 @@ public class MyController {
 		}
 		
 		
-		@RequestMapping("/manageProduct")
-		public ModelAndView manageproducts()
-		{
-			
-			List<Products> productlist;
-			Categories category=null;
-			Suppliers supplier=null;
-			List<Categories> categorieslist=categoryServiceDao.viewCategoryService(category);
-			System.out.println("category:"+categorieslist);
-			List<Suppliers> supplierslist=supplierServiceDao.viewSupplierService(supplier);
-			productlist=productServiceDao.viewProductsService();
-			return new ModelAndView("manageproducts").addObject("productlist",productlist).addObject("categorieslist",categorieslist).addObject("supplierslist",supplierslist);
-		}
-		@RequestMapping("/saveproduct")
-		public ModelAndView saveproducts(@Valid @ModelAttribute Products newproduct,BindingResult result)
-		{
-			System.out.print(newproduct);
-			if(result.hasErrors())
-			{
-				System.out.println("error");
-				return new ModelAndView("manageproducts");
-			}
-			//newproduct.getImage_file();
-			logger.info("inside save product");
-			if(productServiceDao.saveProductService(newproduct))
-			{
-				logger.info("inside save product");
-				return new ModelAndView("redirect:/manageProduct");
-			}
-			else
-				return new ModelAndView("manageproducts").addObject("msg","data is not saved");
-			
-		}
+		
 		
 }
