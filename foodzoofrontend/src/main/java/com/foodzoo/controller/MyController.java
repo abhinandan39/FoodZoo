@@ -493,97 +493,45 @@ public class MyController {
 		return new ModelAndView("profilepage").addObject("user", user).addObject("date", date);
 	}
 
-	@RequestMapping("/manageCategory")
-	public ModelAndView callcategory(@ModelAttribute Categories category) {
-		List<Categories> list = new ArrayList<Categories>();
-		Categories session_category = null;
-		List<Categories> categoryList = categoryServiceDao.viewCategoryService(session_category);
-		Suppliers supplier = null;
-		List<Suppliers> supplierList = supplierServiceDao.viewSupplierService(supplier);
-		servletContext.setAttribute("categoryList", categoryList);
-		servletContext.setAttribute("supplierList", supplierList);
 
-		list = categoryServiceDao.viewCategoryService(category);
-		if (!list.isEmpty())
-			return new ModelAndView("managecategory", "command", new Categories()).addObject("list", list);
-		else
-			return new ModelAndView("managecategory", "command", new Categories());
 
-	}
 
-	@RequestMapping("/savecategory")
-	public ModelAndView saveCategory(@ModelAttribute Categories newcategory) {
-		if (categoryServiceDao.saveCategoryService(newcategory)) {
-			
-			return new ModelAndView("redirect:/manageCategory").addObject("msg", "data is saved");
-		}
 
-		else
-			return new ModelAndView("redirect:/manageCategory").addObject("msg", "data is not saved");
+	
+	 @RequestMapping("/manageSupplier")
+	   public ModelAndView callsupplier(@ModelAttribute Suppliers suppliers)
+	   {
+		   List<Suppliers> list=new ArrayList<Suppliers>();
 
-	}
+		     list= supplierServiceDao.viewSupplierService(suppliers);
+		     if(!list.isEmpty())
+		     return new ModelAndView("managesuppliers","command",new Suppliers()).addObject("list",list);
+		     else
+		    	 return new ModelAndView("managesuppliers","command",new Suppliers());
+	   }
+	 @RequestMapping("/savesupplier")
+		public ModelAndView saveSupplier(@ModelAttribute Suppliers suppliers)
+		{
+			     if(supplierServiceDao.saveSupplierService(suppliers))
+			     return new ModelAndView("redirect:/manageSupplier").addObject("msg","data is saved");
+			     else
+				     return new ModelAndView("redirect:/manageSupplier").addObject("msg","data is not saved");
+	 
+	    }
 
-	@RequestMapping("/product")
-	public ModelAndView viewProductsInCategory(@RequestParam(value = "cat", required = false) String id) {
-		Categories category = categoryServiceDao.viewCategoryByIdService(id);
-		String category_name = category.getCategory_name();
-		List<Products> productList = productServiceDao.productByCategoryService(category_name);
-		Gson gSon = new GsonBuilder().create();
-		logger.info(productList);
-		String products = gSon.toJson(productList);
-		return new ModelAndView("ProductsView").addObject("products", products);
-	}
+		@RequestMapping("/supplierdelete/{id}")
+		public ModelAndView deletesup(@PathVariable String id) {
+		     Suppliers suppliers=supplierServiceDao.viewSupplierByIdService(id);
+			if (supplierServiceDao.deleteSupplierService(suppliers)) {
+				return new ModelAndView("redirect:/manageSupplier");
+			} else {
 
-	@RequestMapping("/categorydelete/{id}")
-	public ModelAndView delete(@PathVariable String id) {
-		Categories category = categoryServiceDao.viewCategoryByIdService(id);
-		if (categoryServiceDao.deleteCategoryService(category)) {
-			return new ModelAndView("redirect:/manageCategory");
-		} else {
-
-			return new ModelAndView("managecategory", "msg", "data not deleted");
-		}
+				return new ModelAndView("manageSupplier", "msg", "data not deleted");
+			}
 
 	}
 
-	@RequestMapping("/categoryupdate")
-	public ModelAndView categoryupdate(@ModelAttribute Categories updatedcategory) {
-		categoryServiceDao.updateCategoryService(updatedcategory);
-		return new ModelAndView("redirect:/manageCategory");
 
-	}
-
-	@RequestMapping("/manageSupplier")
-	public ModelAndView callsupplier(@ModelAttribute Suppliers suppliers) {
-		List<Suppliers> list = new ArrayList<Suppliers>();
-
-		list = supplierServiceDao.viewSupplierService(suppliers);
-		if (!list.isEmpty())
-			return new ModelAndView("managesuppliers", "command", new Suppliers()).addObject("list", list);
-		else
-			return new ModelAndView("managesuppliers", "command", new Suppliers());
-	}
-
-	@RequestMapping("/savesupplier")
-	public ModelAndView saveSupplier(@ModelAttribute Suppliers suppliers) {
-		if (supplierServiceDao.saveSupplierService(suppliers))
-			return new ModelAndView("redirect:/manageSupplier").addObject("msg", "data is saved");
-		else
-			return new ModelAndView("redirect:/manageSupplier").addObject("msg", "data is not saved");
-
-	}
-
-	@RequestMapping("/supplierdelete/{id}")
-	public ModelAndView deletesup(@PathVariable String id) {
-		Suppliers suppliers = supplierServiceDao.viewSupplierByIdService(id);
-		if (supplierServiceDao.deleteSupplierService(suppliers)) {
-			return new ModelAndView("redirect:/manageSupplier");
-		} else {
-
-			return new ModelAndView("manageSupplier", "msg", "data not deleted");
-		}
-
-	}
 
 	@RequestMapping("/supplierupdate")
 	public ModelAndView supplierupdate(@ModelAttribute Suppliers suppliers) {
@@ -592,6 +540,7 @@ public class MyController {
 
 	}
 
+	// For all products
 	@RequestMapping("/viewProducts")
 	public ModelAndView viewCategory() {
 		logger.info("Inside Json method");
@@ -604,5 +553,18 @@ public class MyController {
 		System.out.println(products);
 		return new ModelAndView("ProductsView").addObject("products", products);
 	}
+
+	//For particular Category
+	@RequestMapping("/product")
+	public ModelAndView viewProductsInCategory(@RequestParam(value = "cat", required = false) String id) {
+		Categories category = categoryServiceDao.viewCategoryByIdService(id);
+		String category_name = category.getCategory_name();
+		List<Products> productList = productServiceDao.productByCategoryService(category_name);
+		Gson gSon = new GsonBuilder().create();
+		logger.info(productList);
+		String products = gSon.toJson(productList);
+		return new ModelAndView("ProductsView").addObject("products", products);
+	}
+
 
 }

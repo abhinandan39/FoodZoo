@@ -96,22 +96,10 @@ public class ProductController {
 	
 	
 	/**
-	 * saveproducts method is used to save the product object obtained from manageproducts.jsp file and it 
-	 * will also pass the list of categories and suppliers to the same jsp page.It will be called
-	 * on the action manageProduct.On successful completion of this method a list of existing products
-	 * will be shown on manageproducts.jsp file
-	 * for viewing the product list and fetching the category and supplier lists it will call the respective
-	 * service methods which are linked to DAO class methods.Those methods will return respective lists.
-	 * These lists will be added with the view object and sent to the view returned by this method.
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
+	 * saveproducts method is used to save the product object obtained from manageproducts.jsp file and It will be called
+	 * on the action saveproduct.On successful completion of this method Product data will be saved into database
+	 * In this method saveProductService method  of class ProductServiceDAO will be called which will further call save
+	 * method of ProductDAO class.
 	 * @param newproduct is an object of class Products.This Object is binded with data sent by the form.
 	 * @param result is an object of class BindingResult which is used to check errors in the binding of form data to the object.
 	 * @return ModelAndView Object 
@@ -132,33 +120,67 @@ public class ProductController {
 			return new ModelAndView("manageproducts");
 		}
 		//newproduct.getImage_file();
-		logger.info("inside save product");
+		logger.info("------------inside saveproduct method-----------");
 		if(productServiceDao.saveProductService(newproduct))
 		{
-			logger.info("inside save product");
+			logger.info("--------saveproduct method call complete data is saved----------");
 			return new ModelAndView("redirect:/manageProduct");
 		}
 		else
+		{
+			logger.info("--------saveproduct method call is not completed data is not saved----------");
+
 			return new ModelAndView("manageproducts").addObject("msg","data is not saved");
-		
+		}
 	}
 	
+	
+	
+	/**
+	 * productupdate method is used to update the product object obtained from manageproducts.jsp file and It will be called
+	 * on the action updateproduct.On successful completion of this method Product data will be updated into database
+	 * In this method updateProductService method  of class ProductServiceDAO will be called which will further call update
+	 * method of ProductDAO class.
+	 * @param newproduct is an object of class Products.This Object is binded with data sent by the form.
+	 * @param result is an object of class BindingResult which is used to check errors in the binding of form data to the object.
+	 * @return ModelAndView Object 
+	 */
+	
+		
 	@RequestMapping("/updateproduct")
 	public ModelAndView productupdate(@ModelAttribute Products newproduct)
 	{
+		logger.info("-----inside productupdate--------");
 		productServiceDao.updateProductService(newproduct);
-		
+		logger.info("-------product updated successfully------");
 		return new ModelAndView("redirect:/manageProduct");
 		
 	}
 	
+	/**
+	 * deleteproduct method is used to delete the product by the id obtained from manageproducts.jsp file path variable and It will be called
+	 * on the action /productdelete/{id}.On successful completion of this method Product data will be deleted from database
+	 * In this method viewProductByIdService method  of class ProductServiceDAO will be called.which will further call viewProductById
+	 * method of ProductDAO class.It will return the particular id product and this product will be deleted by calling method deleteProductService of ProductServiceDAO.
+	 * which will call deleteProduct method of ProductDAO class.
+	 * @param id id of the product to be deleted
+	 * @return ModelAndView Object 
+	 */
+	
+	
 	@RequestMapping("/productdelete/{id}")
-	public ModelAndView deleteprod(@PathVariable String id) {
+	public ModelAndView deleteproduct(@PathVariable String id) {
+		logger.info("-----inside deleteproduct method----------");
 	     Products products=productServiceDao.viewProductByIdService(id);
-		if (productServiceDao.deleteProductService(products)) {
+	     
+	     logger.info("-----product is-----"+products);
+		if (productServiceDao.deleteProductService(products)) 
+		{
+			logger.info("--------deleteproduct service is called and product is deleted-------");
 			return new ModelAndView("redirect:/manageProduct");
 		} else {
 
+			logger.info("--------error: product is not deleted-------");
 			return new ModelAndView("manageProduct", "msg", "data not deleted");
 		}
 
