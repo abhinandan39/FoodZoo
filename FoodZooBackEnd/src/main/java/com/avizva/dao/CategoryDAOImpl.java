@@ -8,11 +8,12 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 
 import com.avizva.model.Categories;
 import com.avizva.service.CategoryServiceDaoImpl;
-@Controller
+
+@Repository
 public class CategoryDAOImpl implements CategoryDAO{
 	/**
 	 * for keeping the log of this class

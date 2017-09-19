@@ -4,12 +4,13 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.avizva.dao.SupplierDAOImpl;
 import com.avizva.model.Suppliers;
 
 
-
+@Service
 public class SupplierServiceDAOImpl implements SupplierServiceDAO{
 	
 	Logger logger=Logger.getLogger(SupplierServiceDAOImpl.class);

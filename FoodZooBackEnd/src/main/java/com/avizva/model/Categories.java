@@ -11,14 +11,14 @@ import org.springframework.stereotype.Component;
  * 
  *
  */
-@Entity
+
 /**
  * 
  * @author Parul.Sharma
  * makes the bean of class
  *
  */
-@Component
+
 /**
  * 
  * @author Parul.Sharma
@@ -28,6 +28,8 @@ import org.springframework.stereotype.Component;
  * This class is for getting the information of category
  *
  */
+@Entity
+@Component
 public class Categories {
 	/**
 	 * @NotEmpty annotation is validation that means that field should not be empty above which it is applied
