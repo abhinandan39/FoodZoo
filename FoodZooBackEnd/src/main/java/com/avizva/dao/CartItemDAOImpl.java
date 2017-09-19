@@ -1,9 +1,10 @@
 package com.avizva.dao;
 
+import java.util.ArrayList;
 import java.util.List;
-
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -11,9 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.avizva.model.CartItem;
-import com.avizva.model.Categories;
-
-
 
 @Repository
 public class CartItemDAOImpl {
@@ -119,6 +117,37 @@ public class CartItemDAOImpl {
 		list= criteria.list();
 		session.close();
 		return list;
+	}
+	
+	
+	
+	
+	public List<CartItem> viewCartItemsByUser(String user_name)
+	{
+		List<CartItem> list=new ArrayList<CartItem>();
+		Session session = getSession();
+		Query query=session.createQuery("from CartItem where user_name=:user_name");
+		query.setParameter("user_name", user_name);
+		list=query.list();
+	    logger.info("list:"+list);
+		return list;
+		
+	}
+	
+	public float getTotalPrice(List<CartItem> cartitems,String user_name)
+	{
+		CartItemDAOImpl cartitemdaoimpl=null;
+		float totalprice=0l;
+		Session session = getSession();
+		List<CartItem> list=cartitemdaoimpl.viewCartItemsByUser(user_name);
+		for(CartItem price:list)
+		{
+			totalprice=totalprice+price.getPrice();
+		}
+		
+		
+		return totalprice;
+		
 	}
 	
 }
