@@ -68,9 +68,8 @@ public class Products {
 	/**
 	 * Image File is stored as a miltp_part file
 	 */
-//	@Transient
-//	private MultipartFile image_file;
-//	
+	
+	
 	
 	public String getProduct_id() {
 		return product_id;

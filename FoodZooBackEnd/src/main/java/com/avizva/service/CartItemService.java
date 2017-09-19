@@ -16,5 +16,11 @@ public interface CartItemService {
 	public CartItem viewCartItemByIdService(int cart_item_id);
 	
 	public List<CartItem> viewCartItemsService(CartItem cartitem);
+	
+	
+    public List<CartItem> viewCartItemsByUserService(String user_name);
+	
+	public float getTotalPriceService(List<CartItem> cartitems,String user_name);
+	
 
 }

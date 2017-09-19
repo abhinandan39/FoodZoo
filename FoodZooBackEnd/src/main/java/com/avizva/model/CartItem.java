@@ -22,6 +22,29 @@ public class CartItem {
 	
 	@NotEmpty
 	private String user_name;
+	
+	@NotEmpty
+	private float price;
+	
+	@NotEmpty
+	private int cartitem_quantity;
+	
+	
+		public float getPrice() {
+		return price;
+	}
+
+	public void setPrice(float price) {
+		this.price = price;
+	}
+
+	public int getCartitem_quantity() {
+		return cartitem_quantity;
+	}
+
+	public void setCartitem_quantity(int cartitem_quantity) {
+		this.cartitem_quantity = cartitem_quantity;
+	}
 
 	public int getCart_item_id() {
 		return cart_item_id;

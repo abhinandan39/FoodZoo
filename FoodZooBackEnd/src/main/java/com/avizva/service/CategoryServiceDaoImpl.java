@@ -12,6 +12,9 @@ import com.avizva.model.Categories;
 @Service
 public class CategoryServiceDaoImpl implements CategoryServiceDAO {
 	Logger logger=Logger.getLogger(CategoryServiceDaoImpl.class);
+
+	
+	
 	@Autowired
 	CategoryDAOImpl categoryDAOImpl;
 

@@ -3,6 +3,7 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>/WEB-INF/spring-security.xml</param-value>
+		
 	</context-param>
 	<filter>  <!-- Authentication Filter. Creates session, manages, closes automatically -->
 		<filter-name>springSecurityFilterChain</filter-name>

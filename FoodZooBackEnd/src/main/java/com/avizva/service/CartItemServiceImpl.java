@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.avizva.dao.CartItemDAOImpl;
+import com.avizva.dao.ProductsDAOImpl;
 import com.avizva.model.CartItem;
+import com.avizva.model.Products;
 @Service
 public class CartItemServiceImpl {
 
@@ -15,15 +17,26 @@ public class CartItemServiceImpl {
 	@Autowired
 	CartItemDAOImpl cartItemDAOImpl;
 	
+	@Autowired
+	ProductsDAOImpl productsDAOImpl;
 	
 	public boolean saveCartItemService(CartItem cartitem) {
 		
 		logger.info("----inside service:saveCartItemService method------");
-		if(cartItemDAOImpl.saveCartItem(cartitem)){
+		Products products=productsDAOImpl.viewProductById(cartitem.getProduct_id());
+		if(products.getQuantity()>=1)
+		{
+		if(cartItemDAOImpl.saveCartItem(cartitem))
+		{
+			//products.setQuantity(products.getQuantity()-1);
+			//productsDAOImpl.updateProduct(products);
 			logger.info("---cartitem info is saved in db-----");
-			return true;
+			
+		}
+		return true;
 		}
 		else{
+			
 			logger.info("---cartitem info is not saved in db-----");
 			return false;
 		}
@@ -52,6 +65,9 @@ public class CartItemServiceImpl {
 		logger.info("---inside service:deleteCartItemService method---");
 		if(cartItemDAOImpl.deleteCartItem(cartitem))
 		{
+//		Products products=productsDAOImpl.viewProductById(cartitem.getProduct_id());
+//			products.setQuantity(products.getQuantity()+1);
+//			productsDAOImpl.updateProduct(products);
 			logger.info("----cartitem info deleted in db---");
 			return true;
 		}
@@ -80,8 +96,26 @@ public class CartItemServiceImpl {
 	}
 
 	
+	  public List<CartItem> viewCartItemsByUserService(String user_name)
+	  {
+		  
+		  logger.info("-----------inside viewcartitemsbyuser service-------");
+		  List<CartItem> list=null;
+		  list=cartItemDAOImpl.viewCartItemsByUser(user_name);
+		  logger.info("---showing all the items by username-------");
+		  return list;
+	  }
 	
-	
-	
-	
+	  public float getTotalPriceService(List<CartItem> cartitems,String user_name)
+	  {
+		  logger.info("----inside total price---------");
+		  float totalprice=0l;
+		  totalprice=cartItemDAOImpl.getTotalPrice(cartitems, user_name);
+		  logger.info("-------total price obtained-----"+totalprice);
+		  return totalprice;
+		  
+		  
+	  }
+	  
+	 
 }
