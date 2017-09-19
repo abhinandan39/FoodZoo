@@ -31,7 +31,7 @@ public class CartItemServiceImpl {
 	}
 	
 	
-	public boolean updateCategoryService(CartItem cartitem) {
+	public boolean updateCartItemService(CartItem cartitem) {
 	    logger.info("----inside service:upadteCartItemService method------");
 		if(cartItemDAOImpl.updateCartItem(cartitem))
 		{

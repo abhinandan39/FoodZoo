@@ -142,6 +142,21 @@ public class MyController {
 
 		logger.info("----calling loginService method to check validity-----");
 
+		HttpSession session = request.getSession();
+//		String product = (String)session.getAttribute("product_id");
+//		String check_login = (String)session.getAttribute("loginCheck");
+//		String url = (String)session.getAttribute("url");
+		if(session.getAttribute("loginCheck") != null){
+			session = request.getSession(true);
+			String username = request.getParameter("username");
+			Users user = serviceDao.viewUserService(username);
+			String role = user.getRole();
+			session.setAttribute("sessionusername", username);
+			session.setAttribute("sessionrole", role);
+			return new ModelAndView("redirect:/viewProducts");
+		}
+		else{
+		
 		boolean check = serviceDao.loginService(request);
 		if (check) {
 
@@ -154,7 +169,7 @@ public class MyController {
 			logger.info("---login Successful---");
 
 			logger.info("--- Storing username and role in session---");
-			HttpSession session = request.getSession(false);
+			session = request.getSession(true);
 			session.setAttribute("sessionusername", username);
 			session.setAttribute("sessionrole", role);
 
@@ -163,6 +178,7 @@ public class MyController {
 			logger.info("----login unsucessful----");
 			return new ModelAndView("login").addObject("errormsg", "Invalid Credentials").addObject("loginactive",
 					"active");
+		}
 		}
 
 	}

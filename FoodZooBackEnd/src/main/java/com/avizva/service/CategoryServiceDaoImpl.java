@@ -110,5 +110,13 @@ public class CategoryServiceDaoImpl implements CategoryServiceDAO {
 		return list;
 	}
 
+//	public Categories viewCategoryByNameService(String category_name) {
+//		logger.info("----inside service:viewCategoryByNameService method---");
+//		Categories category =	categoryDAOImpl.viewCategoryByName(category_name);
+//		logger.info("----show information related to particular category_id---");
+//			return category;
+//	
+//	}
+
 
 }

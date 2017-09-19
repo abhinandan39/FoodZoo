@@ -92,7 +92,7 @@
 				<div class="col-sm-3">
 					
 				</div>
-
+				<input type="hidden" value="${url}" />
 				<div class="col-sm-6"
 					style="background: #ffffff; padding: 5px; margin-top: 100px; margin-bottom: 100px; border-radius: 10px;">
 					<div class="row">

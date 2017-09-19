@@ -34,6 +34,8 @@ public interface CategoryDAO {
 	 * @return return category object with the category info
 	 */
 	public Categories viewCategoryById(String category_id);
+	
+//	public Categories viewCategoryByName(String category_name);
 	/**
 	 * viewCategory method called to view all the categories present in the database.
 	 * this method will get the control from service method not from controller directly
