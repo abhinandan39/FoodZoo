@@ -112,9 +112,9 @@
 			</h3>
 			<!-- Food Categories -->
 
-
+			<a href="product?cat=north">
 			<div class="col-sm-4 img-hover" style="text-align: center;">
-
+			
 				<img src="${images}/northindian.jpg" class="img-rounded"
 					style="width: 250px; height: 250px">
 				<div class="middle">
@@ -122,8 +122,11 @@
 						<h4>North Indian</h4>
 					</div>
 				</div>
+				
 
 			</div>
+			</a>
+			<a href="product?cat=south">
 			<div class="col-sm-4 img-hover" style="text-align: center;">
 				<img src="${images}/southindian.jpg" class="img-rounded"
 					style="width: 250px; height: 250px">
@@ -134,6 +137,8 @@
 					</div>
 				</div>
 			</div>
+			</a>
+			<a href="product?cat=chinese">
 			<div class="col-sm-4 img-hover" style="text-align: center;">
 				<img src="${images}/chinese.jpg" class="img-rounded"
 					style="width: 250px; height: 250px">
@@ -143,10 +148,11 @@
 					</div>
 				</div>
 			</div>
+			</a>
 
 		</div>
 		<div class="row">
-
+			<a href="product?cat=italian">
 			<div class="col-sm-4 img-hover" style="text-align: center;">
 				<img src="${images}/Italian.jpg" class="img-rounded"
 					style="width: 250px; height: 250px">
@@ -156,6 +162,8 @@
 					</div>
 				</div>
 			</div>
+			</a>
+			<a href="product?cat=dessert">
 			<div class="col-sm-4 img-hover" style="text-align: center;">
 				<img src="${images}/dessert.jpeg" class="img-rounded"
 					style="width: 250px; height: 250px">
@@ -165,15 +173,18 @@
 					</div>
 				</div>
 			</div>
+			</a>
+			<a href="product?cat=bengali">
 			<div class="col-sm-4 img-hover" style="text-align: center;">
 				<img src="${images}/thaifood.jpg" class="img-rounded"
 					style="width: 250px; height: 250px">
 				<div class="middle">
 					<div class="text">
-						<h4>Thai</h4>
+						<h4>Bengali</h4>
 					</div>
 				</div>
 			</div>
+			</a>
 		</div>
 	</div>
 
