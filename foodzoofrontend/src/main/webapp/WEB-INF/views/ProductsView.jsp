@@ -141,7 +141,7 @@ span.itemPrice {
 							</div>
 							
 						</div>
-						<a href="{{product.product_id}}" class="linkstyle">
+						<a href="singleProduct?id={{product.product_id}}" class="linkstyle">
 						<div class="col-sm-12 panelBottom">
 							<div class="col-sm-12 text-center">
 								<h5>{{product.product_name}}</h5>
