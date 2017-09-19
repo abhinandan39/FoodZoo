@@ -105,7 +105,9 @@ span.itemPrice {
 .btn-default{
 	font-size: 14px !important;
 }
-
+.linkstyle:hover{
+	color:#ffffff !important;
+}
 
 	
 </style>
@@ -139,7 +141,7 @@ span.itemPrice {
 							</div>
 							
 						</div>
-
+						<a href="{{product.product_id}}" class="linkstyle">
 						<div class="col-sm-12 panelBottom">
 							<div class="col-sm-12 text-center">
 								<h5>{{product.product_name}}</h5>
@@ -147,6 +149,7 @@ span.itemPrice {
 							</div>
 							
 						</div>
+						</a>
 						<div class="col-sm-12 panelBottom">
 							<div class="col-sm-6">
 								<button class="btn btn-lg btn-add-to-cart">
@@ -176,7 +179,6 @@ span.itemPrice {
 	 app.controller('productController',function($scope){
 		 
 		
-		 
 		 $scope.productList = ${products}
 		 
 	 });

@@ -566,5 +566,12 @@ public class MyController {
 		return new ModelAndView("ProductsView").addObject("products", products);
 	}
 
+	// Single Product View
+	@RequestMapping("/singleProduct")
+	public ModelAndView viewSignleProduct(@RequestParam(value= "id", required = false) String id){
+		Products product = productServiceDao.viewProductByIdService(id);
+		return new ModelAndView("SingleProductView").addObject("product",product);
+		
+	}
 
 }
