@@ -13,26 +13,92 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <c:url var="css" value="/resources/css"></c:url>
+  <c:url var="js" value="/resources/js"></c:url>
+  <c:url var="images" value="/resources/images"></c:url>
+  
+  <style>
+    #piechart1,#piechart2
+    {
+      padding-top:50px;
+      padding-left:50px;
+      padding:right:50px;
+       padding-bottom:50px; 
+     
+      height:10%;
+    }
+  
+  
+  
+  </style>
+  <script>
+  google.charts.load('current', {
+		'packages' : [ 'corechart' ]
+	});
+	google.charts.setOnLoadCallback(drawChart);
 
+	// Draw the chart and set the chart values
+	function drawChart() {
+		var data1 = google.visualization.arrayToDataTable([
+				[ 'PRODUCTS', 'NUMBER' ], [ 'southindian', 8 ],
+				[ 'northindian', 2 ], [ 'chinese', 4 ], [ 'thai', 2 ],
+				[ 'dessert', 8 ] ]);
+
+		var data2 = google.visualization.arrayToDataTable([
+				[ 'PRODUCTS USER', 'NUMBER' ], [ 'southindian', 8 ],
+				[ 'northindian', 2 ], [ 'chinese', 4 ], [ 'thai', 2 ],
+				[ 'dessert', 8 ] ]);
+		// Optional; add a title and set the width and height of the chart
+		var options1 = {
+			'title' : 'Product Names',
+			'width' : 550,
+			'height' : 400
+		};
+		var options2 = {
+			'title' : 'Product Users',
+			'width' : 550,
+			'height' : 400
+		};
+		// Display the chart inside the <div> element with id="piechart"
+		var chart1 = new google.visualization.PieChart(document
+				.getElementById('piechart1'));
+		var chart2 = new google.visualization.PieChart(document
+				.getElementById('piechart2'));
+		chart1.draw(data1, options1);
+		chart2.draw(data2, options2);
+	}
+
+  
+  
+  
+  
+  
+  
+  </script>
+	
+	  
 </head>
-<style>
-.form
-{
-   padding-left:50px;
-
-}
-</style>
 <body>
-	<div class="container">
+<jsp:include page="header.jsp"/>
+<div class="container-fluid" >
+<div class="row" style="background-color:#DCDCDC" >
 
-	 
-			<button type="submit" class="btn btn-success" value="add product" data-toggle="modal" data-target="#productModal">Add Product</button>
+</div>
+<div class="row" style="background-color:#DCDCDC">
+<div class="col-sm-6" id="piechart1"></div>
+<div class="col-sm-6" id="piechart2"></div>
+</div>
+	
+</div>
+	<div class="container-fluid">
+		<button type="submit" class="btn btn-success" value="add product" data-toggle="modal" data-target="#productModal"style="margin-top:20px; margin-bottom:20px;" >Add Product</button>
 				<div class="modal fade" id="productModal" role="dialog">
 					<div class="modal-dialog">
 							<div class="modal-content">
 								<div class="modal-header">
 									<button type="button" class="close" data-dismiss="modal">&times;</button>
-								     <h4 class="modal-title">Add a new Product</h4>
+								     <h4 class="modal-title">Product Details</h4>
 								  </div>  
 								  <div class="modal-body">
 								  <form id="product_form" class="form-group" action="saveproduct">
@@ -90,6 +156,7 @@
 		
 		</table>	
 			</div>
+	<jsp:include page="footer.jsp"/>
 	</body>
 	<script>
 	
@@ -97,6 +164,7 @@
 		
 		document.getElementById('product_button').setAttribute("value","Update Product");
 		document.getElementById('product_form').setAttribute("action","updateproduct");
+	//	document.getElementById('modal-title').setAttribute("value","Update your Product");
 		document.getElementById('product_id').setAttribute('value',id);
 		document.getElementById('product_name').setAttribute('value',name);
 		document.getElementById('price').setAttribute('value',price);
