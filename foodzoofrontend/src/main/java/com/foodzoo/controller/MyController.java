@@ -240,6 +240,7 @@ public class MyController {
 		user.setEnabled(true);
 		String username = user.getUsername();
 		logger.info("----inside controller, username is " + username);
+		System.out.println("ServeletContext"+servletContext);
 		if (result.hasErrors()) {
 			logger.info("---form data is not binded properly-----");
 			return new ModelAndView("register").addObject("registeractive", "active");
