@@ -1,5 +1,7 @@
 package com.foodzoo.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -10,10 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.avizva.model.CartItem;
 import com.avizva.model.Products;
+import com.avizva.service.CartItemService;
+import com.avizva.service.CartItemServiceImpl;
 import com.avizva.service.CategoryServiceDAO;
 import com.avizva.service.ProductServiceDAO;
 import com.avizva.service.ServiceDAO;
+import com.google.gson.Gson;
 
 /**
  * 
@@ -42,6 +48,8 @@ public class CartController {
 	ProductServiceDAO productServiceDao;
 	@Autowired
 	CategoryServiceDAO categoryServiceDao;
+	@Autowired
+	CartItemServiceImpl cartItemService;
 
 	/**
 	 * logger is used to print the logs on console. It is an instance of class Logger.
@@ -51,17 +59,28 @@ public class CartController {
 	Logger logger=Logger.getLogger(CartController.class);
 	
 	@RequestMapping("/cartClick")
-	public ModelAndView viewCart(@RequestParam(value= "id", required = false) String id, HttpServletRequest request){
+	public ModelAndView clickCart(@RequestParam(value= "id", required = false) String id, HttpServletRequest request){
 		
 		HttpSession session = request.getSession();
+		//Getting Username
 		String username = (String)session.getAttribute("sessionusername");
-		System.out.println("Username: "+username);
+		// Getting All Product Data  
+		Products product = productServiceDao.viewProductByIdService(id);
+		Float price = product.getPrice();
+		int quantity =1;
+		
+		CartItem cartItem = new CartItem();
+		
+		cartItem.setProduct_id(id);
+		cartItem.setPrice(price);
+		cartItem.setCartitem_quantity(quantity);
+		cartItem.setUser_name(username);
+		
+		
+		
 		if(username != null){
-			Products product = productServiceDao.viewProductByIdService(id);
-//			String category = product.getCategory_name();
-//			categoryServiceDao.viewCategoryByNameService(category);
-			String redirect = "redirect:/singleProduct?id="+id;
-			return new ModelAndView("redirect:/viewProducts");
+			cartItemService.saveCartItemService(cartItem);
+			return new ModelAndView("redirect:/viewCart");
 		}
 		else{
 			System.out.println("Inside If");
@@ -75,6 +94,16 @@ public class CartController {
 		}
 		
 		
+	}
+	
+	@RequestMapping("/viewCart")
+	public ModelAndView viewCart(){
+			CartItem cartItem = null;
+			List<CartItem> cartList = cartItemService.viewCartItemsService(cartItem);
+			Gson gSon = new Gson();
+			String cartItems = gSon.toJson(cartList);
+			System.out.println(cartItems);
+			return new ModelAndView("cartPage").addObject("cartItems",cartItems);
 	}
 	
 	
