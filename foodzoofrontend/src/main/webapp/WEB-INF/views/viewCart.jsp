@@ -167,6 +167,8 @@ span.itemPrice {
 	 });
 	</script>
 	
-	
+	${product.product_name}<br>
+${product.product_id}<br>
+${product.description}<br>
 </body>
 </html>

@@ -48,8 +48,8 @@ public class MyController {
 	CategoryServiceDAO categoryServiceDao;
 	@Autowired
 	SupplierServiceDAO supplierServiceDao;
-	@Autowired
-	ServletContext servletContext;
+
+	ServletContext servletContext=null;
 	@Autowired
 	ProductServiceDAO productServiceDao;
 
@@ -70,8 +70,8 @@ public class MyController {
 		Suppliers supplier = null;
 		List<Suppliers> supplierList = supplierServiceDao.viewSupplierService(supplier);
 		logger.info("----calling index-----");
-		servletContext.setAttribute("categoryList", categoryList);
-		servletContext.setAttribute("supplierList", supplierList);
+//	servletContext.setAttribute("categoryList", categoryList);
+//	servletContext.setAttribute("supplierList", supplierList);
 
 		return new ModelAndView("index").addObject("homeactive", "active");
 

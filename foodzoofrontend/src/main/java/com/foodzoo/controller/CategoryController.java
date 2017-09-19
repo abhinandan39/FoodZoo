@@ -44,8 +44,8 @@ public class CategoryController {
 	@Autowired
 	SupplierServiceDAO supplierServiceDao;
 
-	@Autowired
-	ServletContext servletContext;
+	
+	ServletContext servletContext=null;
 
 	@Autowired
 	CategoryServiceDAO categoryServiceDao;
