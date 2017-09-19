@@ -49,8 +49,8 @@ public class MyController {
 	CategoryServiceDAO categoryServiceDao;
 	@Autowired
 	SupplierServiceDAO supplierServiceDao;
-	@Autowired
-	ServletContext servletContext;
+	
+	ServletContext servletContext=null;
 	@Autowired
 	ProductServiceDAO productServiceDao;
 
@@ -66,9 +66,10 @@ public class MyController {
 	 */
 	@RequestMapping("/")
 	public ModelAndView indexcall() {
+		
 		Categories category = null;
 		List<Categories> categoryList = categoryServiceDao.viewCategoryService(category);
-		Suppliers supplier = null;
+    	Suppliers supplier = null;
 		List<Suppliers> supplierList = supplierServiceDao.viewSupplierService(supplier);
 		logger.info("----calling index-----");
 		servletContext.setAttribute("categoryList", categoryList);
@@ -91,10 +92,10 @@ public class MyController {
 		Categories category = null;
 		List<Categories> categoryList = categoryServiceDao.viewCategoryService(category);
 		Suppliers supplier = null;
-		List<Suppliers> supplierList = supplierServiceDao.viewSupplierService(supplier);
-		servletContext.setAttribute("categoryList", categoryList);
-		servletContext.setAttribute("supplierList", supplierList);
-		logger.info("-----calling index------");
+	List<Suppliers> supplierList = supplierServiceDao.viewSupplierService(supplier);
+	servletContext.setAttribute("categoryList", categoryList);
+	servletContext.setAttribute("supplierList", supplierList);
+	logger.info("-----calling index------");
 		return new ModelAndView("index").addObject("homeactive", "active");
 	}
 
