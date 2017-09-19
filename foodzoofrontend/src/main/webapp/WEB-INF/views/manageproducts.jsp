@@ -92,7 +92,7 @@
 	
 </div>
 	<div class="container-fluid">
-		<button type="submit" class="btn btn-success" value="add product" data-toggle="modal" data-target="#productModal"style="margin-top:20px; margin-bottom:20px;" >Add Product</button>
+		<button type="submit" class="btn btn-success" value="add product" data-toggle="modal" data-target="#productModal" style="margin-top:20px; margin-bottom:20px;">Add Product</button>
 				<div class="modal fade" id="productModal" role="dialog">
 					<div class="modal-dialog">
 							<div class="modal-content">
@@ -101,7 +101,7 @@
 								     <h4 class="modal-title">Product Details</h4>
 								  </div>  
 								  <div class="modal-body">
-								  <form id="product_form" class="form-group" action="saveproduct">
+								  <form id="product_form" class="form-group" action="saveproduct"  enctype="multipart/form-data" method="post">
 								      <input class="form-control" type="text" name="product_id" placeholder="Enter Product ID" id="product_id"/><br>
 								  	  <input class="form-control" type="text" name="product_name" placeholder="Enter Product Name" id="product_name"/><br>
 								      <input class="form-control" type="text" name="price" placeholder="Enter Product Price" id="price"/><br>
@@ -117,6 +117,7 @@
 								      <option><c:out value="${x.supplier_name}"></c:out></option>
 								      </c:forEach>
 								      </select><br>
+								      <input class="form-control" name="file" type="file" placeholder="choose an Image" id="image"/><br>
 								    <!--   <input class="form-control" type="file" name="image_file"/><br>
 								  -->  <input type="submit" class="btn btn-success" id="product_button" value="Save Product"/>
 								     
@@ -127,6 +128,7 @@
 								</div>
 							</div>
 					</div>	
+	  </div>
 		<table class="table table-striped">
 		<thead class="thead-inverse">
 		<tr>
@@ -164,7 +166,6 @@
 		
 		document.getElementById('product_button').setAttribute("value","Update Product");
 		document.getElementById('product_form').setAttribute("action","updateproduct");
-	//	document.getElementById('modal-title').setAttribute("value","Update your Product");
 		document.getElementById('product_id').setAttribute('value',id);
 		document.getElementById('product_name').setAttribute('value',name);
 		document.getElementById('price').setAttribute('value',price);
@@ -172,6 +173,8 @@
 		document.getElementById('quantity').setAttribute('value',quantity);
 		document.getElementById('categoryselect').setAttribute('value',categoryname);
 		document.getElementById('supplierselect').setAttribute('value',suppliername);
+		//document.getElementById('image').setAttribute('value',image);
+
 	}
 	
 	</script>

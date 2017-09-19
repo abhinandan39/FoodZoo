@@ -3,6 +3,7 @@ package com.avizva.dao;
 import java.util.List;
 
 import com.avizva.model.CartItem;
+import com.avizva.model.Users;
 
 
 public interface CartItemDAO {
@@ -43,6 +44,12 @@ public interface CartItemDAO {
 	 * @return list of CartItem
 	 */
 	public List<CartItem> viewCartItems(CartItem cartitem);
+	
+	
+	public List<CartItem> viewCartItemsByUser(String user_name);
+	
+	public float getTotalPrice(List<CartItem> cartitems,String user_name);
+	
 	
 
 }
