@@ -27,12 +27,6 @@
 	padding-right:10px;
 }
 
-/* .navbar .nav>.active>a {
-	background-color: #1f7a1f;
-	opacity: 0.7;
-	color: white;
-} */
-
 .dropdown {
 	position: relative;
 	cursor: default;
@@ -79,13 +73,10 @@
 }
 
 .search {
-	margin-top: 0px;
+	
 }
 
-.searchbutton {
-	
-	
-}
+
 #sessionuser{
 	margin-top:14px;
 } 
@@ -123,6 +114,13 @@
 }
 .search-form .form-group:hover,
 .search-form .form-group.hover {
+   
+  width: 100%;
+  border-radius: 4px 25px 25px 4px;
+}
+.search-form .form-group:focus,
+.search-form .form-group.focus {
+   
   width: 100%;
   border-radius: 4px 25px 25px 4px;
 }
@@ -139,6 +137,21 @@
   color: #000;
   left: initial;
   font-size: 14px;
+}
+.dynamicCategories{
+	display:block;
+	padding: 5px;
+	color: black;
+}
+.allFood{
+	display: block;
+	border-bottom: 1px solid #000;
+	list-style: lower-greek;
+}
+.dynamicCategories:focus , .dynamicCategories:hover{
+	display:block;
+	padding: 5px;
+	color: green !important; 
 }
 
 </style>
@@ -167,11 +180,11 @@
 					
 					<span> Menu <i class="fa fa-bars" aria-hidden="true"></i></span>
 					<div class="dropdown-content">
-						<p>North Indian</p>
-						<p>South Indian</p>
-						<p>Thailand</p>
-						<p>Italian</p>
-						<p>Dessert</p>
+						<a class="dynamicCategories allFood" href="viewProducts">All Food</a>
+						<c:forEach var="categories" items="${applicationScope['categoryList']}">
+							<a class="dynamicCategories" href="product?cat=${categories.category_id}">	${categories.category_name}</a>
+						</c:forEach>
+						
 					</div>
 					
 				</div>
@@ -204,30 +217,33 @@
 			
 			<c:if test="${not empty sessionusername}">
 				<li class="nav-item" id="sessionuser">
-					<span class="glyphicon glyphicon-user">  </span>  ${sessionusername}
+				 ${sessionusername}
+					<span class="glyphicon glyphicon-user">  </span> 
 				</li>
 				<c:if test="${adminRole == 'ROLE_ADMIN' }">
 				<li class="nav-item barss" style="margin-left:9px;">
 				<div class="dropdown">
 				 <span> Manage <i class="fa fa-cog" aria-hidden="true"></i></span> 
 						 	 <div class="dropdown-content">
-						     <p><a href=""> Categories </a></p>
-					     	 <p><a href=""> Suppliers </a></p>
-					     	 <p><a href=""> Products </a></p>
+						     <p><a href="manageCategory"> Categories </a></p>
+					     	 <p><a href="manageSupplier"> Suppliers </a></p>
+					     	 <p><a href="manageProduct"> Products </a></p>
+
 			   		 		 </div>
 				</div>
 				</li>
 				</c:if>
 				<li class="nav-item ${cartactive}"><a href="">
-				<span class="glyphicon glyphicon-shopping-cart"></span> Cart </a></li>
+				Cart
+				<span class="glyphicon glyphicon-shopping-cart"></span>  </a></li>
 				<li class="nav-item"><a href="logout"><span class="glyphicons glyphicons-log-out"></span> Logout </a></li>
 				<c:if test="${sessionrole == 'ROLE_USER'}">
 				<li class="nav-item barss">
 				<div class="dropdown">
 				 <span> Settings <i class="fa fa-cog" aria-hidden="true"></i></span>
 						 	 <div class="dropdown-content">
-						     <p><a href="profile">Profile</a></p>
-					     	 <p><a href="deactivate">Deactivate</a></p>
+						     <a class="dynamicCategories" href="profile">Profile</a>
+					     	 <a class="dynamicCategories"href="deactivate">Deactivate</a>
 			   		 		 </div>
 				</div>
 				</li>
@@ -237,9 +253,9 @@
 				<div class="dropdown">
 				 <span> Settings <i class="fa fa-cog" aria-hidden="true"></i></span>
 						 	 <div class="dropdown-content">
-						     <p><a href="profile">Profile</a></p>
-					     	 <p><a href="deactivate">Deactivate</a></p>
-					     	 <p><a href="adminPanel">Admin Panel</a></p>
+						     <a class="dynamicCategories" href="profile">Profile</a>
+					     	 <a class="dynamicCategories" href="deactivate">Deactivate</a>
+					     	 <a class="dynamicCategories" href="adminPanel">Admin Panel</a>
 			   		 		 </div>
 				</div>
 				</li>

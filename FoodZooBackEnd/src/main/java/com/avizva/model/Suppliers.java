@@ -1,23 +1,11 @@
 package com.avizva.model;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
 
 import org.springframework.stereotype.Component;
-/**
- * @author Parul.Sharma
- * @Entity annotation for making table of that class above which it is applied
- * with default name
- * 
- *
- */
 
-/**
- * 
- * @author Parul.Sharma
- * makes the bean of class
- *
- */
 /**
  * 
  * @author Parul.Sharma
@@ -33,20 +21,24 @@ public class Suppliers {
 	/**
 	 * @NotEmpty annotation is validation that means that field should not be empty above which it is applied
 	 */
-	@NotEmpty
+	
 	/**
 	 * supplier_id specifies supplier's id
 	 */
-	private String supplier_id;
 	@NotEmpty
+	@Id
+	private String supplier_id;
+	
 	/**
 	 * supplier_name specifies supplier name
 	 */
-	private String supplier_name;
 	@NotEmpty
+	private String supplier_name;
+	
 	/**
 	 * supplier_description specifies suppliers'description
 	 */
+	@NotEmpty
 	private String supplier_description;
 	public String getSupplier_id() {
 		return supplier_id;

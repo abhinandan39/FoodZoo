@@ -13,7 +13,8 @@ import org.springframework.stereotype.Repository;
 
 import com.avizva.model.Suppliers;
 import com.avizva.service.CategoryServiceDaoImpl;
-@Repository 
+
+@Repository
 public class SupplierDAOImpl implements SupplierDAO {
 	Logger logger=Logger.getLogger(CategoryServiceDaoImpl.class);
 

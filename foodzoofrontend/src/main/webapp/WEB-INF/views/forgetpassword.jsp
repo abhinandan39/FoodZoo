@@ -142,7 +142,7 @@ ${msg}
 	<jsp:include page="footer.jsp"></jsp:include>
 		<script>
 			
-			$("#displaymessage").delay(4000).hide('fast');
+			$("#displaymessage").delay(2000).hide('slow');
 			
 	</script>
 </body>

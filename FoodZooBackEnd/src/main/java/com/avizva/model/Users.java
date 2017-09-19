@@ -15,50 +15,90 @@ import javax.validation.constraints.Size;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
+/**
+ *  @author Abhinandan.Gupta
+ *  @author Priyanshi.Tiwari
+ *  @author Parul.Sharma
+ *  This User class is a model class for managing user related informations.
+ */
+
+
+
+
 @Entity
 @Component
 public class Users {
 
-	
-	
+	/**
+	 *variable fname is used for storing first name of the user 
+	 * */
 	@NotEmpty
 	@Pattern(regexp="[^0-9]*")
-	@Size(min=3, max=15)
-	private String fname;
+	@Size(min=3, max=15)	
+	private String fname;	
+	
+	/**
+	 * variable lname is used for storing last name of the user 
+	 * */
 	@NotEmpty
 	@Pattern(regexp="[^0-9]*")
 	@Size(min=3, max=15)
 	private String lname;
+	
+	/**
+	 * variable lname is used for storing username of the user 
+	 * */
 	@NotEmpty
 	@Size(min=3, max=25)
 	@Id
 	private String username;
+	
+	/**
+	 * variable lname is used for storing password of the user 
+	 * */
 	@NotEmpty
 	@Size(min=6, max=20)
 	private String password;
+	
+	/**
+	 * variable contact is used for storing contact of the user 
+	 * */
 	@NotNull
 	@Pattern(regexp="[7-9]{1}[0-9]{9}")
 	private String contact;
 	
-	
+	/**
+	 * variable email is used for storing email of the user 
+	 * */
 	@NotEmpty
+	@Column(unique=true)
 	private String email;
-	
-//	@NotEmpty
-//	private String state;
-	
+		
+	/**
+	 * variable dob is used for storing date of birth of the user 
+	 * */
 	@NotNull
 	@Past
 	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Date dob;
 	
+	
+	/**
+	 * variable role is used for storing date of birth of the user 
+	 * */
 	private String role;
 	@Column(name="enabled", columnDefinition="boolean default true", nullable=false)
 	private boolean enabled =true;
-//	private Address address;
+
 	
+	/**
+	 * variable securityque is used for storing security question for the user 
+	 * */
 	private String securityque;
 	
+	/**
+	 * variable securityans is used for storing security answer for the user 
+	 * */
 	private String securityans;
 	
 	public String getUsername() {

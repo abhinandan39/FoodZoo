@@ -15,6 +15,7 @@ import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.avizva.model.Categories;
 import com.avizva.model.Users;
 
 
@@ -53,7 +54,7 @@ public class ApplicationContextConfig {
 
 	    LocalSessionFactoryBuilder sessionBuilder = new LocalSessionFactoryBuilder(dataSource);
 	    sessionBuilder.addProperties(getHibernateProperties());
-	   // sessionBuilder.addAnnotatedClasses(Users.class);
+	    //sessionBuilder.addAnnotatedClasses(Categories.class);
 	  
 	   sessionBuilder.scanPackages("com"); // This is used to scan a package for Annotated Classes
 	    

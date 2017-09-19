@@ -175,7 +175,10 @@
 
 						</div>
 						<div class="col-sm-7" style="margin-top: 10px">
-							<input type="password" class="form-control" name="password" placeholder="<spring:message code='label.password'></spring:message>"  required="true"/>
+							<input type="password" class="form-control" name="password" id="passid" placeholder="<spring:message code='label.password'></spring:message>"  required="true"/>
+							<span
+								id="passlength">
+							</span>
 						</div>
 
 						<div class="col-sm-3" style="text-align: right; margin-top: 10px">
@@ -188,7 +191,10 @@
 
 						</div>
 						<div class="col-sm-7">
-							<input type="password" class="form-control" name="repassword" placeholder="<spring:message code='label.repassword'></spring:message>"  style="margin-top: 10px;  " required>
+							<input type="password" class="form-control" name="repassword" id="repassid" placeholder="<spring:message code='label.repassword'></spring:message>"  style="margin-top: 10px;  " required>
+							<span
+								id="message">
+							</span>
 						</div>
 
 						<div class="col-sm-3" style="text-align: right; margin-top: 10px">
@@ -215,18 +221,28 @@
 	</div>
 	<jsp:include page="footer.jsp"></jsp:include>
 	<script>
-		var check = function() {
-			if (document.getElementById('passid').value == document
-					.getElementById('repassid').value) {
-				document.getElementById('message').style.color = 'green';
-				document.getElementById('message').innerHTML = 'Passwords Matched';
-				return true;
-			} else {
-				document.getElementById('message').style.color = 'red';
-				document.getElementById('message').innerHTML = 'Password Not matching';
+		$('#loginform').submit(function(e) {
+			
+			if($('#passid').val().length < 6){
+				$('#passlength').css('color','red');
+				$('#passlength').text('Password Should be greater than 6 characters').show().fadeOut(2000);
 				return false;
 			}
-		}
+		
+			else{
+				
+				if ($('#passid').val() == $('#repassid').val()) {
+					
+				return true;
+					
+				} else {
+					$('#message').css('color','red');
+					$('#message').text('Passwords Not Matching').show().fadeOut(2000);
+					
+					return false;
+				}
+			}
+		});
 	</script>
 </body>
 </html>

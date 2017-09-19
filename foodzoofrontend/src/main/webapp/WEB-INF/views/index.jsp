@@ -177,11 +177,14 @@
 		</div>
 	</div>
 
+	
+<%-- ${applicationScope['categoryList'].get(0).category_name}<br>
+${applicationScope['supplierList']} --%>
 	<!-- Social Media Footer -->
 	<jsp:include page="footer.jsp" />
 	<script>
 			
-			$("#displaymessage").delay(4000).hide('fast');
+			$("#displaymessage").delay(2000).hide('slow');
 			
 	</script>
 </body>
