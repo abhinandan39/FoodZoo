@@ -471,49 +471,7 @@ public class MyController {
 		return new ModelAndView("profilepage").addObject("user",user).addObject("date",date);
 	} 
 
-   @RequestMapping("/manageCategory")
-   public ModelAndView callcategory(@ModelAttribute Categories category)
-   {
-	   List<Categories> list=new ArrayList<Categories>();
 
-	     list= categoryServiceDao.viewCategoryService(category);
-	     if(!list.isEmpty())
-	     return new ModelAndView("managecategory","command",new Categories()).addObject("list",list);
-	     else
-	    	 return new ModelAndView("managecategory","command",new Categories());
-	
-
-		  
-   }
-	@RequestMapping("/savecategory")
-	public ModelAndView saveCategory(@ModelAttribute Categories newcategory)
-	{
-		     if(categoryServiceDao.saveCategoryService(newcategory))
-		     return new ModelAndView("redirect:/manageCategory").addObject("msg","data is saved");
-		     else
-			     return new ModelAndView("redirect:/manageCategory").addObject("msg","data is not saved");
- 
-    }
-
-	@RequestMapping("/categorydelete/{id}")
-	public ModelAndView delete(@PathVariable String id) {
-		Categories category=categoryServiceDao.viewCategoryByIdService(id);
-		if (categoryServiceDao.deleteCategoryService(category)) {
-			return new ModelAndView("redirect:/manageCategory");
-		} else {
-
-			return new ModelAndView("managecategory", "msg", "data not deleted");
-		}
-
-	}
-
-	@RequestMapping("/categoryupdate")
-	public ModelAndView categoryupdate(@ModelAttribute Categories updatedcategory)
-	{
-		categoryServiceDao.updateCategoryService(updatedcategory);
-		return new ModelAndView("redirect:/manageCategory");
-		
-	}
 	
 	 @RequestMapping("/manageSupplier")
 	   public ModelAndView callsupplier(@ModelAttribute Suppliers suppliers)

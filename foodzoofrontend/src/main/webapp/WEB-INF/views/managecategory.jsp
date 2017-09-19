@@ -5,44 +5,32 @@
 
 <html>
 <head>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet"
-	href="http://cdn.bootcss.com/animate.css/3.5.1/animate.min.css">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link
-	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-	rel="stylesheet">
-<script type="text/javascript"
-	src="https://www.gstatic.com/charts/loader.js"></script>
-<c:url var="css" value="/resources/css"></c:url>
-<c:url var="js" value="/resources/js"></c:url>
-<c:url var="images" value="/resources/images"></c:url>
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<link rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet"
+		href="http://cdn.bootcss.com/animate.css/3.5.1/animate.min.css">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	<c:url var="css" value="/resources/css"></c:url>
+	<c:url var="js" value="/resources/js"></c:url>
+	<c:url var="images" value="/resources/images"></c:url>
 <style type="text/css">
 .err {
 	color: red;
 }
-
-.backgroundimage {
-	background-image: url('${images}/food1.jpg');
-	background-repeat: no-repeat;
-	background-attachment: fixed;
-	background-size: cover;
-	opacity: 2.0;
-}
-
-#displaymessage {
-	text-align: center;
-	padding: 10px;
-}
+  #piechart1,#piechart2
+    {
+      padding-top:50px;
+      padding-left:50px;
+      padding-right:50px;
+       padding-bottom:50px; 
+    }
+   
 </style>
-
 <script type="text/javascript">
 	// Load google charts
 	google.charts.load('current', {
@@ -85,15 +73,43 @@
 
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
-	<br>
-
-	<div class="row">
+    <div class="container-fluid">
+	<div class="row" style="background-color:#DCDCDC">
 		<div class="col-sm-6" id="piechart1"></div>
 		<div class="col-sm-6" id="piechart2"></div>
 	</div>
-	<center>
-		<table class="table" style="width: 90%">
-			<thead style="background-color: #d0e1e1">
+	</div>
+	<div class="container-fluid">
+		<form:form id="category_form" action="savecategory" style="padding-top:20px;">
+				<div class="row">
+				<div class="col-sm-4">
+					<form:input id="one" path="category_id" class="form-control"></form:input>
+				</div>
+				<div class="col-sm-4">
+					<form:input id="two" path="category_name" class="form-control"></form:input>
+				</div>
+				<div class="col-sm-4">
+					
+					<form:input id="three" path="category_description"
+						class="form-control"></form:input>
+				</div>
+
+				</div>
+
+				<div class="row">
+				<div class="col-sm-4"></div>
+				<div class="col-sm-4"style=" align:center">
+							<input type="submit" class="btn btn-success" value="save"
+							id="category_button"
+							style="margin-top: 10px; margin-bottom: 10px; padding-left:20px; padding-right:20px"></input>
+				</div>
+				<div class="col-sm-4"></div>
+				</div>
+		</form:form>
+	</div>
+	<div class="container-fluid">
+		<table class="table table-striped">
+			<thead>
 				<tr>
 					<td>Category Id</td>
 					<td>Category Name</td>
@@ -115,59 +131,9 @@
 				</tr>
 			</c:forEach>
 		</table>
-	</center>
-	<div class="container">
-		<form:form id="category_form" action="savecategory">
-
-
-			<div class="row">
-				<div class="col-sm-4">
-					<form:input id="one" path="category_id" class="form-control"></form:input>
-				</div>
-				<div class="col-sm-4">
-					<form:input id="two" path="category_name" class="form-control"></form:input>
-				</div>
-				<div class="col-sm-4">
-					
-					<form:input id="three" path="category_description"
-						class="form-control"></form:input>
-				</div>
-
-			</div>
-
-			<div class="row">
-				<div class="col-sm-4"></div>
-				<div class="col-sm-4">
-					<center>
-						<input type="submit" class="btn btn-success" value="save"
-							id="category_button"
-							style="margin-top: 10px; margin-bottom: 10px;"></input>
-					</center>
-
-				</div>
-				<div class="col-sm-4"></div>
-			</div>
-		</form:form>
-
 	</div>
-	<%-- <div class="container">
-<div class="row">
-<div class="col-sm-4"></div>
-<div class="col-sm-4">
-<center>
-<input type="submit" class="btn btn-success" value="save" id="category_button1" style="margin-top:10px;margin-bottom:10px;"/></div>
-</center>
-</div>
-<div class="col-sm-4">
-</div> --%>
-
-	</div>
-
-
-
-
-
-	<jsp:include page="footer.jsp"></jsp:include>
+	
+<jsp:include page="footer.jsp"></jsp:include>
 </body>
 <script>
 	$(document).ready(function() {
