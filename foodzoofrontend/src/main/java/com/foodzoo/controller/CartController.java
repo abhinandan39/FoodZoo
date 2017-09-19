@@ -1,5 +1,6 @@
 package com.foodzoo.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -72,14 +73,25 @@ public class CartController {
 		CartItem cartItem = new CartItem();
 		
 		cartItem.setProduct_id(id);
-		cartItem.setPrice(price);
-		cartItem.setCartitem_quantity(quantity);
+		cartItem.setPrice(price);	
 		cartItem.setUser_name(username);
 		
 		
 		
-		if(username != null){
-			cartItemService.saveCartItemService(cartItem);
+		if(username != null){				
+			CartItem item = cartItemService.viewCartItemByProductId(id);
+			if(item!=null){
+				cartItem.setCart_item_id(item.getCart_item_id());
+				cartItem.setCartitem_quantity(item.getCartitem_quantity()+1);
+				session.setAttribute("databaseMethod", "update");
+				cartItemService.updateCartItemService(cartItem);
+			}
+			else{
+				cartItem.setCartitem_quantity(quantity);
+				session.setAttribute("databaseMethod", "save");
+				cartItemService.saveCartItemService(cartItem);
+			}
+			
 			return new ModelAndView("redirect:/viewCart");
 		}
 		else{
@@ -88,7 +100,7 @@ public class CartController {
 			System.out.println(url);
 			session.setAttribute("product_id", id);
 			session.setAttribute("loginCheck", "false");
-			session.setAttribute("url", url);
+			session.setAttribute("cartItem", cartItem);
 			return new ModelAndView("login");
 			
 		}
@@ -97,13 +109,24 @@ public class CartController {
 	}
 	
 	@RequestMapping("/viewCart")
-	public ModelAndView viewCart(){
+	public ModelAndView viewCart(HttpServletRequest request){
+			
 			CartItem cartItem = null;
-			List<CartItem> cartList = cartItemService.viewCartItemsService(cartItem);
+			List<Products> productList = cartItemService.getAllProductsInCart();
+			List<Integer> productQuantity = new ArrayList<Integer>();
+			for(Products p : productList){
+				productQuantity.add(cartItemService.viewCartItemByProductId((p.getProduct_id())).getCartitem_quantity());
+			}
+			String user_name = (String)request.getAttribute("sessionusername");
+			System.out.println(user_name);
+//			Float total = cartItemService.totalPriceService(user_name);
+//			System.out.println("TOTAL IS: "+total);
 			Gson gSon = new Gson();
-			String cartItems = gSon.toJson(cartList);
-			System.out.println(cartItems);
-			return new ModelAndView("cartPage").addObject("cartItems",cartItems);
+			String productItems = gSon.toJson(productList);
+			String quantity = gSon.toJson(productQuantity);
+//			String totalAmount = gSon.toJson(total);
+			return new ModelAndView("cartPage").addObject("quantity",quantity)
+					.addObject("productList", productItems);
 	}
 	
 	

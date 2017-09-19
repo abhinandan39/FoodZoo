@@ -1,5 +1,6 @@
 package com.avizva.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -13,7 +14,7 @@ import com.avizva.model.Products;
 
 
 @Service
-public class CartItemServiceImpl {
+public class CartItemServiceImpl implements CartItemService {
 
 	Logger logger=Logger.getLogger(CartItemServiceImpl.class);
 	@Autowired
@@ -108,16 +109,44 @@ public class CartItemServiceImpl {
 		  return list;
 	  }
 	
-	  public float getTotalPriceService(List<CartItem> cartitems,String user_name)
-	  {
-		  logger.info("----inside total price---------");
-		  float totalprice=0l;
-		  totalprice=cartItemDAOImpl.getTotalPrice(cartitems, user_name);
-		  logger.info("-------total price obtained-----"+totalprice);
-		  return totalprice;
-		  
-		  
-	  }
+
+
+
+	public List<Products> getAllProductsInCart() {
+
+		CartItem cartItem = null;
+		List<CartItem> listCart = cartItemDAOImpl.viewCartItems(cartItem);
+		List<Products> productList = new ArrayList<Products>();
+		for(CartItem c : listCart){
+			productList.add(productsDAOImpl.viewProductById((c.getProduct_id())));
+		}
+		return productList;
+	}
+
+
+	public CartItem viewCartItemByProductId(String product_id) {
+		
+		List<CartItem> cartList = cartItemDAOImpl.viewCartItemByProductId(product_id);
+		logger.info("-----Inside ViewCartItemByProductId");
+		if(cartList.isEmpty()){
+			return null;
+		}
+		else{
+			return cartList.get(0);
+		}
+		
+		
+	}
+
+
+	public float totalPriceService(String user_name) {
+		List<CartItem> cartItems = cartItemDAOImpl.viewCartItemsByUser(user_name);
+		Float total = cartItemDAOImpl.getTotalPrice(cartItems, user_name);
+		return total;
+	}
+
+
+
 	  
 	 
 }

@@ -12,9 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.avizva.model.CartItem;
+import com.avizva.model.Products;
 
 @Repository
-public class CartItemDAOImpl {
+public class CartItemDAOImpl implements CartItemDAO {
 
 	/**
 	 * for keeping the log of this class
@@ -140,14 +141,27 @@ public class CartItemDAOImpl {
 		float totalprice=0l;
 		Session session = getSession();
 		List<CartItem> list=cartitemdaoimpl.viewCartItemsByUser(user_name);
-		for(CartItem price:list)
+		for(CartItem item : list)
 		{
-			totalprice=totalprice+price.getPrice();
+			totalprice=totalprice+ (item.getPrice())*(item.getCartitem_quantity());
 		}
-		
-		
+	
 		return totalprice;
 		
 	}
+
+
+	public List<CartItem> viewCartItemByProductId(String product_id) {
+
+		List<CartItem> list=new ArrayList<CartItem>();
+		Session session = getSession();
+		Query query=session.createQuery("from CartItem where product_id=:product_id");
+		query.setParameter("product_id", product_id);
+		list=query.list();
+	    logger.info("list:"+list);
+		return list;
+	}
+
+
 	
 }
