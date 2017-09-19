@@ -143,6 +143,11 @@
 	padding: 5px;
 	color: black;
 }
+.allFood{
+	display: block;
+	border-bottom: 1px solid #000;
+	list-style: lower-greek;
+}
 .dynamicCategories:focus , .dynamicCategories:hover{
 	display:block;
 	padding: 5px;
@@ -175,14 +180,11 @@
 					
 					<span> Menu <i class="fa fa-bars" aria-hidden="true"></i></span>
 					<div class="dropdown-content">
+						<a class="dynamicCategories allFood" href="viewProducts">All Food</a>
 						<c:forEach var="categories" items="${applicationScope['categoryList']}">
-							<a class="dynamicCategories" href="${categories.category_name}">	${categories.category_name}</a>
+							<a class="dynamicCategories" href="product?cat=${categories.category_id}">	${categories.category_name}</a>
 						</c:forEach>
-						<!-- <p>North Indian</p>
-						<p>South Indian</p>
-						<p>Thailand</p>
-						<p>Italian</p>
-						<p>Dessert</p> -->
+						
 					</div>
 					
 				</div>
@@ -240,8 +242,8 @@
 				<div class="dropdown">
 				 <span> Settings <i class="fa fa-cog" aria-hidden="true"></i></span>
 						 	 <div class="dropdown-content">
-						     <a href="profile">Profile</a>
-					     	 <a href="deactivate">Deactivate</a>
+						     <a class="dynamicCategories" href="profile">Profile</a>
+					     	 <a class="dynamicCategories"href="deactivate">Deactivate</a>
 			   		 		 </div>
 				</div>
 				</li>

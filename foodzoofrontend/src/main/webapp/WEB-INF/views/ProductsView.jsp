@@ -23,6 +23,8 @@
 <link
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
 	rel="stylesheet">
+	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 
 <c:url var="css" value="/resources/css"></c:url>
 <c:url var="js" value="/resources/js"></c:url>
@@ -92,15 +94,42 @@ span.itemPrice {
 	transform: translatZ(0) scale(1.40);
 	opacity: 0.9;
 }
+.btn{
+	display:block;
+}
+
+.form-group{
+	text-align:center;
+}
+
+.btn-default{
+	font-size: 14px !important;
+}
+
+
 	
 </style>
 </head>
 <body ng-app="myApp" ng-controller="productController">
 
 	<jsp:include page="header.jsp"></jsp:include>
+	
 	<div class="container">
+		
+		<div class="form-group">
+			<h5>Sort By:</h5>
+			<label class="btn btn-default btn-lg">
+			      <input type="radio" checked="checked" name="radioSelect" ng-model="sortBy" value="product_name" > Name
+			</label>
+		    <label class="btn btn-default btn-lg">
+		      <input type="radio" name="radioSelect" ng-model="sortBy" value="category_name"> Category
+		    </label>
+		    <label class="btn btn-default btn-lg">
+		      <input type="radio" name="radioSelect" ng-model="sortBy" value="price" > Price
+	    </label>
+	</div>
 		<div class="row">
-			<div class="col-sm-4" ng-repeat="task in tasks">
+			<div class="col-sm-4" ng-repeat="product in productList | orderBy:sortBy">
 				<div class="panel panel-default panel--styled">
 					<div class="panel-body">
 						<div class="col-md-12 panelTop">
@@ -113,8 +142,8 @@ span.itemPrice {
 
 						<div class="col-sm-12 panelBottom">
 							<div class="col-sm-12 text-center">
-								<h5>Product Name</h5>
-								<p style="font-size: 13px;">Your tasty food description goes here. The ingredients and all</p>
+								<h5>{{product.product_name}}</h5>
+								<p style="font-size: 13px; height: 3.6em;">{{product.description}}</p>
 							</div>
 							
 						</div>
@@ -125,9 +154,9 @@ span.itemPrice {
 								</button>
 							</div>
 							<div class="col-sm-6">
-								<h5>
-									Price <span class="itemPrice">$24.99</span>
-								</h5>
+								<h6>
+									Price <span class="itemPrice">Rs: {{product.price}}</span>
+								</h6>
 							</div>
 							<div class="col-sm-4">
 								<div class="stars">
@@ -140,21 +169,15 @@ span.itemPrice {
 			</div>
 		</div>
 	</div>
-	${products}
 <jsp:include page="footer.jsp" />
 	
 	<script type="text/javascript">
 	 var app = angular.module("myApp",[]);
 	 app.controller('productController',function($scope){
 		 
-		 $scope.tasks = [{1:1},
-			 			{1:1},
-			 			{1:1},
-			 			{1:1},
-			 			{2:2},
-			 			{3:3},
-			 			{4:4}
-			 			];
+		
+		 
+		 $scope.productList = ${products}
 		 
 	 });
 	</script>

@@ -76,5 +76,14 @@ public class ProductServiceDAOImpl implements ProductServiceDAO {
 	
 	}
 
+	public List<Products> productByCategoryService(String category) {
+		
+		logger.info("----inside service:productByCategoryService method----");
+		List<Products> list=null;
+		list = productDaoImpl.productByCategory(category);
+		logger.info("---showing all the Products In this Category---");
+		return list;
+	}
+
 	
 }

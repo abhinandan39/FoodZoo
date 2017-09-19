@@ -15,4 +15,6 @@ public interface ProductServiceDAO {
 	public Products viewProductByIdService(String product_id);
 	
 	public List<Products> viewProductsService();
+	
+	public List<Products> productByCategoryService(String category);
 }

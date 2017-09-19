@@ -16,4 +16,6 @@ public interface ProductsDAO {
 	
 	public List<Products> viewProducts();
 	
+	public List<Products> productByCategory(String product);
+	
 }

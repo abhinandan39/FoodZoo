@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -127,6 +128,26 @@ public class ProductsDAOImpl implements ProductsDAO {
 			session= getSession();
 			Criteria criteria = session.createCriteria(Products.class);
 			products = criteria.list();
+			
+		}
+		catch(Exception e){
+			
+		}
+		finally{
+			session.close();
+		}
+			
+			return products;
+	}
+	
+	public List<Products> productByCategory(String category){
+		List<Products> products = null;
+		Session session = getSession();
+		try{
+			session= getSession();
+			Query query = session.createQuery("from Products where category_name =:category_name");
+			query.setParameter("category_name", category);
+			products = query.list();
 			
 		}
 		catch(Exception e){
