@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.avizva.model.Categories;
 import com.avizva.model.Products;
 import com.avizva.model.Suppliers;
@@ -49,7 +48,7 @@ public class MyController {
 	CategoryServiceDAO categoryServiceDao;
 	@Autowired
 	SupplierServiceDAO supplierServiceDao;
-	
+
 	ServletContext servletContext=null;
 	@Autowired
 	ProductServiceDAO productServiceDao;
@@ -72,8 +71,8 @@ public class MyController {
     	Suppliers supplier = null;
 		List<Suppliers> supplierList = supplierServiceDao.viewSupplierService(supplier);
 		logger.info("----calling index-----");
-		servletContext.setAttribute("categoryList", categoryList);
-		servletContext.setAttribute("supplierList", supplierList);
+//	servletContext.setAttribute("categoryList", categoryList);
+//	servletContext.setAttribute("supplierList", supplierList);
 
 		return new ModelAndView("index").addObject("homeactive", "active");
 
@@ -242,6 +241,7 @@ public class MyController {
 		user.setEnabled(true);
 		String username = user.getUsername();
 		logger.info("----inside controller, username is " + username);
+		System.out.println("ServeletContext"+servletContext);
 		if (result.hasErrors()) {
 			logger.info("---form data is not binded properly-----");
 			return new ModelAndView("register").addObject("registeractive", "active");
