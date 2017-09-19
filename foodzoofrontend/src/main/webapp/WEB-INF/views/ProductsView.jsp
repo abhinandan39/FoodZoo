@@ -152,9 +152,11 @@ span.itemPrice {
 						</a>
 						<div class="col-sm-12 panelBottom">
 							<div class="col-sm-6">
+								<a href="cartView?id={{product_product.id}}">
 								<button class="btn btn-lg btn-add-to-cart">
 									<span class="glyphicon glyphicon-shopping-cart"></span>
 								</button>
+								</a>
 							</div>
 							<div class="col-sm-6">
 								<h6>
