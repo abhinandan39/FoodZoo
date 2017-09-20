@@ -53,8 +53,11 @@ public class MyController {
 	CategoryServiceDAO categoryServiceDao;
 	@Autowired
 	SupplierServiceDAO supplierServiceDao;
-	@Autowired(required = false)
+
+	
+	@Autowired(required=false)
 	ServletContext servletContext;
+
 	@Autowired
 	ProductServiceDAO productServiceDao;
 	@Autowired
@@ -73,16 +76,16 @@ public class MyController {
 	 */
 	@RequestMapping("/")
 	public ModelAndView indexcall() {
-		
+	
 		Categories category = null;
 		List<Categories> categoryList = categoryServiceDao.viewCategoryService(category);
-    	Suppliers supplier = null;
+     	Suppliers supplier = null;
 		List<Suppliers> supplierList = supplierServiceDao.viewSupplierService(supplier);
 		logger.info("----calling index-----");
 		servletContext.setAttribute("categoryList", categoryList);
 		servletContext.setAttribute("supplierList", supplierList);
 
-		return new ModelAndView("index").addObject("homeactive", "active");
+	 return new ModelAndView("index").addObject("homeactive", "active");
 
 	}
 

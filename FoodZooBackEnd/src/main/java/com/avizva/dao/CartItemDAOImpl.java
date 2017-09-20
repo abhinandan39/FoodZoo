@@ -163,4 +163,10 @@ public class CartItemDAOImpl implements CartItemDAO {
 
 
 	
+	public float cartitemprice(float price,int quantity)
+	{
+		return price*quantity;
+		
+	}
+	
 }

@@ -3,6 +3,7 @@ package com.avizva.service;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,8 @@ public class CartItemServiceImpl implements CartItemService {
 	
 	public boolean saveCartItemService(CartItem cartitem) {
 		
+		logger.info("----inside service:saveCartItemService method------");
+
 		
 			if(cartItemDAOImpl.saveCartItem(cartitem))
 			{
