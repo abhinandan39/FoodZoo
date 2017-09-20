@@ -50,7 +50,7 @@ public class CartController {
 	@Autowired
 	CategoryServiceDAO categoryServiceDao;
 	@Autowired
-	CartItemServiceImpl cartItemService;
+	CartItemService cartItemService;
 
 	/**
 	 * logger is used to print the logs on console. It is an instance of class Logger.
@@ -117,16 +117,17 @@ public class CartController {
 			for(Products p : productList){
 				productQuantity.add(cartItemService.viewCartItemByProductId((p.getProduct_id())).getCartitem_quantity());
 			}
-			String user_name = (String)request.getAttribute("sessionusername");
+			HttpSession session = request.getSession();
+			String user_name = (String)session.getAttribute("sessionusername");
 			System.out.println(user_name);
-//			Float total = cartItemService.totalPriceService(user_name);
-//			System.out.println("TOTAL IS: "+total);
+			Float total = cartItemService.totalPriceService(user_name);
+			System.out.println("TOTAL IS: "+total);
 			Gson gSon = new Gson();
 			String productItems = gSon.toJson(productList);
 			String quantity = gSon.toJson(productQuantity);
-//			String totalAmount = gSon.toJson(total);
+			String totalAmount = gSon.toJson(total);
 			return new ModelAndView("cartPage").addObject("quantity",quantity)
-					.addObject("productList", productItems);
+					.addObject("productList", productItems).addObject("total",totalAmount);
 	}
 	
 	

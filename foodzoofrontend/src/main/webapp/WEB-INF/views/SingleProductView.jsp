@@ -182,8 +182,9 @@ font-size: 20px;
 								<div class="col-sm-12">
 							
 								<button class="btn btn-lg but-add-to-cart but">
-								
+								<a href="cartClick?id=${product.product_id}">
 									<span>Add To Cart</span>
+								</a>
 								</button>
 						
 							</div>

@@ -25,41 +25,52 @@ public class CartItemServiceImpl implements CartItemService {
 	
 	public boolean saveCartItemService(CartItem cartitem) {
 		
-		logger.info("----inside service:saveCartItemService method------");
-		Products products=productsDAOImpl.viewProductById(cartitem.getProduct_id());
-		if(products.getQuantity()>=1)
-		{
-		if(cartItemDAOImpl.saveCartItem(cartitem))
-		{
-			//products.setQuantity(products.getQuantity()-1);
-			//productsDAOImpl.updateProduct(products);
-			logger.info("---cartitem info is saved in db-----");
+		
+			if(cartItemDAOImpl.saveCartItem(cartitem))
+			{
+				//products.setQuantity(products.getQuantity()-1);
+				//productsDAOImpl.updateProduct(products);
+				logger.info("---cartitem info is saved in db-----");
+				return true;
+			}
 			
-		}
-		return true;
-		}
-		else{
-			
-			logger.info("---cartitem info is not saved in db-----");
-			return false;
-		}
+			else{
+				
+				logger.info("---cartitem info is not saved in db-----");
+				return false;
+			}
+		
+		
 		
 	}
 	
 	
 	public boolean updateCartItemService(CartItem cartitem) {
 	    logger.info("----inside service:upadteCartItemService method------");
-		if(cartItemDAOImpl.updateCartItem(cartitem))
-		{
-			logger.info("---cartitem info is updated in db-----");
-			return true;
-		}
-		else{
+		Products products=productsDAOImpl.viewProductById(cartitem.getProduct_id());
+		List<CartItem> list = cartItemDAOImpl.viewCartItemByProductId(cartitem.getProduct_id());
+		if(!list.isEmpty()){
+			CartItem item = list.get(0);
+			if(item.getCartitem_quantity() < products.getQuantity()  && products.getQuantity()>=1)
+			{
+			if(cartItemDAOImpl.updateCartItem(cartitem))
+			{
+				//products.setQuantity(products.getQuantity()-1);
+				//productsDAOImpl.updateProduct(products);
+				logger.info("---cartitem info is updated in db-----");
+				return true;
+			}
 			
-			logger.info("---cartitem info is not updates in db---");
-			return false;
+			else{
+				
+				logger.info("---cartitem info is not updated in db-----");
+				return false;
+			}
+	
+			
+			}
 		}
-		
+		return true;
 	}
 	
 	

@@ -147,7 +147,7 @@ span.itemPrice {
 							<div class="col-sm-12 panelBottom">
 								<div class="col-sm-12 text-center">
 									<p style="font-size: 15px; height: 4.0em;">{{product.product_name}}</p>
-									Quantity<p style="font-size: 13px; height: 1.5em;">{{$index}}</p>
+									Quantity<p style="font-size: 13px; height: 1.5em;">{{product.quantity}}</p>
 									Price: <p style="font-size: 15px; height: 1.0em;">{{product.price}}</p>
 								</div>
 
@@ -157,7 +157,7 @@ span.itemPrice {
 							
 							<div class="col-sm-12">
 								<h6>
-									Total Price <span class="itemPrice">Rs: {{product.price}}</span>
+									Total Price <span class="itemPrice">Rs: {{product.price * product.quantity}}</span>
 								</h6>
 							</div>
 							
@@ -168,7 +168,7 @@ span.itemPrice {
 		</div>
 		<div class="row">
 			<div class="col-sm-12 totalAmount">
-				<!-- Total Cart Amount: {{total}} -->
+				Total Cart Amount: {{totalAmount}}
 			</div>
 		</div>
 	</div>
@@ -180,7 +180,11 @@ span.itemPrice {
 
 			$scope.listQuantity = ${quantity}
 			$scope.productList = ${productList}
-			/* $scope.total = ${totalAmount} */
+			$scope.totalAmount = ${total}
+			for(i=0;i<$scope.productList.length;i++){
+				$scope.productList[i].quantity=$scope.listQuantity[i];
+				}
+			
 		});
 	</script>
 </body>

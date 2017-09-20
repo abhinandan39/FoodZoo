@@ -140,8 +140,7 @@ public class CartItemDAOImpl implements CartItemDAO {
 		CartItemDAOImpl cartitemdaoimpl=null;
 		float totalprice=0l;
 		Session session = getSession();
-		List<CartItem> list=cartitemdaoimpl.viewCartItemsByUser(user_name);
-		for(CartItem item : list)
+		for(CartItem item : cartitems)
 		{
 			totalprice=totalprice+ (item.getPrice())*(item.getCartitem_quantity());
 		}
