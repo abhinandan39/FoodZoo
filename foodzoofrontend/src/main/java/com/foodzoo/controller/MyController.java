@@ -27,6 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.avizva.model.CartItem;
 import com.avizva.model.Categories;
 import com.avizva.model.Products;
+import com.avizva.model.ShippingAddress;
 import com.avizva.model.Suppliers;
 import com.avizva.model.Users;
 import com.avizva.service.CartItemServiceImpl;
@@ -116,7 +117,11 @@ public class MyController {
 		logger.info("---------redirecting to signup page----");
 		return new ModelAndView("register").addObject("registeractive", "active");
 	}
+	
+	
 
+
+	
 	/**
 	 * when loginhere action is performed then it redirects to the login page
 	 * and makes the login button active
@@ -273,7 +278,7 @@ public class MyController {
 		user.setEnabled(true);
 		String username = user.getUsername();
 		logger.info("----inside controller, username is " + username);
-		System.out.println("ServeletContext"+servletContext);
+	
 		if (result.hasErrors()) {
 			logger.info("---form data is not binded properly-----");
 			return new ModelAndView("register").addObject("registeractive", "active");

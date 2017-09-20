@@ -1,11 +1,7 @@
 package com.foodzoo.controller;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.util.List;
 
-import javax.servlet.annotation.MultipartConfig;
 import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
@@ -15,9 +11,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.avizva.model.Categories;
@@ -117,27 +110,10 @@ public class ProductController {
 	
 	
 	
-	@RequestMapping(value="/saveproduct", method=RequestMethod.POST)
-	public ModelAndView saveproducts(@Valid @ModelAttribute Products newproduct,@RequestParam("file") MultipartFile image, BindingResult result)
+	@RequestMapping("/saveproduct")
+	public ModelAndView saveproducts(@Valid @ModelAttribute Products newproduct,BindingResult result)
 	{
-		
-		logger.info("----inside saveproduct------");
-		String imgpath="/Users/Priyanshi.Tiwari/Desktop/FoodzooUp/ImageUpload/";
-		String file_info=imgpath+newproduct.getProduct_id()+".jpg";
-		
-		File f=new File(file_info);
-		if(!image.isEmpty()){
-			try{
-			byte buff[]=image.getBytes();
-			BufferedOutputStream bs=new BufferedOutputStream(new FileOutputStream(f));
-			bs.write(buff);
-			bs.close();
-			}
-			catch(Exception e){
-				logger.info("Exception");
-			}
-		}
-			logger.info("--------"+newproduct+"---------------");
+		logger.info("--------"+newproduct+"---------------");
 		if(result.hasErrors())
 		{
 			logger.info("---------error in binding---------");
