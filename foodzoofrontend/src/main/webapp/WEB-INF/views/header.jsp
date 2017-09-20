@@ -206,8 +206,7 @@
 			
 			
 			<c:if test="${ empty sessionusername}">
-				<li class="nav-item ${cartactive}"><a href=""><span
-					class="glyphicon glyphicon-shopping-cart"></span> Cart </a></li>
+				
 				<li class="nav-item ${registeractive}"><a href="signup"><span class="glyphicon glyphicon-user"></span>
 						Sign Up</a></li>
 				<li class="nav-item ${loginactive}"><a href="loginhere"><span
@@ -233,7 +232,7 @@
 				</div>
 				</li>
 				</c:if>
-				<li class="nav-item ${cartactive}"><a href="">
+				<li class="nav-item ${cartactive}"><a href="viewCart">
 				Cart
 				<span class="glyphicon glyphicon-shopping-cart"></span>  </a></li>
 				<li class="nav-item"><a href="logout"><span class="glyphicons glyphicons-log-out"></span> Logout </a></li>

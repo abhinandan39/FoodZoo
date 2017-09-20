@@ -26,7 +26,7 @@ public interface CartItemService {
 	
 	public float totalPriceService(String user_name);
 	
-	public List<Products> getAllProductsInCart();
+	public List<Products> getAllProductsInCart(String username);
 	
 
 }

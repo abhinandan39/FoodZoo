@@ -84,6 +84,69 @@ public class CartController {
 				cartItem.setCart_item_id(item.getCart_item_id());
 				cartItem.setCartitem_quantity(item.getCartitem_quantity()+1);
 				session.setAttribute("databaseMethod", "update");
+				boolean check = cartItemService.updateCartItemService(cartItem);
+				if(check){
+					
+				}
+				
+			}
+			else{
+				cartItem.setCartitem_quantity(quantity);
+				session.setAttribute("databaseMethod", "save");
+				cartItemService.saveCartItemService(cartItem);
+			}
+			
+			return new ModelAndView("redirect:/viewCart");
+		}
+		else{
+			CartItem item = cartItemService.viewCartItemByProductId(id);
+			if(item!=null){
+				cartItem.setCart_item_id(item.getCart_item_id());
+				cartItem.setCartitem_quantity(item.getCartitem_quantity()+1);
+				session.setAttribute("databaseMethod", "update");
+				
+			}
+			else{
+				cartItem.setCartitem_quantity(quantity);
+				session.setAttribute("databaseMethod", "save");
+				
+			}
+			session.setAttribute("product_id", id);
+			session.setAttribute("loginCheck", "false");
+			session.setAttribute("cartItem", cartItem);
+			return new ModelAndView("login");
+			
+		}
+		
+		
+	}
+	
+	@RequestMapping("/singleCartClick")
+	public ModelAndView singleProductClick(HttpServletRequest request){
+		String product_id = request.getParameter("id");
+		String product_quantity = request.getParameter("quantity");
+		HttpSession session = request.getSession();
+		//Getting Username
+		String username = (String)session.getAttribute("sessionusername");
+		// Getting All Product Data  
+		Products product = productServiceDao.viewProductByIdService(product_id);
+		Float price = product.getPrice();
+		int quantity = Integer.parseInt(product_quantity);
+		
+		CartItem cartItem = new CartItem();
+		
+		cartItem.setProduct_id(product_id);
+		cartItem.setPrice(price);	
+		cartItem.setUser_name(username);
+		
+		
+		
+		if(username != null){				
+			CartItem item = cartItemService.viewCartItemByProductId(product_id);
+			if(item!=null){
+				cartItem.setCart_item_id(item.getCart_item_id());
+				cartItem.setCartitem_quantity(item.getCartitem_quantity()+quantity);
+				session.setAttribute("databaseMethod", "update");
 				cartItemService.updateCartItemService(cartItem);
 			}
 			else{
@@ -95,10 +158,7 @@ public class CartController {
 			return new ModelAndView("redirect:/viewCart");
 		}
 		else{
-			System.out.println("Inside If");
-			String url  = request.getRequestURI()+"?id="+id;
-			System.out.println(url);
-			session.setAttribute("product_id", id);
+			session.setAttribute("product_id", product_id);
 			session.setAttribute("loginCheck", "false");
 			session.setAttribute("cartItem", cartItem);
 			return new ModelAndView("login");
@@ -111,14 +171,16 @@ public class CartController {
 	@RequestMapping("/viewCart")
 	public ModelAndView viewCart(HttpServletRequest request){
 			
+			HttpSession session = request.getSession();
+			String user_name = (String)session.getAttribute("sessionusername");
 			CartItem cartItem = null;
-			List<Products> productList = cartItemService.getAllProductsInCart();
+			List<Products> productList = cartItemService.getAllProductsInCart(user_name);
 			List<Integer> productQuantity = new ArrayList<Integer>();
 			for(Products p : productList){
 				productQuantity.add(cartItemService.viewCartItemByProductId((p.getProduct_id())).getCartitem_quantity());
 			}
-			HttpSession session = request.getSession();
-			String user_name = (String)session.getAttribute("sessionusername");
+			
+			
 			System.out.println(user_name);
 			Float total = cartItemService.totalPriceService(user_name);
 			System.out.println("TOTAL IS: "+total);
@@ -128,6 +190,26 @@ public class CartController {
 			String totalAmount = gSon.toJson(total);
 			return new ModelAndView("cartPage").addObject("quantity",quantity)
 					.addObject("productList", productItems).addObject("total",totalAmount);
+	}
+	
+	@RequestMapping("/deleteItem")
+	public ModelAndView delete(@RequestParam("id") String id){
+		CartItem cartItem = cartItemService.viewCartItemByProductId(id);
+		cartItemService.deleteCartItemService(cartItem);
+		return new ModelAndView("redirect:/viewCart");
+	}
+	
+	@RequestMapping("/updateItem")
+	public ModelAndView updateCart(@RequestParam("id") String id, @RequestParam("updatedValue") String updated){
+		CartItem cartItem = cartItemService.viewCartItemByProductId(id);
+		System.out.println(cartItem);
+		int updatedValue = Integer.parseInt(updated);
+		System.out.println(cartItem.getCartitem_quantity());
+		System.out.println(updatedValue);
+		cartItem.setCartitem_quantity(updatedValue);
+		System.out.println(cartItem.getCartitem_quantity());
+		cartItemService.updateCartItemService(cartItem);
+		return new ModelAndView("redirect:/viewCart");
 	}
 	
 	

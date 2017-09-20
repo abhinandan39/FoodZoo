@@ -147,21 +147,29 @@ public class MyController {
 
 		logger.info("---entered into controller logedin method-------");
 
-		logger.info("----calling loginService method to check validity-----");
+		logger.info("---Getting the session created before login-------");
+
 
 		HttpSession session = request.getSession();
 //		String product = (String)session.getAttribute("product_id");
 //		String check_login = (String)session.getAttribute("loginCheck");
 //		String url = (String)session.getAttribute("url");
 		if(session.getAttribute("loginCheck") != null){
+			logger.info("-------Not yet logged in-----");
+			CartItem cartItem = (CartItem)session.getAttribute("cartItem");
+			logger.info("-------Cart Item-----"+cartItem);
+			String databaseMethod = (String)session.getAttribute("databaseMethod");
+			System.out.println("Database Method"+databaseMethod);
+			session.invalidate();
+			logger.info("----Data Fetched from session before login-----");
+			logger.info("-------Old Session Deleted, User session created-----");
 			session = request.getSession(true);
 			String username = request.getParameter("username");
 			Users user = serviceDao.viewUserService(username);
+			logger.info("-------Getting User Role-----");
 			String role = user.getRole();
 			session.setAttribute("sessionusername", username);
 			session.setAttribute("sessionrole", role);
-			CartItem cartItem = (CartItem)session.getAttribute("cartItem");
-			String databaseMethod = (String)session.getAttribute("databaseMethod");
 			if(databaseMethod.equals("update")){
 				cartItemService.updateCartItemService(cartItem);
 			}
@@ -172,7 +180,7 @@ public class MyController {
 			return new ModelAndView("redirect:/viewCart");
 		}
 		else{
-		
+			logger.info("----calling loginService method to check validity-----");
 		boolean check = serviceDao.loginService(request);
 		if (check) {
 

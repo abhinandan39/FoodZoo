@@ -173,21 +173,24 @@ font-size: 20px;
 								<p>Preprared By<span class="itemPrice">${product.supplier_name}</span></p>
 								<p>Quantity Left<span class="itemPrice">${product.quantity}</span></p>
 														
-   <div class="count-input space-bottom">
-                                <a class="incr-btn" data-action="decrease" href="#">–</a>
-                                <input class="quantity" type="text" name="quantity" value="1"/>
-                                <a class="incr-btn" data-action="increase" href="#">&plus;</a>
-                            </div>
-			
+  
+								<form action="singleCartClick">
+									 <div class="count-input space-bottom">
+   										<input type="hidden" name="id" value="${product.product_id}" />
+		                                <a class="incr-btn" data-action="decrease" href="#">–</a>
+		                                <input class="quantity" type="text" name="quantity" value="1"/>
+		                                <a class="incr-btn" data-action="increase" href="#">&plus;</a>
+                          			 </div>
 								<div class="col-sm-12">
-							
-								<button class="btn btn-lg but-add-to-cart but">
-								<a href="cartClick?id=${product.product_id}">
+								<button type="submit" class="btn btn-lg but-add-to-cart but">
+								
 									<span>Add To Cart</span>
-								</a>
 								</button>
+								</div>
+								</form>
+								
 						
-							</div>
+							
 							</div>
 							
 						</div>
@@ -221,8 +224,7 @@ font-size: 20px;
 	 app.controller('productController',function($scope){
 		 
 		
-		 
-		 $scope.productList = ${products}
+		 $scope.product = ${product}
 		 
 	 });
 	 

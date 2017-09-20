@@ -51,7 +51,8 @@ public class CartItemServiceImpl implements CartItemService {
 		List<CartItem> list = cartItemDAOImpl.viewCartItemByProductId(cartitem.getProduct_id());
 		if(!list.isEmpty()){
 			CartItem item = list.get(0);
-			if(item.getCartitem_quantity() < products.getQuantity()  && products.getQuantity()>=1)
+			System.out.println(cartitem.getCartitem_quantity());
+			if(cartitem.getCartitem_quantity() <= products.getQuantity()  && products.getQuantity()>=1)
 			{
 			if(cartItemDAOImpl.updateCartItem(cartitem))
 			{
@@ -123,10 +124,10 @@ public class CartItemServiceImpl implements CartItemService {
 
 
 
-	public List<Products> getAllProductsInCart() {
+	public List<Products> getAllProductsInCart(String username) {
 
 		CartItem cartItem = null;
-		List<CartItem> listCart = cartItemDAOImpl.viewCartItems(cartItem);
+		List<CartItem> listCart = cartItemDAOImpl.viewCartItemsByUser(username);
 		List<Products> productList = new ArrayList<Products>();
 		for(CartItem c : listCart){
 			productList.add(productsDAOImpl.viewProductById((c.getProduct_id())));
