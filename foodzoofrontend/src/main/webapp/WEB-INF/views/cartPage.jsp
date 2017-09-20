@@ -111,8 +111,13 @@ span.itemPrice {
 	color:#ffffff !important;
 }
 .totalAmount{
-	margin-left: 30px;
-	padding: 10px;
+	margin-left: 50px;
+	padding: 30px;
+	background: #fbfbfb;
+	font-size: 16px;
+}
+.btn-success{
+	font-size: 16px !important;
 }
 	
 </style>
@@ -126,7 +131,7 @@ span.itemPrice {
 <jsp:include page="header.jsp"></jsp:include>
 	<div class="container">
 	<div class="jumbotron">
-    <h2>Your Cart</h2> 
+    <h2>Your Cart <span class="glyphicon glyphicon-shopping-cart"></span></h2> 
     <p>All the items you selected are at one place now</p> 
   	</div>
 		<div class="row">
@@ -166,9 +171,15 @@ span.itemPrice {
 				</div>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-sm-12 totalAmount">
-				Total Cart Amount: {{totalAmount}}
+		<div class="row totalAmount" >
+			
+			<div class="col-sm-10">
+				Total Amount: {{totalAmount}}
+			</div>
+			<div class="col-sm-2" >
+				<a href="checkout">
+				<button class="btn btn-success"> Check Out <span class="glyphicon glyphicon-shopping-cart"></span> </button>
+				</a>
 			</div>
 		</div>
 	</div>
