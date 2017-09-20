@@ -179,7 +179,7 @@ span.itemPrice {
 				Total Amount: {{totalAmount}}
 			</div>
 			<div class="col-sm-2" >
-				<a href="#">
+				<a href="checkout">
 				<button class="btn btn-success"> Check Out <span class="glyphicon glyphicon-shopping-cart"></span> </button>
 				</a>
 			</div>

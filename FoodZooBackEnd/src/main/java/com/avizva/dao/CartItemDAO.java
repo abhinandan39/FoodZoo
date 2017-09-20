@@ -51,6 +51,7 @@ public interface CartItemDAO {
 	
 	public float getTotalPrice(List<CartItem> cartitems,String user_name);
 	
+
 	public List<CartItem> viewCartItemByProductId(String product_id);
 
 }
