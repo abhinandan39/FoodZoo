@@ -2,6 +2,7 @@ package com.avizva.service;
 
 import java.util.List;
 
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,7 +12,7 @@ import com.avizva.dao.ProductsDAOImpl;
 import com.avizva.model.CartItem;
 import com.avizva.model.Products;
 @Service
-public class CartItemServiceImpl {
+public class CartItemServiceImpl implements CartItemService {
 
 	Logger logger=Logger.getLogger(CartItemServiceImpl.class);
 	@Autowired
@@ -25,21 +26,21 @@ public class CartItemServiceImpl {
 		logger.info("----inside service:saveCartItemService method------");
 		Products products=productsDAOImpl.viewProductById(cartitem.getProduct_id());
 		if(products.getQuantity()>=1)
-		{
-		if(cartItemDAOImpl.saveCartItem(cartitem))
-		{
+		{	if(cartItemDAOImpl.saveCartItem(cartitem))
+		   {
 			//products.setQuantity(products.getQuantity()-1);
 			//productsDAOImpl.updateProduct(products);
 			logger.info("---cartitem info is saved in db-----");
-			
-		}
-		return true;
-		}
-		else{
+			return true;
+			}
+		  
+        else{
 			
 			logger.info("---cartitem info is not saved in db-----");
 			return false;
+		    }
 		}
+		return false;
 		
 	}
 	

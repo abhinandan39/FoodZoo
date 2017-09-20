@@ -50,6 +50,6 @@ public interface CartItemDAO {
 	
 	public float getTotalPrice(List<CartItem> cartitems,String user_name);
 	
-	
+	public float cartitemprice(float price,int quantity);
 
 }

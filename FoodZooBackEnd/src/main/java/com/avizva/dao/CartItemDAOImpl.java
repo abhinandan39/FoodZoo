@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
 import com.avizva.model.CartItem;
 
 @Repository
-public class CartItemDAOImpl {
+public class CartItemDAOImpl implements CartItemDAO {
 
 	/**
 	 * for keeping the log of this class
@@ -147,6 +147,12 @@ public class CartItemDAOImpl {
 		
 		
 		return totalprice;
+		
+	}
+	
+	public float cartitemprice(float price,int quantity)
+	{
+		return price*quantity;
 		
 	}
 	

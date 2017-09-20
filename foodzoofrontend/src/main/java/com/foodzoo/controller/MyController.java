@@ -50,7 +50,10 @@ public class MyController {
 	@Autowired
 	SupplierServiceDAO supplierServiceDao;
 	
-	ServletContext servletContext=null;
+	@Autowired(required=false)
+	ServletContext servletContext;
+	
+	
 	@Autowired
 	ProductServiceDAO productServiceDao;
 
