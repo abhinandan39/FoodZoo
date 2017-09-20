@@ -43,8 +43,8 @@ public class CategoryController {
 
 	@Autowired
 	SupplierServiceDAO supplierServiceDao;
-
-	ServletContext servletContext=null;
+	@Autowired(required = false)
+	ServletContext servletContext;
 
 	@Autowired
 	CategoryServiceDAO categoryServiceDao;

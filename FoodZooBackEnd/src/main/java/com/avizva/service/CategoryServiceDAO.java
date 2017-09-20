@@ -31,6 +31,15 @@ public interface CategoryServiceDAO {
 	 * @return category object with the data of category related to that id
 	 */
 	public Categories viewCategoryByIdService(String category_id);
+	
+	/**
+	 * viewCategoryByNameService method called to view the data of already existing category by category_name
+	 * @param category_name
+	 * @return
+	 */
+//	public Categories viewCategoryByNameService(String category_name);
+
+	
 	/**
 	 * viewCategoryService method called to view all the data of already existing category
 	 * @param category

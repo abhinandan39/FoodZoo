@@ -1,5 +1,6 @@
 package com.avizva.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -10,8 +11,10 @@ import com.avizva.dao.CartItemDAOImpl;
 import com.avizva.dao.ProductsDAOImpl;
 import com.avizva.model.CartItem;
 import com.avizva.model.Products;
+
+
 @Service
-public class CartItemServiceImpl {
+public class CartItemServiceImpl implements CartItemService {
 
 	Logger logger=Logger.getLogger(CartItemServiceImpl.class);
 	@Autowired
@@ -22,41 +25,52 @@ public class CartItemServiceImpl {
 	
 	public boolean saveCartItemService(CartItem cartitem) {
 		
-		logger.info("----inside service:saveCartItemService method------");
-		Products products=productsDAOImpl.viewProductById(cartitem.getProduct_id());
-		if(products.getQuantity()>=1)
-		{
-		if(cartItemDAOImpl.saveCartItem(cartitem))
-		{
-			//products.setQuantity(products.getQuantity()-1);
-			//productsDAOImpl.updateProduct(products);
-			logger.info("---cartitem info is saved in db-----");
+		
+			if(cartItemDAOImpl.saveCartItem(cartitem))
+			{
+				//products.setQuantity(products.getQuantity()-1);
+				//productsDAOImpl.updateProduct(products);
+				logger.info("---cartitem info is saved in db-----");
+				return true;
+			}
 			
-		}
-		return true;
-		}
-		else{
-			
-			logger.info("---cartitem info is not saved in db-----");
-			return false;
-		}
+			else{
+				
+				logger.info("---cartitem info is not saved in db-----");
+				return false;
+			}
+		
+		
 		
 	}
 	
 	
 	public boolean updateCartItemService(CartItem cartitem) {
 	    logger.info("----inside service:upadteCartItemService method------");
-		if(cartItemDAOImpl.updateCartItem(cartitem))
-		{
-			logger.info("---cartitem info is updated in db-----");
-			return true;
-		}
-		else{
+		Products products=productsDAOImpl.viewProductById(cartitem.getProduct_id());
+		List<CartItem> list = cartItemDAOImpl.viewCartItemByProductId(cartitem.getProduct_id());
+		if(!list.isEmpty()){
+			CartItem item = list.get(0);
+			if(item.getCartitem_quantity() < products.getQuantity()  && products.getQuantity()>=1)
+			{
+			if(cartItemDAOImpl.updateCartItem(cartitem))
+			{
+				//products.setQuantity(products.getQuantity()-1);
+				//productsDAOImpl.updateProduct(products);
+				logger.info("---cartitem info is updated in db-----");
+				return true;
+			}
 			
-			logger.info("---cartitem info is not updates in db---");
-			return false;
+			else{
+				
+				logger.info("---cartitem info is not updated in db-----");
+				return false;
+			}
+	
+			
+			}
 		}
-		
+		return true;
 	}
 	
 	
@@ -106,16 +120,44 @@ public class CartItemServiceImpl {
 		  return list;
 	  }
 	
-	  public float getTotalPriceService(List<CartItem> cartitems,String user_name)
-	  {
-		  logger.info("----inside total price---------");
-		  float totalprice=0l;
-		  totalprice=cartItemDAOImpl.getTotalPrice(cartitems, user_name);
-		  logger.info("-------total price obtained-----"+totalprice);
-		  return totalprice;
-		  
-		  
-	  }
+
+
+
+	public List<Products> getAllProductsInCart() {
+
+		CartItem cartItem = null;
+		List<CartItem> listCart = cartItemDAOImpl.viewCartItems(cartItem);
+		List<Products> productList = new ArrayList<Products>();
+		for(CartItem c : listCart){
+			productList.add(productsDAOImpl.viewProductById((c.getProduct_id())));
+		}
+		return productList;
+	}
+
+
+	public CartItem viewCartItemByProductId(String product_id) {
+		
+		List<CartItem> cartList = cartItemDAOImpl.viewCartItemByProductId(product_id);
+		logger.info("-----Inside ViewCartItemByProductId");
+		if(cartList.isEmpty()){
+			return null;
+		}
+		else{
+			return cartList.get(0);
+		}
+		
+		
+	}
+
+
+	public float totalPriceService(String user_name) {
+		List<CartItem> cartItems = cartItemDAOImpl.viewCartItemsByUser(user_name);
+		Float total = cartItemDAOImpl.getTotalPrice(cartItems, user_name);
+		return total;
+	}
+
+
+
 	  
 	 
 }

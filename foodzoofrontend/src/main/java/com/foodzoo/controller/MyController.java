@@ -21,12 +21,16 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.avizva.model.CartItem;
 import com.avizva.model.Categories;
 import com.avizva.model.Products;
 import com.avizva.model.ShippingAddress;
 import com.avizva.model.Suppliers;
 import com.avizva.model.Users;
+import com.avizva.service.CartItemServiceImpl;
 import com.avizva.service.CategoryServiceDAO;
 import com.avizva.service.ProductServiceDAO;
 import com.avizva.service.ServiceDAO;
@@ -49,10 +53,13 @@ public class MyController {
 	CategoryServiceDAO categoryServiceDao;
 	@Autowired
 	SupplierServiceDAO supplierServiceDao;
-
-	ServletContext servletContext=null;
+	@Autowired(required = false)
+	ServletContext servletContext;
 	@Autowired
 	ProductServiceDAO productServiceDao;
+	@Autowired
+	CartItemServiceImpl cartItemService;
+	
 
 	/**
 	 * requestmapping annotation maps the user request to particular action "/"
@@ -72,8 +79,8 @@ public class MyController {
     	Suppliers supplier = null;
 		List<Suppliers> supplierList = supplierServiceDao.viewSupplierService(supplier);
 		logger.info("----calling index-----");
-//	servletContext.setAttribute("categoryList", categoryList);
-//	servletContext.setAttribute("supplierList", supplierList);
+		servletContext.setAttribute("categoryList", categoryList);
+		servletContext.setAttribute("supplierList", supplierList);
 
 		return new ModelAndView("index").addObject("homeactive", "active");
 
@@ -147,6 +154,30 @@ public class MyController {
 
 		logger.info("----calling loginService method to check validity-----");
 
+		HttpSession session = request.getSession();
+//		String product = (String)session.getAttribute("product_id");
+//		String check_login = (String)session.getAttribute("loginCheck");
+//		String url = (String)session.getAttribute("url");
+		if(session.getAttribute("loginCheck") != null){
+			session = request.getSession(true);
+			String username = request.getParameter("username");
+			Users user = serviceDao.viewUserService(username);
+			String role = user.getRole();
+			session.setAttribute("sessionusername", username);
+			session.setAttribute("sessionrole", role);
+			CartItem cartItem = (CartItem)session.getAttribute("cartItem");
+			String databaseMethod = (String)session.getAttribute("databaseMethod");
+			if(databaseMethod.equals("update")){
+				cartItemService.updateCartItemService(cartItem);
+			}
+			else{
+				cartItemService.saveCartItemService(cartItem);
+			}
+			
+			return new ModelAndView("redirect:/viewCart");
+		}
+		else{
+		
 		boolean check = serviceDao.loginService(request);
 		if (check) {
 
@@ -159,7 +190,7 @@ public class MyController {
 			logger.info("---login Successful---");
 
 			logger.info("--- Storing username and role in session---");
-			HttpSession session = request.getSession(false);
+			session = request.getSession(true);
 			session.setAttribute("sessionusername", username);
 			session.setAttribute("sessionrole", role);
 
@@ -168,6 +199,7 @@ public class MyController {
 			logger.info("----login unsucessful----");
 			return new ModelAndView("login").addObject("errormsg", "Invalid Credentials").addObject("loginactive",
 					"active");
+		}
 		}
 
 	}
