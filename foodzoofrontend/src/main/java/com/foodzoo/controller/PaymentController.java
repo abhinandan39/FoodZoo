@@ -23,7 +23,7 @@ public class PaymentController {
 	@Autowired
 	PaymentService paymentService;
 	
-	@RequestMapping("/Payment")
+	@RequestMapping("/paymentMode")
 	public ModelAndView callPaymentMethod()
 	{
 		logger.info("----calling paymentmethod-----");

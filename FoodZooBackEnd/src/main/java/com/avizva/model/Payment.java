@@ -12,24 +12,17 @@ import org.springframework.stereotype.Component;
 @Entity
 @Component
 public class Payment {
-	
-	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int paymentid;
-	
-	
 	private String mode;
-	
-	
-	@Size(min=0,max=16)
 	private String cardnumber;
 	
 
 	private String nameoncard;
 	
 	
-	@Size(min=0,max=3)
+	
 	private String cvv;
 
 	public int getPaymentid() {

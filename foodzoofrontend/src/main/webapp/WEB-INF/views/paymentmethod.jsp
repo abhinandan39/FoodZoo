@@ -92,45 +92,13 @@
 				    
 				    <div class="col-sm-1"></div>
 				    <div class="col-sm-10">
-				 <!--    <span>
-				   <input type="radio" name="mode" value="cod" id="id1" />
-								<label for="id1">Cash On Delivery</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									<input type="radio" name="mode" value="card" id="id2" />
-									<label for="id2">Card Payment Method</label>
-									</span>
-									<br><br> -->
-					 			
 					</div>
-					
-					
 					<div class="col-sm-1"></div>
 					</div>
 					<div class="row">
 						<div class="col-sm-1"></div>
 						<div class="col-sm-10">
-							
-							
-							<%--  <form action="cashondelivery">
-						
-						             <span>
-				 					 <input type="radio" name="mode" value="cod" id="id1" />
-									<label for="id1">Cash On Delivery</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									<input type="radio" name="mode" value="card" id="id2" />
-									<label for="id2">Card Payment Method</label>
-									</span>
-									<br><br>
-					 			
-						              <div id="div1">
-									  <p><h3>Cash on Delivery payment method</h3></p>
-					 				  <p>Pay with Cash When Your Order is delivered</p>
-									  <input type="submit" class="btn btn-success" value="Pay Now"/>
-								      </div>
-							</form> 
-								 --%>
-							
-							
-					 			
-								 <form class="form-group" action="paynow" method="post">
+									 <form class="form-group" action="paynow" method="post">
 								  <span>
 				 					 <input type="radio" name="mode" value="cod" id="id1" />
 									<label for="id1">Cash On Delivery</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -159,8 +127,7 @@
 									<input type="submit" class="btn btn-success" value="Pay Now"/>
 									</div> 
 								</form> 
-							
-							
+			
 						</div>
 						<div class=col-sm-1"></div>
 					

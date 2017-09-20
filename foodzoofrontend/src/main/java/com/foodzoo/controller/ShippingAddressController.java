@@ -53,12 +53,7 @@ public class ShippingAddressController {
 		System.out.println("Inside profile " + address);
 		return new ModelAndView("UpdateAddress", "command", address);
 	}
-	@RequestMapping("/paymentMode")
-	public ModelAndView getPay(HttpServletRequest request) {
-
-		
-		return new ModelAndView("pay");
-	}
+	
 	@RequestMapping("/updateaddress")
 	public ModelAndView updateUser(@Valid @ModelAttribute ShippingAddress address, BindingResult result) {
 
@@ -102,7 +97,7 @@ public class ShippingAddressController {
 					session1.setAttribute("sessionusername", address.getUsername());
 				
 					logger.info("---registration success-------");
-					return new ModelAndView("pay", "msg", "Your shipping address saved  Successfully");
+					return new ModelAndView("paymentmethod", "msg", "Your shipping address saved  Successfully");
 				} else {
 					logger.info("-----registration failed------");
 					return new ModelAndView("cartPage").addObject("msg", "some error occured ");
