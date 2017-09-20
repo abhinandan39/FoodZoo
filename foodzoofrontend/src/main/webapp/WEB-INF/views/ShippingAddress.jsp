@@ -90,10 +90,10 @@ marigin-left:-100px;
 
 	<div class="backgroundimage">
 		
-		<form id="regform" action="paymentMode" method="post">
+		<form id="regform" action="checkout1" method="post">
 			<div class="row">
 				<div class="col-sm-3">
-					
+					<input type="hidden" name="username" value="${sessionusername}" />
 				</div>
 
 				<div class="col-sm-6"

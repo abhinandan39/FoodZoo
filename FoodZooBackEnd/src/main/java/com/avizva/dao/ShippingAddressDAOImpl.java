@@ -69,7 +69,8 @@ public class ShippingAddressDAOImpl {
 		}
 		else{
 			
-			flag=true;}
+			flag=true;
+			}
 		}
 		catch(Exception e){
 			logger.error("exception occured:"+ e);
@@ -83,6 +84,26 @@ public class ShippingAddressDAOImpl {
        
 		return flag;
 
+	}
+	public boolean updateAddress(ShippingAddress address) {
+		boolean flag = false;
+		Session session = null;
+		Transaction transaction = null;
+		try {
+			session = getSession();
+			transaction = session.beginTransaction();
+//			Users user = session.get(Users.class, username);
+			session.update(address);
+			transaction.commit();
+			flag = true;
+		} catch (Exception e) {
+			logger.error("exception occured:"+ e);
+			transaction.rollback();
+		} finally {
+			session.close();
+
+		}
+		return flag;
 	}
 
 }

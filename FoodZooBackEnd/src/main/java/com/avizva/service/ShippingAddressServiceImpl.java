@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.avizva.dao.ShippingAddressDAOImpl;
 import com.avizva.model.ShippingAddress;
+import com.avizva.model.Users;
 
 @Service
 public class ShippingAddressServiceImpl {
@@ -32,8 +33,7 @@ public class ShippingAddressServiceImpl {
 	ShippingAddressDAOImpl shippingAddressDAOImpl;
 
 	public boolean saveShippingAddressService(ShippingAddress address) {
-		String username = address.getUsername();
-		logger.info("----inside service:saveserive method------");
+		
 		if (shippingAddressDAOImpl.saveShippingAddress(address)) {
 			logger.info("---user info is saved in db-----");
 			String from = "FoodZoo";
@@ -77,4 +77,16 @@ public class ShippingAddressServiceImpl {
 
 	}
 
-}
+	public boolean updateAddressService(ShippingAddress address) {
+		
+			if(shippingAddressDAOImpl.updateAddress(address))
+			{
+				return true;
+			}
+			else{
+				return false;
+			}
+			
+		}
+	}
+
