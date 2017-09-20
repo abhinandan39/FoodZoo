@@ -2,6 +2,7 @@ package com.avizva.service;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.avizva.model.ShippingAddress;
 import com.avizva.model.Users;
 
 public interface ServiceDAO {
@@ -80,5 +81,6 @@ public interface ServiceDAO {
 	 * @return true or false
 	 */
 	public boolean existUserService(String username);
+	
 	
 }
