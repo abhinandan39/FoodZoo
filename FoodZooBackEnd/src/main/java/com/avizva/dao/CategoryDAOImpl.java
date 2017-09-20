@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -147,6 +148,16 @@ public class CategoryDAOImpl implements CategoryDAO{
 		session.close();
 		return category;
 	}
+	
+	
+//	public Categories viewCategoryByName(String category_name){
+//		Session session = getSession();
+//		Query query = session.createQuery("from Categories where category_name =:category_name");
+//		query.setParameter("category_name", category_name);
+//		List<Category> = query.list();
+//		session.close();
+//		return category;
+//	}
 
 	/**
 	 * viewCategory method get the list of category present in the Categories class from CategoryServiceDAOImpl's vieCategoryService method

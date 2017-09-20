@@ -13,7 +13,6 @@ import com.avizva.model.Users;
 import com.avizva.config.ApplicationContextConfig;
 import com.avizva.config.TestContextConfig;
 
-@Import({ApplicationContextConfig.class})
 public class UserDAOTest {
 	/**
 	 * bean is used that is made through annotation

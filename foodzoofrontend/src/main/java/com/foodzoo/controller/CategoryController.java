@@ -44,7 +44,7 @@ public class CategoryController {
 	@Autowired
 	SupplierServiceDAO supplierServiceDao;
 
-    @Autowired(required=false)
+	@Autowired(required = false)
 	ServletContext servletContext;
 
 	@Autowired
@@ -83,7 +83,9 @@ public class CategoryController {
 		servletContext.setAttribute("supplierList", supplierList);
 		List<Categories> list = new ArrayList<Categories>();
 		list = categoryServiceDao.viewCategoryService(category);
-		
+
+		System.out.println("servletContext");
+
 		logger.info("------list obtained is------" + list);
 		if (!list.isEmpty()) {
 

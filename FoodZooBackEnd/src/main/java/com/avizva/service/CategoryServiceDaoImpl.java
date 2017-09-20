@@ -12,6 +12,9 @@ import com.avizva.model.Categories;
 @Service
 public class CategoryServiceDaoImpl implements CategoryServiceDAO {
 	Logger logger=Logger.getLogger(CategoryServiceDaoImpl.class);
+
+	
+	
 	@Autowired
 	CategoryDAOImpl categoryDAOImpl;
 
@@ -109,6 +112,14 @@ public class CategoryServiceDaoImpl implements CategoryServiceDAO {
 		logger.info("---showing all the categories---");
 		return list;
 	}
+
+//	public Categories viewCategoryByNameService(String category_name) {
+//		logger.info("----inside service:viewCategoryByNameService method---");
+//		Categories category =	categoryDAOImpl.viewCategoryByName(category_name);
+//		logger.info("----show information related to particular category_id---");
+//			return category;
+//	
+//	}
 
 
 }

@@ -7,8 +7,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+<title>Cart</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
@@ -23,8 +24,9 @@
 <link
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
 	rel="stylesheet">
-	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script
+	src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 
 <c:url var="css" value="/resources/css"></c:url>
 <c:url var="js" value="/resources/js"></c:url>
@@ -40,7 +42,7 @@
 	color: #ffffff;
 }
 .panelTop {
-    padding: 20px;
+    padding: 10px;
 }
 
 .panelBottom {
@@ -108,84 +110,82 @@ span.itemPrice {
 .linkstyle:hover{
 	color:#ffffff !important;
 }
-
+.totalAmount{
+	margin-left: 30px;
+	padding: 10px;
+}
 	
 </style>
 </head>
-<body ng-app="myApp" ng-controller="productController">
+<body ng-app="myApp" ng-controller="cartController">
+<!-- 	Cart Page
 
-	<jsp:include page="header.jsp"></jsp:include>
+	<div ng-repeat="product in productList track by $index">{{product}}</div>
 	
+	{{listQuantity}} -->
+<jsp:include page="header.jsp"></jsp:include>
 	<div class="container">
-		
-		<div class="form-group">
-			<h5>Sort By:</h5>
-			<label class="btn btn-default btn-lg">
-			      <input type="radio" checked="checked" name="radioSelect" ng-model="sortBy" value="product_name" > Name
-			</label>
-		    <label class="btn btn-default btn-lg">
-		      <input type="radio" name="radioSelect" ng-model="sortBy" value="category_name"> Category
-		    </label>
-		    <label class="btn btn-default btn-lg">
-		      <input type="radio" name="radioSelect" ng-model="sortBy" value="price" > Price
-	    </label>
-	</div>
+	<div class="jumbotron">
+    <h2>Your Cart</h2> 
+    <p>All the items you selected are at one place now</p> 
+  	</div>
 		<div class="row">
-			<div class="col-sm-4" ng-repeat="product in productList | orderBy:sortBy">
+			<div class="col-sm-3" class="topClass"
+				ng-repeat="product in productList">
 				<div class="panel panel-default panel--styled">
 					<div class="panel-body">
 						<div class="col-md-12 panelTop">
 							<div class="col-md-12 img-hover">
-								<img src="${images}/productOne.jpg" class="img img-rounded" width="100%" height="200px"
-									alt="Food" />
+								<img src="${images}/productOne.jpg" class="img img-rounded"
+									width="100%" height="100px" alt="Food" />
+								
 							</div>
 							
+
 						</div>
-						<a href="singleProduct?id={{product.product_id}}" class="linkstyle">
-						<div class="col-sm-12 panelBottom">
-							<div class="col-sm-12 text-center">
-								<h5>{{product.product_name}}</h5>
-								<p style="font-size: 13px; height: 3.6em;">{{product.description}}</p>
+						
+							<div class="col-sm-12 panelBottom">
+								<div class="col-sm-12 text-center">
+									<p style="font-size: 15px; height: 4.0em;">{{product.product_name}}</p>
+									Quantity<p style="font-size: 13px; height: 1.5em;">{{product.quantity}}</p>
+									Price: <p style="font-size: 15px; height: 1.0em;">{{product.price}}</p>
+								</div>
+
 							</div>
+					
+						<div class="col-sm-12 panelBottom">
 							
-						</div>
-						</a>
-						<div class="col-sm-12 panelBottom">
-							<div class="col-sm-6">
-								<a href="cartClick?id={{product.product_id}}">
-								<button class="btn btn-lg btn-add-to-cart">
-									<span class="glyphicon glyphicon-shopping-cart"></span>
-								</button>
-								</a>
-							</div>
-							<div class="col-sm-6">
+							<div class="col-sm-12">
 								<h6>
-									Price <span class="itemPrice">Rs: {{product.price}}</span>
+									Total Price <span class="itemPrice">Rs: {{product.price * product.quantity}}</span>
 								</h6>
 							</div>
-							<div class="col-sm-4">
-								<div class="stars">
-									<div id="stars" class="starrr"></div>
-								</div>
-							</div>
+							
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+		<div class="row">
+			<div class="col-sm-12 totalAmount">
+				Total Cart Amount: {{totalAmount}}
+			</div>
+		</div>
 	</div>
-<jsp:include page="footer.jsp" />
 	
+	<jsp:include page="footer.jsp" />
 	<script type="text/javascript">
-	 var app = angular.module("myApp",[]);
-	 app.controller('productController',function($scope){
-		 
-		
-		 $scope.productList = ${products}
-		 
-	 });
+		var app = angular.module("myApp", []);
+		app.controller('cartController', function($scope) {
+
+			$scope.listQuantity = ${quantity}
+			$scope.productList = ${productList}
+			$scope.totalAmount = ${total}
+			for(i=0;i<$scope.productList.length;i++){
+				$scope.productList[i].quantity=$scope.listQuantity[i];
+				}
+			
+		});
 	</script>
-	
-	
 </body>
 </html>

@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.stereotype.Component;
 
@@ -23,10 +24,10 @@ public class CartItem {
 	@NotEmpty
 	private String user_name;
 	
-	@NotEmpty
+	@NotNull
 	private float price;
 	
-	@NotEmpty
+	@NotNull
 	private int cartitem_quantity;
 	
 	

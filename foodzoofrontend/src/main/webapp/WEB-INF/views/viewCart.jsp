@@ -105,9 +105,7 @@ span.itemPrice {
 .btn-default{
 	font-size: 14px !important;
 }
-.linkstyle:hover{
-	color:#ffffff !important;
-}
+
 
 	
 </style>
@@ -117,52 +115,28 @@ span.itemPrice {
 	<jsp:include page="header.jsp"></jsp:include>
 	
 	<div class="container">
-		
-		<div class="form-group">
-			<h5>Sort By:</h5>
-			<label class="btn btn-default btn-lg">
-			      <input type="radio" checked="checked" name="radioSelect" ng-model="sortBy" value="product_name" > Name
-			</label>
-		    <label class="btn btn-default btn-lg">
-		      <input type="radio" name="radioSelect" ng-model="sortBy" value="category_name"> Category
-		    </label>
-		    <label class="btn btn-default btn-lg">
-		      <input type="radio" name="radioSelect" ng-model="sortBy" value="price" > Price
-	    </label>
-	</div>
 		<div class="row">
-			<div class="col-sm-4" ng-repeat="product in productList | orderBy:sortBy">
+			<div class="col-sm-12">
 				<div class="panel panel-default panel--styled">
 					<div class="panel-body">
-						<div class="col-md-12 panelTop">
+						<div class="col-md-8 panelTop">
 							<div class="col-md-12 img-hover">
 								<img src="${images}/productOne.jpg" class="img img-rounded" width="100%" height="200px"
 									alt="Food" />
 							</div>
 							
 						</div>
-						<a href="singleProduct?id={{product.product_id}}" class="linkstyle">
-						<div class="col-sm-12 panelBottom">
+
+						<div class="col-sm-4 panelBottom">
 							<div class="col-sm-12 text-center">
 								<h5>{{product.product_name}}</h5>
 								<p style="font-size: 13px; height: 3.6em;">{{product.description}}</p>
+								Price <span class="itemPrice">Rs: {{product.price}}</span>
 							</div>
 							
 						</div>
-						</a>
-						<div class="col-sm-12 panelBottom">
-							<div class="col-sm-6">
-								<a href="cartClick?id={{product.product_id}}">
-								<button class="btn btn-lg btn-add-to-cart">
-									<span class="glyphicon glyphicon-shopping-cart"></span>
-								</button>
-								</a>
-							</div>
-							<div class="col-sm-6">
-								<h6>
-									Price <span class="itemPrice">Rs: {{product.price}}</span>
-								</h6>
-							</div>
+						
+							
 							<div class="col-sm-4">
 								<div class="stars">
 									<div id="stars" class="starrr"></div>
@@ -173,7 +147,13 @@ span.itemPrice {
 				</div>
 			</div>
 		</div>
-	</div>
+	<div class="col-sm-12 panelBottom">
+							<div class="col-sm-6">
+								<button class="btn btn-lg btn-add-to-cart">
+									<span class="glyphicon glyphicon-shopping-cart">Add To Cart</span>
+								</button>
+							</div>
+							</div>
 <jsp:include page="footer.jsp" />
 	
 	<script type="text/javascript">
@@ -181,11 +161,14 @@ span.itemPrice {
 	 app.controller('productController',function($scope){
 		 
 		
+		 
 		 $scope.productList = ${products}
 		 
 	 });
 	</script>
 	
-	
+	${product.product_name}<br>
+${product.product_id}<br>
+${product.description}<br>
 </body>
 </html>
