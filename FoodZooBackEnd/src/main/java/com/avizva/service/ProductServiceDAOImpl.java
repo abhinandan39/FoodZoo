@@ -8,14 +8,28 @@ import org.springframework.stereotype.Service;
 
 import com.avizva.dao.ProductsDAOImpl;
 import com.avizva.model.Products;
-
+/**
+ * 
+ * @author Parul.Sharma
+ * service annotation for making this class as a service class
+ *
+ */
 @Service
 public class ProductServiceDAOImpl implements ProductServiceDAO {
-	
+	/**
+	 * keep the log of all the transactions
+	 */
 	Logger logger=Logger.getLogger(ProductServiceDAOImpl.class);
+	/**
+	 * auotiwred annotation for making use of existing bean of this class instead of creating seperate object
+	 */
 	@Autowired
 	ProductsDAOImpl productDaoImpl;
-
+/**
+ * saveProductService method that takes product as parameter and it calls productDaoImpl's saveProduct method
+ * if that method returns true then this method returns true
+ * else false
+ */
 	public boolean saveProductService(Products product) {
 
 		logger.info("----inside service:saveProductSerice Method------");
@@ -29,7 +43,11 @@ public class ProductServiceDAOImpl implements ProductServiceDAO {
 		}
 		
 	}
-
+/**
+ * updateProductService method for upating the existing product details
+ * calls productDaoImpl's updateProduct method if that returns true then this method returns true
+ * else false
+ */
 	public boolean updateProductService(Products product) {
 
 		logger.info("----inside service:updateProductSerice method------");
@@ -42,7 +60,11 @@ public class ProductServiceDAOImpl implements ProductServiceDAO {
 			return false;
 		}
 	}
-
+/**
+ * deleteProductService method for deleting the existing product in the database
+ * calss productDaoImpl's deleteProduct method and if this returns true then deleteProductService returns true
+ * else returns false 
+ */
 	public boolean deleteProductService(Products product) {
 
 		logger.info("---inside service:deleteProductService method---");
@@ -57,7 +79,10 @@ public class ProductServiceDAOImpl implements ProductServiceDAO {
 			return false;
 		}
 	}
-
+/**
+ * viewProductByIdService method for showing the product corresponding to the product id
+ * calls productDaoImpl's viewProductById method and returns the product
+ */
 	public Products viewProductByIdService(String product_id) {
 
 		logger.info("----inside service:viewProductByIdService method---");
@@ -65,7 +90,11 @@ public class ProductServiceDAOImpl implements ProductServiceDAO {
 		logger.info("----show information related to particular product_id---");
 			return product;
 	}
-
+/**
+ * viewProductsService method for showing all the products in the cart
+ * calls productDaoImpl's viewProducts method that returns the list of products present in the database
+ * returns list
+ */
 	public List<Products> viewProductsService() {
 		
 		logger.info("----inside service:viewProductsService method----");
@@ -75,7 +104,10 @@ public class ProductServiceDAOImpl implements ProductServiceDAO {
 		return list;
 	
 	}
-
+/**
+ * productByCategoryService method for showing all the products corresponding to the category
+ * calls productDaoImpl's productByCategory method that returns the list of product corresponding to the category
+ */
 	public List<Products> productByCategoryService(String category) {
 		
 		logger.info("----inside service:productByCategoryService method----");
