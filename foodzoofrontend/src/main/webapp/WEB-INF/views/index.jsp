@@ -83,7 +83,7 @@
 					</div>
 				</div>
 				<div class="item">
-					<img src="${images}/food1.jpg" class="tales">
+					<img src="${images}/food4.jpg" class="tales">
 					<div class="carousel-caption">
 						<h1>foodzoo</h1>
 						<p>welcome to fooodzoo.</p>
