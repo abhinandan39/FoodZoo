@@ -83,7 +83,7 @@
 					</div>
 				</div>
 				<div class="item">
-					<img src="${images}/food31.jpg" class="tales">
+					<img src="${images}/food1.jpg" class="tales">
 					<div class="carousel-caption">
 						<h1>foodzoo</h1>
 						<p>welcome to fooodzoo.</p>
@@ -140,7 +140,7 @@
 			</a>
 			<a href="product?cat=chinese">
 			<div class="col-sm-4 img-hover" style="text-align: center;">
-				<img src="${images}/chinese.jpg" class="img-rounded"
+				<img src="${images}/chinesenew.jpg" class="img-rounded"
 					style="width: 250px; height: 250px">
 				<div class="middle">
 					<div class="text">
@@ -176,7 +176,7 @@
 			</a>
 			<a href="product?cat=bengali">
 			<div class="col-sm-4 img-hover" style="text-align: center;">
-				<img src="${images}/thaifood.jpg" class="img-rounded"
+				<img src="${images}/bengalinew.jpg" class="img-rounded"
 					style="width: 250px; height: 250px">
 				<div class="middle">
 					<div class="text">

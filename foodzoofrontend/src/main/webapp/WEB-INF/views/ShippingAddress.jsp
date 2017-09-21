@@ -198,6 +198,20 @@ marigin-left:-100px;
 
 					</div>
 					<div class="row">
+						<div class="col-sm-2" style="margin-top: 20px"></div>
+
+						<div class="col-sm-7">
+							<input type="text" length="10" class="form-control"
+								name="contact"
+								placeholder="<spring:message code='label.country'></spring:message>"
+								id="contactid" placeholder="Enter country"
+								 style="margin-top: 10px" required>
+							<span class="err"><form:errors path="shippingAddress.country"></form:errors></span>
+						</div>
+						<div class="col-sm-3" style="margin-top: 20px"></div>
+
+					</div>
+					<div class="row">
 
 						<div class="col-sm-2" style="text-align: left; margin-top: 10px">
 

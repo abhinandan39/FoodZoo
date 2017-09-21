@@ -9,20 +9,38 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.avizva.model.Payment;
-import com.avizva.service.CategoryServiceDaoImpl;
+
+import com.avizva.service.CategoryServiceImpl;
+
+
+/**
+ * 
+ * @author Parul.Sharma
+ * repository annotation makes the bean of impl class
+ *
+ */
 
 @Repository
 public class PaymentDAOImpl implements PaymentDAO {
-
+/**
+ * for kepping complete log of the transactions happening
+ */
 	Logger logger=Logger.getLogger(PaymentDAOImpl.class);
 
 	@Autowired
 	SessionFactory sessionFactory;
-	
+
+	/**
+	 * getSession method is used to open/create a session from the auto-wired object of sessionFactory.
+	 * @return Session
+	 */
 	public Session getSession() {
 		return sessionFactory.openSession();
 	}
-	
+	/**
+	 * savePayment method that will take the payment object as parameter and save the payment mode
+	 * returns true or false
+	 */
 	public boolean savePayment(Payment newpayment) {
 			logger.info("--inside paymentdao save method-----");
 			 

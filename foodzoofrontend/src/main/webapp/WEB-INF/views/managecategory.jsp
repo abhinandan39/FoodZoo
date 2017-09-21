@@ -80,32 +80,32 @@
 	</div>
 	</div>
 	<div class="container-fluid">
-		<form:form id="category_form" action="savecategory" style="padding-top:20px;">
-				<div class="row">
-				<div class="col-sm-4">
-					<form:input id="one" path="category_id" class="form-control"></form:input>
-				</div>
-				<div class="col-sm-4">
-					<form:input id="two" path="category_name" class="form-control"></form:input>
-				</div>
-				<div class="col-sm-4">
-					
-					<form:input id="three" path="category_description"
-						class="form-control"></form:input>
-				</div>
-
-				</div>
-
-				<div class="row">
-				<div class="col-sm-4"></div>
-				<div class="col-sm-4"style=" align:center">
-							<input type="submit" class="btn btn-success" value="save"
-							id="category_button"
-							style="margin-top: 10px; margin-bottom: 10px; padding-left:20px; padding-right:20px"></input>
-				</div>
-				<div class="col-sm-4"></div>
-				</div>
-		</form:form>
+	<button type="submit" class="btn btn-success" value="AddCategory" data-toggle="modal" data-target="#categoryModal" style="margin-top:20px; margin-bottom:20px;">Add Category</button>
+	
+	
+	
+	<div class="modal fade" id="categoryModal" role="dialog">
+					<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+								     <h4 class="modal-title">Category Details</h4>
+								  </div>  
+								  <div class="modal-body">
+								  <form id="category_form" class="form-group" action="savecategory" method="post">
+								      <input class="form-control" type="text" name="category_id" placeholder="Enter Category ID" id="category_id" required/><br>
+								  	  <input class="form-control" type="text" name="category_name" placeholder="Enter Category Name" id="category_name" required/><br>
+								      <input class="form-control" type="text" name="category_description" placeholder="Enter Category Description" id="category_description" required/><br>
+								      <input type="submit" class="btn btn-success" id="category_button" value="Save Category"/>
+								     
+								  </form>
+								  </div>
+								<div class="modal-footer">
+       							 </div>
+								</div>
+							</div>
+					</div>	
+	
 	</div>
 	<div class="container-fluid">
 		<table class="table table-striped">
@@ -123,7 +123,7 @@
 					<td id="01"><c:out value="${x.category_id}"></c:out></td>
 					<td id="02"><c:out value="${x.category_name}"></c:out></td>
 					<td id="03"><c:out value="${x.category_description}"></c:out></td>
-					<td><a href="#categoryedit" class=""><i
+					<td><a href="#categoryModal" data-toggle="modal"><i
 							class="fa fa-pencil" aria-hidden="true"
 							onClick="editFunction('${x.category_id}','${x.category_name}','${x.category_description}')"></i></a></td>
 					<td><a href="categorydelete/${x.category_id}"><i
@@ -159,9 +159,10 @@
 		
 		document.getElementById('category_button').setAttribute("value","update");
 		document.getElementById('category_form').setAttribute("action","categoryupdate");
-		document.getElementById('one').setAttribute('value',id);
-		document.getElementById('two').setAttribute('value',name);
-		document.getElementById('three').setAttribute('value',category);
+		document.getElementById('category_id').setAttribute('value',id);
+		document.getElementById('category_id').setAttribute("disabled","true");
+		document.getElementById('category_name').setAttribute('value',name);
+		document.getElementById('category_description').setAttribute('value',category);
 		
 	}
 </script>

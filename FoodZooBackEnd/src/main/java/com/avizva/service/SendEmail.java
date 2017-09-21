@@ -7,16 +7,35 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-
+/**
+ * 
+ * @author Parul.Sharma
+ * service annotation for making that class as a service class
+ * can be used anywhere directly
+ *
+ */
 @Service
 public class SendEmail {
+	/**
+	 * keeps track of all transactions
+	 */
 	Logger logger=Logger.getLogger(SendEmail.class);
+	/**
+	 * object of predefined mailsender class
+	 */
 	private MailSender mailSender;
 
 	public void setMailSender(MailSender mailSender) {
 		this.mailSender = mailSender;
 	}
-
+/**
+ * sendmail method for sending the mail 
+ * @param from
+ * @param to
+ * @param subject
+ * @param msg
+ * @return true or false
+ */
 	public boolean sendMail(String from, String to, String subject, String msg) {
 		int flag = 0;
 		// creating message

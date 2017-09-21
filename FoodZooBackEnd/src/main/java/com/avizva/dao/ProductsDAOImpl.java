@@ -13,7 +13,16 @@ import org.springframework.stereotype.Repository;
 
 import com.avizva.model.Categories;
 import com.avizva.model.Products;
-import com.avizva.service.CategoryServiceDaoImpl;
+
+import com.avizva.service.CategoryServiceImpl;
+
+
+/**
+ * @repository makes the bean of impl class
+ * ProductsDAOImpl class that implemnets ProductsDAO and execute all its method
+ * @author Parul.Sharma
+ *
+ */
 
 @Repository
 public class ProductsDAOImpl implements ProductsDAO {
@@ -22,7 +31,7 @@ public class ProductsDAOImpl implements ProductsDAO {
 	 * for keeping the log of this class
 	 */
 	
-	Logger logger=Logger.getLogger(CategoryServiceDaoImpl.class);
+	Logger logger=Logger.getLogger(CategoryServiceImpl.class);
 
 	@Autowired
 	SessionFactory sessionFactory;
@@ -34,7 +43,12 @@ public class ProductsDAOImpl implements ProductsDAO {
 	public Session getSession() {
 		return sessionFactory.openSession();
 	}
-
+	/**
+	 * saveProduct method for saving the product into the database
+	 * takes the product's object and all its information
+	 * and saves the data to the database
+	 * return true or false
+	 */
 	public boolean saveProduct(Products product) {
 
 		logger.info("------inside dao:saveProduct method------");
@@ -58,7 +72,10 @@ public class ProductsDAOImpl implements ProductsDAO {
 		return flag;
 
 	}
-
+/**
+ * updateProduct that takes the products's object and update the existing product
+ * returns true or false
+ */
 	public boolean updateProduct(Products product) {
 			
 		boolean flag = false;
@@ -80,7 +97,12 @@ public class ProductsDAOImpl implements ProductsDAO {
 		}
 		return flag;
 	}
-
+/**
+ * deleteProduct that takes the product's object as the parameter
+ * takes all the data of that object
+ * and perform deletion operation
+ * returns true or false
+ */
 	public boolean deleteProduct(Products product) {
 
 		boolean flag=false;
@@ -102,7 +124,11 @@ public class ProductsDAOImpl implements ProductsDAO {
 		}
 		return flag;
 	}
-
+/**
+ * viewProductById method takes the unique product_id as the parameter
+ * it will show all the products related to that product id
+ * returns product
+ */
 	public Products viewProductById(String product_id) {
 
 		Session session = getSession();
@@ -119,7 +145,11 @@ public class ProductsDAOImpl implements ProductsDAO {
 		}
 		return product;
 	}
-
+/**
+ * viewProducts method will show all the products present in the database
+ * takes the products class and will extract complete list of the product present in the database
+ * returns the list of the products
+ */
 	public List<Products> viewProducts() {
 
 		List<Products> products = null;
@@ -139,7 +169,10 @@ public class ProductsDAOImpl implements ProductsDAO {
 			
 			return products;
 	}
-	
+	/**
+	 * productByCategory method will showthe product relatedto the particular category
+	 * return the products
+	 */
 	public List<Products> productByCategory(String category){
 		List<Products> products = null;
 		Session session = getSession();

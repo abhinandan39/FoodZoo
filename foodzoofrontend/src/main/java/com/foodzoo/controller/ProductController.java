@@ -22,10 +22,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.avizva.model.Categories;
 import com.avizva.model.Products;
 import com.avizva.model.Suppliers;
-import com.avizva.service.CategoryServiceDAO;
-import com.avizva.service.ProductServiceDAO;
-import com.avizva.service.ServiceDAO;
-import com.avizva.service.SupplierServiceDAO;
+import com.avizva.service.CategoryService;
+import com.avizva.service.ProductService;
+import com.avizva.service.UserService;
+import com.avizva.service.SupplierService;
 /**
  * 
  * @author Priyanshi.Tiwari
@@ -51,13 +51,13 @@ public class ProductController {
 	
 	
 	@Autowired
-	ServiceDAO serviceDao;
+	UserService serviceDao;
 	@Autowired
-	ProductServiceDAO productServiceDao;
+	ProductService productServiceDao;
 	@Autowired
-	CategoryServiceDAO categoryServiceDao;
+	CategoryService categoryServiceDao;
 	@Autowired
-	SupplierServiceDAO supplierServiceDao;
+	SupplierService supplierServiceDao;
 	
 
 	/**

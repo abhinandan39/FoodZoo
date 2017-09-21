@@ -21,7 +21,8 @@ import com.avizva.model.Payment;
 import com.avizva.model.ShippingAddress;
 import com.avizva.model.UserOrder;
 import com.avizva.service.CartItemService;
-import com.avizva.service.CategoryServiceDaoImpl;
+
+import com.avizva.service.CategoryServiceImpl;
 import com.avizva.service.PaymentService;
 import com.avizva.service.ShippingAddressService;
 import com.avizva.service.UserOrderService;

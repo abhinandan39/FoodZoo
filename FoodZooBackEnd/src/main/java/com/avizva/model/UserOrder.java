@@ -14,11 +14,18 @@ import javax.persistence.UniqueConstraint;
 
 import org.springframework.stereotype.Component;
 
-
+/**
+ * 
+ * @author Parul.Sharma
+ * model class UserOrder that will take confirm the user order with its corresponding details
+ *
+ */
 @Component
 @Entity
 public class UserOrder {
-
+/**
+ * order id is the unique id for the order placed by the user
+ */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int order_id;
@@ -26,15 +33,27 @@ public class UserOrder {
 	@Column(unique=true)
 	private String orderNumber;
 	
-	@OneToMany(cascade = CascadeType.ALL)
-	private List<CartItem> cartList;
-	
-	
-	@OneToOne(cascade = CascadeType.ALL)
-	private ShippingAddress address;
 	
 	private String paymentMode;
 	
+	/**
+	 * cartList takes the cart item beloging to the particular customer
+	 */
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<CartItem> cartList;
+	/**
+	 * ShippingAddress object for taking the address of the corresponding customer
+	 */
+	@OneToOne(cascade = CascadeType.ALL)	
+	private ShippingAddress address;
+	/**
+	 * payment method that customer opted for
+	 */
+	@OneToOne
+	private Payment payment;
+	/**
+	 * and the user name the primary key which is already saved in the session
+	 */
 	private String username;
 
 	public int getOrder_id() {

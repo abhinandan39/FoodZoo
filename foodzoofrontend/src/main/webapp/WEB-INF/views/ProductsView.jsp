@@ -182,7 +182,6 @@ span.itemPrice {
 	 var app = angular.module("myApp",[]);
 	 app.controller('productController',function($scope){
 		 
-		
 		 $scope.productList = ${products}
 		 
 	 });

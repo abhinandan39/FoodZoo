@@ -44,7 +44,7 @@ public interface CartItemDAO {
 	 * @param cartitem
 	 * @return list of CartItem
 	 */
-	public List<CartItem> viewCartItems(CartItem cartitem);
+	public List<CartItem> viewCartItems();
 	
 	
 	public List<CartItem> viewCartItemsByUser(String user_name);

@@ -11,13 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.avizva.model.Users;
-import com.avizva.service.ServiceDAOImpl;
+import com.avizva.service.UserServiceImpl;
 
 
 
 @Repository
 public class UserDAOImpl implements UserDAO {
-	Logger logger=Logger.getLogger(ServiceDAOImpl.class);
+	Logger logger=Logger.getLogger(UserServiceImpl.class);
 
 	@Autowired
 	SessionFactory sessionFactory;
