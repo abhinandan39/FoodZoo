@@ -8,7 +8,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
@@ -23,56 +24,46 @@
 <link
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
 	rel="stylesheet">
-	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script
+	src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 
 <c:url var="css" value="/resources/css"></c:url>
 <c:url var="js" value="/resources/js"></c:url>
 <c:url var="images" value="/resources/images"></c:url>
 <style type="text/css">
-
-
 .panel.panel--styled {
-    background: #fbfbfb;
-    margin-left:30px;
-    margin-top:20px;
+	background: #fbfbfb;
+	margin-left: 30px;
 }
-.panel.panel--styled:hover{
-	background: #737373;
-	color: #ffffff;
-}
+
 .panelTop {
-    padding: 20px;
-    margin-left: 400px;
-    
+	padding: 20px;
 }
 
 .panelBottom {
-    border-top: 1px solid #e7e7e7;
-    padding-top: 10px;
-    padding-bottom: 10px;
+	border-top: 1px solid #e7e7e7;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	background: #fbfbfb;
 }
+
 .btn-add-to-cart {
-    background: #46d246;
-    color: #fff;
-    font-size: 13px !important;
+	background: #46d246;
+	color: #fff;
+	font-size: 13px !important;
 }
-
-
 
 span.itemPrice {
-    font-size: 20px;
-    color: #28a428;
-    margin-left: 20px;
-    
-    
-}
-span.itemDesc {
-    font-size: 20px;
-    color: #28a428;
-    
+	font-size: 20px;
+	color: #28a428;
+	margin-left: 20px;
 }
 
+span.itemDesc {
+	font-size: 20px;
+	color: #28a428;
+}
 
 .backgroundimage {
 	background-image: url('${images}/food1.jpg');
@@ -82,181 +73,322 @@ span.itemDesc {
 	opacity: 0.8;
 }
 
-
-.form-group{
-	text-align:center;
+.form-group {
+	text-align: center;
 }
 
-
-.x
-{
-
-margin-top:100px;
-}
-.but-add-to-cart:hover{
-	color: #fff;   
-    background: #28a428;
+.but-add-to-cart:hover {
+	color: #fff;
+	background: #28a428;
 	outline: none;
 }
-.but
-{
-margin-top:50px;
-margin-left:50px;
-background-color: light green;
-}
-	
-.product
-{
-font-size: 20px;
 
+.but {
+	margin-top: 50px;
+	margin-left: 50px;
+	background-color: light green;
 }
-#formShip
-{
-background-color: grey;
-}	
-.panel-heading
-{
-font-size:40px;
- text-align:center;
-}
-.row
-{
-padding: 10px;
 
-
+.product {
+	font-size: 20px;
 }
+.middleRow{
+	background: #ffffff; 
+	padding: 5px; 
+	margin-top: 10px; 
+	margin-bottom: 100px; 
+	border-radius: 10px;
+}
+
+.nav-pills{
+	margin-top: 20px !important;
+	border-radius: 4px;
+	background: #ffffff;
+}
+
+.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover{
+
+	color: #fff;
+    background-color: #3e9840 !important;
+}
+
 </style>
 </head>
 <body ng-app="myApp">
 
 	<jsp:include page="header.jsp"></jsp:include>
-		
-		
-			<div class="backgroundimage">
-	<div class="container">
 
-		<div class="row">
-			<div class="col-sm-12">
-				<div class="panel panel-default panel--styled">
-				<div class="panel-heading">Address</div>
-					<div class="panel-body">
+
+	<div class="backgroundimage">
+		<div class="container">
+			
+			<ul class="nav nav-pills nav-justified">
+				
+				<li id="addressHead" class="active"><a data-toggle="pill" href="#addressPill">Address</a></li>
+				<li id="paymentHead"><a  data-toggle="pill" href="#paymentPill">Payment Methods</a></li>
+			</ul>
+		  <div class="tab-content">
+			<div id="addressPill" class="row tab-pane fade in active">
+				<div class="row">
+				<div class="col-sm-1">
+					
+				</div>
+
+				<div class="col-sm-10 middleRow">
+					<div class="row">
+						<h4 style="text-align:center;"> Your Address</h4>
 						
-							
-						<div class="col-sm-4 x">
-							<div class="col-sm-12 text-center product">
-							<div class="row">
-							<div class="col-sm-4" style="text-align: left; margin-top: 20px">
+					</div>
+				
+					<div class="row">
+
+						<div class="col-sm-2">
+						
+						</div>
+						<div class="col-sm-2" style="text-align: left; margin-top: 20px">
 							<label class="form-label">Name</label>
 						</div>
-						<div class="col-sm-8" style="margin-top: 20px">
-							${shippingAddress.fullname}
+						<div class="col-sm-7" style="margin-top: 20px">
+							<span class="form-control">${shippingAddress.fullname}</span>
 						</div>
+
+						<div class="col-sm-1" style="text-align: right; margin-top: 20px">
+
 						</div>
-						<div class="row">
-						<div class="col-sm-4" style="text-align: left; margin-top: 20px">
+					 </div>
+					<div class="row">
+
+						<div class="col-sm-2">
+						
+						</div>
+						<div class="col-sm-2" style="text-align: left; margin-top: 20px">
 							<label class="form-label">Address</label>
 						</div>
-						<div class="col-sm-8" style="margin-top: 20px">
-							${shippingAddress.address1}
+						<div class="col-sm-7" style="margin-top: 20px">
+							<span class="form-control">${shippingAddress.address1}</span>
 						</div>
+
+						<div class="col-sm-1" style="text-align: right; margin-top: 20px">
+
 						</div>
-						<div class="row">
-						<div class="col-sm-4" style="text-align: left; margin-top: 20px">
-							<label class="form-label">City</label>
-						</div>
-						<div class="col-sm-8" style="margin-top: 20px">
-							${shippingAddress.city}
-						</div>
-						</div>
-						<div class="row">
-						<div class="col-sm-4" style="text-align: left; margin-top: 20px">
-							<label class="form-label">ZipCode</label>
-						</div>
-						<div class="col-sm-8" style="margin-top: 20px">
-							${shippingAddress.zipcode}
-						</div>
-						</div>
-						<div class="row">
-						<div class="col-sm-4" style="text-align: left; margin-top: 20px">
-							<label class="form-label">Contact</label>
-						</div>
-						<div class="col-sm-8" style="margin-top: 20px">
-							${shippingAddress.contact}
-						</div>
-						</div>
-						<div class="row">
-						<div class="col-sm-4" style="text-align: left; margin-top: 20px">
-							<label class="form-label">Email</label>
-						</div>
-						<div class="col-sm-8" style="margin-top: 20px">
-							${shippingAddress.email}
-						</div>
-						</div>
-							<%-- <label for="name">Name<span class="itemPrice">${shippingAddress.fullname}</span></label>
-							<label for="address">Address<span class="itemPrice">${shippingAddress.address1}  ${shippingAddress.address2}</span></label>
-							<label for="city">City<span class="itemPrice">${shippingAddress.city}</span></label>
-							<label for="ZipCode">ZipCode<span class="itemPrice">${shippingAddress.zipcode}</span></label>
-							<label for="Contact">Contact<span class="itemPrice">${shippingAddress.contact}</span></label>
-							<label for="Email">Email<span class="itemPrice">${shippingAddress.email} </span></label>
-							 --%>
-							
-							
-							<div class="col-sm-4">
-								<div class="stars">
-									<div id="stars" class="starrr"></div>
-								</div>
-							</div>
-						</div>
-					</div>
-				
-		</div>	
-	<div class="col-sm-12 panel-footer">
-							<div class="col-sm-6">
-								<button class="btn btn-lg but-add-to-cart but">
-								<a href="updateAddress">
-									<span>update</span>
-								</a>
-								</button>
-								<button class="btn btn-lg but-add-to-cart but">
-								<a href="paymentMode">
-									<span>PayNow</span>
-								</a>
-								</button>
-							</div>
+					 </div>
+					 <div class="row">
+
+						<div class="col-sm-2">
 						
+						</div>
+						<div class="col-sm-2" style="text-align: left; margin-top: 20px">
+							<label class="form-label"></label>
+						</div>
+						<div class="col-sm-7" style="margin-top: 20px">
+							<span class="form-control">${shippingAddress.address2}</span>
+						</div>
+
+						<div class="col-sm-1" style="text-align: right; margin-top: 20px">
+
+						</div>
+					 </div>
+					<div class="row">
+
+						<div class="col-sm-2">
+						
+						</div>
+						<div class="col-sm-2" style="text-align: left; margin-top: 20px">
+							<label class="form-label">city</label>
+						</div>
+						<div class="col-sm-7" style="margin-top: 20px">
+							<span class="form-control">${shippingAddress.city}</span>
+						</div>
+
+						<div class="col-sm-1" style="text-align: right; margin-top: 20px">
+
+						</div>
+					 </div>
+					<div class="row">
+
+						<div class="col-sm-2">
+						
+						</div>
+						<div class="col-sm-2" style="text-align: left; margin-top: 20px">
+							<label class="form-label">zipcode</label>
+						</div>
+						<div class="col-sm-7" style="margin-top: 20px">
+							<span class="form-control">${shippingAddress.zipcode}</span>
+						</div>
+
+						<div class="col-sm-1" style="text-align: right; margin-top: 20px">
+
+						</div>
+					 </div>
+					<div class="row">
+
+						<div class="col-sm-2">
+						
+						</div>
+						<div class="col-sm-2" style="text-align: left; margin-top: 20px">
+							<label class="form-label">contact</label>
+						</div>
+						<div class="col-sm-7" style="margin-top: 20px">
+							<span class="form-control">${shippingAddress.contact}</span>
+						</div>
+
+						<div class="col-sm-1" style="text-align: right; margin-top: 20px">
+
+						</div>
+					 </div>
+					<div class="row">
+
+						<div class="col-sm-2">
+						
+						</div>
+						<div class="col-sm-2" style="text-align: left; margin-top: 20px">
+							<label class="form-label">email</label>
+						</div>
+						<div class="col-sm-7" style="margin-top: 20px">
+							<span class="form-control">${shippingAddress.email}</span>
+						</div>
+
+						<div class="col-sm-1" style="text-align: right; margin-top: 20px">
+
+						</div>
+					 </div>
+					
+				
+			 <div class="row">
+					 	<div class="col-sm-4">
+						
+						</div>
+						<div class="col-sm-2" style="text-align: left; margin-top: 20px">
+							<a href="updateAddress"><input class="btn btn-success" type="submit" value="Update"/></a>
+						</div>
+						<div class="col-sm-2" style="margin-top: 20px">
+							
+							<a data-toggle="pill" id="next" href="#paymentPill"><input class="btn btn-success" type="submit" value="Next"/></a>
+						</div>
+
+						<div class="col-sm-4" style="text-align: right; margin-top: 20px">
+						
+						</div>
+					 </div>
+					  
+					 
+				</div>
+				<div class="col-sm-1">
+					
 				</div>
 				
-					
-					</div>
 			</div>
+			</div>
+			<div id="paymentPill" class="row tab-pane fade">
+					
+				<div class="row">
+				<div class="col-sm-1"></div>
+
+				<div class="col-sm-10 middleRow" style="background-color: white;">
+					${msg}
+					<div class="row">
+						<div class="col-sm-1"></div>
+						<div class="col-sm-10">
+							<h2 style="color: green;">Choose Your Payment Method</h2>
+						</div>
+						<div class="col-sm-1"></div>
+					</div>
+
+					<div class="row">
+
+						<div class="col-sm-1"></div>
+						<div class="col-sm-10"></div>
+						<div class="col-sm-1"></div>
+					</div>
+					<div class="row">
+						<div class="col-sm-1"></div>
+						<div class="col-sm-10">
+							<form class="form-group" action="paynow" method="post">
+								<span> <input type="radio" name="mode" value="cod"
+									id="id1" /> <label for="id1">Cash On Delivery</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<input type="radio" name="mode" value="card" id="id2" /> <label
+									for="id2">Card Payment Method</label>
+								</span> <br> <br>
+								<div id="div1">
+									<p>
+									<h3>Cash on Delivery payment method</h3>
+									</p>
+									<p>Pay with Cash When Your Order is delivered</p>
+									<input type="submit" class="btn btn-success" value="View Order And Pay" />
+								</div>
+
+								<div id="div2" style="backgroud-color: #fffffff">
+									<input class="form-control" type="text" name="cardnumber"
+										placeholder="enter your card number"><span class="err"><form:errors
+											path="payment.cardnumber"></form:errors></span><br> <input
+										class="form-control" type="text" name="nameoncard"
+										placeholder="enter your name on card">
+
+
+									<div class="input-group">
+										<input class="form-control" type="text" name="cvv"
+											placeholder="CVV" style="width: 50%; margin-top: 5px;" /> <span><i
+											class="fa fa-credit-card-alt fa-3x" aria-hidden="true"
+											style="color: #007acc; padding-left: 20px; padding-bottom: 20px;"></i></span>
+									</div>
+									<span class="err"><form:errors path="payment.cvv"></form:errors></span>
+									<br> <input type="submit" class="btn btn-success"
+										value="View Order And Pay" />
+								</div>
+							</form>
+
+						</div>
+						<div class="col-sm-1"></div>
+
+					</div>
+
+				</div>
+				<div class="col-sm-1"></div>
+				</div>
+			</div>
+			</div>
+
 		</div>
-			
-			</div>	
-						
+
 	</div>
-				
-<jsp:include page="footer.jsp" />
-	
-	<script type="text/javascript">
-	 var app = angular.module("myApp",[]);
-	 /* app.controller('productController',function($scope){
-		 
-		
-		 
-		 $scope.productList = ${products}
-		 
-	 }); */
+
+	<jsp:include page="footer.jsp" />
+
+
+<script>
+     
+
+
+	  $(document).ready(function()
+	  {
+		  $("#div1").hide();
+		  $("#div2").hide();
+		/*   $("input:radio[name=card]").click(function(){
+			   
+		      $("#div2").hide();
+		      }); */
+		  $("#id2").click(function(){
+			   
+			  $("#div1").hide();
+		      $("#div2").show();
+		      
+		      });
+		  $("#id1").click(function(){
+			   
+		      $("#div2").hide();
+		      $("#div1").show();
+		      });
+		  
+		  $("#next").click(function(){
+			 $("#paymentHead").attr('class','active'); 
+			 $("#addressHead").attr('class','');
+		  });
+	  });
 	 
+	   
+	 
+</script>
 
-	</script>
-	
-	
 </body>
-</html> 
-
-
-
-
-
-
+</html>
 

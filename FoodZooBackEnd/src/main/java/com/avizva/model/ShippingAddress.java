@@ -3,19 +3,57 @@ package com.avizva.model;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import org.springframework.stereotype.Component;
+/**
+ * 
+ * @author Parul.Sharma
+ * model class for shipping address
+ * entity makes the table forthe same class
+ * component will make the bean of model class
+ * 
+ *
+ */
 
 @Entity
+@Component
 public class ShippingAddress {
+	
+	/**
+	 * username is the unique name which is already present in the session if the user is logged in
+	 */
 	@Id
 	private String username;
-	
+	/**
+	 * address1 is the address that user entered in line 1
+	 */
 	private String address1;
+	/**
+	 * fullname is the name that user entered while placing the order
+	 */
 	private String fullname;
+	/**
+	 * email of the user
+	 */
 	private String email;
+	/**
+	 * address2  is the address on line2
+	 */
 	private String address2;
+	/**
+	 * city of the user
+	 */
 	private String city;
+	/**
+	 * zipcode of the user address
+	 */
 	private String zipcode;
+	/**
+	 * country where user resides in
+	 */
 	private String country;
+	/**
+	 * contact of the user
+	 */
 	private String contact;
 	public String getUsername() {
 		return username;

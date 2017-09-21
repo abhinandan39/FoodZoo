@@ -37,10 +37,7 @@
     background: #fbfbfb;
     margin-left:30px;
 }
-.panel.panel--styled:hover{
-	background: #737373;
-	color: #ffffff;
-}
+
 .panelTop {
     padding: 10px;
 }
@@ -83,19 +80,9 @@ span.itemPrice {
 	opacity: 1;
 	backface-visibility: hidden;
 	margin-bottom: 30px;
-	margin-top: 10px;
+	margin-top: 5px;
 }
 
-.img-hover img:hover {
-	-webkit-backface-visibility: hidden;
-	backface-visibility: hidden;
-	-webkit-transform: translateZ(0) scale(1.40); /* Safari and Chrome */
-	-moz-transform: scale(1.40); /* Firefox */
-	-ms-transform: scale(1.40); /* IE 9 */
-	-o-transform: translatZ(0) scale(1.40); /* Opera */
-	transform: translatZ(0) scale(1.40);
-	opacity: 0.9;
-}
 .btn{
 	display:block;
 }
@@ -129,6 +116,23 @@ span.itemPrice {
 	
 	{{listQuantity}} -->
 <jsp:include page="header.jsp"></jsp:include>
+<c:if test="${checkUpdate == 'false'}">
+		<div class="row" id="displaymessage">
+			<div class="col-md-3"></div>
+			<div class="col-md-6">
+				<div class="alert alert-dismissable alert-danger">
+					 
+					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+						×
+					</button>
+					<p>
+						No more Product Available
+					</p> 
+				</div>
+			</div>
+			<div class="col-md-3"></div>
+		</div>
+	</c:if>
 	<div class="container">
 	<div class="jumbotron">
     <h2>Your Cart <span class="glyphicon glyphicon-shopping-cart"></span></h2> 
@@ -136,9 +140,19 @@ span.itemPrice {
   	</div>
 		<div class="row">
 			<div class="col-sm-3" class="topClass"
-				ng-repeat="product in productList">
+				ng-repeat="(i,product) in productList">
 				<div class="panel panel-default panel--styled">
+				<div class="col-md-12">
+							<div>
+				
+								<a href="deleteItem?id={{product.product_id}}"><button class="close" > x </button></a>
+								
+							</div>
+							
+
+						</div>
 					<div class="panel-body">
+						
 						<div class="col-md-12 panelTop">
 							<div class="col-md-12 img-hover">
 								<img src="${images}/productOne.jpg" class="img img-rounded"
@@ -150,10 +164,15 @@ span.itemPrice {
 						</div>
 						
 							<div class="col-sm-12 panelBottom">
-								<div class="col-sm-12 text-center">
+								<div class="col-sm-12">
 									<p style="font-size: 15px; height: 4.0em;">{{product.product_name}}</p>
-									Quantity<p style="font-size: 13px; height: 1.5em;">{{product.quantity}}</p>
-									Price: <p style="font-size: 15px; height: 1.0em;">{{product.price}}</p>
+									Quantity
+									<input style="width: 30%;" type="number" ng-value="{{product.quantity}}" ng-model="quant[i]" />
+									
+									Price: {{product.price }} <p style="font-size: 15px; height: 1.0em;"></p>
+								</div>
+								<div class="col-sm-12 text-center">
+									<a href="updateItem?id={{product.product_id}}&updatedValue={{quant[i]}}"><button class="btn btn-primary">Update</button></a>
 								</div>
 
 							</div>
@@ -162,7 +181,7 @@ span.itemPrice {
 							
 							<div class="col-sm-12">
 								<h6>
-									Total Price <span class="itemPrice">Rs: {{product.price * product.quantity}}</span>
+									Total Price <span class="itemPrice">Rs: {{product.price * quant[i]}}</span>
 								</h6>
 							</div>
 							
@@ -186,10 +205,12 @@ span.itemPrice {
 	
 	<jsp:include page="footer.jsp" />
 	<script type="text/javascript">
+	$("#displaymessage").delay(3000).hide('slow');
 		var app = angular.module("myApp", []);
 		app.controller('cartController', function($scope) {
 
 			$scope.listQuantity = ${quantity}
+			$scope.quant = $scope.listQuantity
 			$scope.productList = ${productList}
 			$scope.totalAmount = ${total}
 			for(i=0;i<$scope.productList.length;i++){

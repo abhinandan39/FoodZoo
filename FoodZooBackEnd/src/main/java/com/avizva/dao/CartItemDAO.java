@@ -44,13 +44,15 @@ public interface CartItemDAO {
 	 * @param cartitem
 	 * @return list of CartItem
 	 */
-	public List<CartItem> viewCartItems(CartItem cartitem);
+	public List<CartItem> viewCartItems();
 	
 	
 	public List<CartItem> viewCartItemsByUser(String user_name);
 	
 	public float getTotalPrice(List<CartItem> cartitems,String user_name);
 	
-	public List<CartItem> viewCartItemByProductId(String product_id);
+
+	public List<CartItem> viewCartItemByProductIdAndUser(String product_id, String username);
+	
 
 }

@@ -9,24 +9,41 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.stereotype.Component;
 
-
+/**
+ *  @author Abhinandan.Gupta
+ *  @author Priyanshi.Tiwari
+ *  @author Parul.Sharma
+ *  This CartItem class is a model class for managing cart item related informations.
+ */
 @Component
 @Entity
 public class CartItem {
 	
+	/**
+	 * cart_item_id primary key that is the id for cart item
+	 */
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int cart_item_id;
-	
+	/**
+	 * product id for the product which is being ordered
+	 */
 	@NotEmpty
 	private String product_id;
-	
+	/**
+	 * username unique name that is already saved in the database
+	 */
 	@NotEmpty
 	private String user_name;
 	
+	/**
+	 * price for the price of the product
+	 */
 	@NotNull
 	private float price;
-	
+	/**
+	 * cart_item quantity for checking the quantity of the items present in the cart
+	 */
 	@NotNull
 	private int cartitem_quantity;
 	
