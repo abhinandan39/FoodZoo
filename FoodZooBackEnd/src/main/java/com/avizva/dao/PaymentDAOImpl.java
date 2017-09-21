@@ -8,13 +8,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.avizva.model.Payment;
-import com.avizva.service.CategoryServiceDaoImpl;
+
+import com.avizva.service.CategoryServiceImpl;
+
+
 /**
  * 
  * @author Parul.Sharma
  * repository annotation makes the bean of impl class
  *
  */
+
 @Repository
 public class PaymentDAOImpl implements PaymentDAO {
 /**

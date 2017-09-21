@@ -10,9 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.avizva.model.ShippingAddress;
 import com.avizva.model.Users;
-import com.avizva.service.ServiceDAOImpl;
-/**
- * 
+
+
+/** 
  * @author Parul.Sharma
  * reposiory annotation makes bean of impl class
  *
@@ -22,7 +22,8 @@ public class ShippingAddressDAOImpl {
 	/**
 	 * keeps the log of all the transactions or things executed
 	 */
-	Logger logger=Logger.getLogger(ServiceDAOImpl.class);
+	Logger logger=Logger.getLogger(ShippingAddressDAOImpl.class);
+
 	@Autowired
 	SessionFactory sessionFactory;
 

@@ -19,11 +19,14 @@ import com.avizva.model.Users;
  *
  */
 @Service
-public class ShippingAddressServiceImpl {
+public class ShippingAddressServiceImpl implements ShippingAddressService {
+
+	
 	/**
 	 * keeps track of all transactions
 	 */
-	Logger logger = Logger.getLogger(ServiceDAOImpl.class);
+	Logger logger = Logger.getLogger(ShippingAddressServiceImpl.class);
+
 	@Autowired
 	SessionFactory sessionFactory;
 

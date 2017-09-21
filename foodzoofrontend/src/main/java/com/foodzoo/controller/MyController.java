@@ -31,10 +31,10 @@ import com.avizva.model.ShippingAddress;
 import com.avizva.model.Suppliers;
 import com.avizva.model.Users;
 import com.avizva.service.CartItemServiceImpl;
-import com.avizva.service.CategoryServiceDAO;
-import com.avizva.service.ProductServiceDAO;
-import com.avizva.service.ServiceDAO;
-import com.avizva.service.SupplierServiceDAO;
+import com.avizva.service.CategoryService;
+import com.avizva.service.ProductService;
+import com.avizva.service.UserService;
+import com.avizva.service.SupplierService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -48,18 +48,18 @@ public class MyController {
 	Logger logger = Logger.getLogger(MyController.class);
 
 	@Autowired
-	ServiceDAO serviceDao;
+	UserService serviceDao;
 	@Autowired
-	CategoryServiceDAO categoryServiceDao;
+	CategoryService categoryServiceDao;
 	@Autowired
-	SupplierServiceDAO supplierServiceDao;
+	SupplierService supplierServiceDao;
 
 	
 	@Autowired(required=false)
 	ServletContext servletContext;
 
 	@Autowired
-	ProductServiceDAO productServiceDao;
+	ProductService productServiceDao;
 	@Autowired
 	CartItemServiceImpl cartItemService;
 	

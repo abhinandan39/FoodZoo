@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.avizva.model.ShippingAddress;
 import com.avizva.model.Users;
-import com.avizva.service.ServiceDAO;
+import com.avizva.service.UserService;
 
 import com.avizva.service.ShippingAddressServiceImpl;
 
@@ -23,7 +23,7 @@ public class ShippingAddressController {
 	Logger logger = Logger.getLogger(MyController.class);
 
 	@Autowired
-	ServiceDAO serviceDao;
+	UserService serviceDao;
 	@Autowired 
 	ShippingAddressServiceImpl shippingAddressService;
 	@RequestMapping("/checkout")
