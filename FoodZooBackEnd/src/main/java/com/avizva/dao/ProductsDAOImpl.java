@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import com.avizva.model.Categories;
 import com.avizva.model.Products;
-import com.avizva.service.CategoryServiceDaoImpl;
+import com.avizva.service.CategoryServiceImpl;
 
 @Repository
 public class ProductsDAOImpl implements ProductsDAO {
@@ -22,7 +22,7 @@ public class ProductsDAOImpl implements ProductsDAO {
 	 * for keeping the log of this class
 	 */
 	
-	Logger logger=Logger.getLogger(CategoryServiceDaoImpl.class);
+	Logger logger=Logger.getLogger(CategoryServiceImpl.class);
 
 	@Autowired
 	SessionFactory sessionFactory;

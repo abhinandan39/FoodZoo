@@ -15,7 +15,7 @@ import com.avizva.model.Users;
 
 @Service
 public class ShippingAddressServiceImpl {
-	Logger logger = Logger.getLogger(ServiceDAOImpl.class);
+	Logger logger = Logger.getLogger(UserServiceImpl.class);
 	@Autowired
 	SessionFactory sessionFactory;
 

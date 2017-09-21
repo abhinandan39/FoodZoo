@@ -17,9 +17,9 @@ import com.avizva.model.CartItem;
 import com.avizva.model.Products;
 import com.avizva.service.CartItemService;
 import com.avizva.service.CartItemServiceImpl;
-import com.avizva.service.CategoryServiceDAO;
-import com.avizva.service.ProductServiceDAO;
-import com.avizva.service.ServiceDAO;
+import com.avizva.service.CategoryService;
+import com.avizva.service.ProductService;
+import com.avizva.service.UserService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -45,11 +45,11 @@ public class CartController {
 	 */
 	
 	@Autowired
-	ServiceDAO serviceDao;
+	UserService serviceDao;
 	@Autowired
-	ProductServiceDAO productServiceDao;
+	ProductService productServiceDao;
 	@Autowired
-	CategoryServiceDAO categoryServiceDao;
+	CategoryService categoryServiceDao;
 	@Autowired
 	CartItemService cartItemService;
 

@@ -102,17 +102,17 @@
 								  </div>  
 								  <div class="modal-body">
 								  <form id="product_form" class="form-group" action="saveproduct"  enctype="multipart/form-data" method="post">
-								      <input class="form-control" type="text" name="product_id" placeholder="Enter Product ID" id="product_id"/><br>
-								  	  <input class="form-control" type="text" name="product_name" placeholder="Enter Product Name" id="product_name"/><br>
-								      <input class="form-control" type="text" name="price" placeholder="Enter Product Price" id="price"/><br>
-								      <input class="form-control" type="text" name="description" placeholder="Enter Product Description" id="description"/><br>
-								      <input class="form-control" type="text" name="quantity"placeholder="Enter Product Quantity" id="quantity"/><br>
-								      <select class="form-control" name="category_name" id="categoryselect">
+								      <input class="form-control" type="text" name="product_id" placeholder="Enter Product ID" id="product_id" required/><br>
+								  	  <input class="form-control" type="text" name="product_name" placeholder="Enter Product Name" id="product_name" required/><br>
+								      <input class="form-control" type="text" name="price" placeholder="Enter Product Price" id="price" required/><br>
+								      <input class="form-control" type="text" name="description" placeholder="Enter Product Description" id="description" required/><br>
+								      <input class="form-control" type="text" name="quantity"placeholder="Enter Product Quantity" id="quantity" required/><br>
+								      <select class="form-control" name="category_name" id="categoryselect" required>
 								      <c:forEach var="x" items="${categorieslist}">
 								      <option><c:out value="${x.category_name}"></c:out></option>
 								      </c:forEach>
 								      </select><br>
-								       <select class="form-control" name="supplier_name" id="supplierselect">
+								       <select class="form-control" name="supplier_name" id="supplierselect" required>
 								      <c:forEach var="x" items="${supplierslist}">
 								      <option><c:out value="${x.supplier_name}"></c:out></option>
 								      </c:forEach>
@@ -167,6 +167,8 @@
 		document.getElementById('product_button').setAttribute("value","Update Product");
 		document.getElementById('product_form').setAttribute("action","updateproduct");
 		document.getElementById('product_id').setAttribute('value',id);
+		document.getElementById('product_id').setAttribute("disabled","true");
+	
 		document.getElementById('product_name').setAttribute('value',name);
 		document.getElementById('price').setAttribute('value',price);
 		document.getElementById('description').setAttribute('value',description);

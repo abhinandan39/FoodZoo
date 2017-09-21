@@ -15,9 +15,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.avizva.model.Categories;
 import com.avizva.model.Suppliers;
-import com.avizva.service.CategoryServiceDAO;
-import com.avizva.service.ServiceDAO;
-import com.avizva.service.SupplierServiceDAO;
+import com.avizva.service.CategoryService;
+import com.avizva.service.UserService;
+import com.avizva.service.SupplierService;
 
 /**
  * @author Priyanshi.Tiwari
@@ -39,16 +39,16 @@ public class CategoryController {
 	 */
 
 	@Autowired
-	ServiceDAO serviceDao;
+	UserService serviceDao;
 
 	@Autowired
-	SupplierServiceDAO supplierServiceDao;
+	SupplierService supplierServiceDao;
 
 	@Autowired(required = false)
 	ServletContext servletContext;
 
 	@Autowired
-	CategoryServiceDAO categoryServiceDao;
+	CategoryService categoryServiceDao;
 
 	/**
 	 * logger is used to print the logs on console. It is an instance of class

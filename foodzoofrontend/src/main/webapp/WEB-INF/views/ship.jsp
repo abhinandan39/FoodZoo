@@ -112,9 +112,86 @@ span.itemDesc {
     background-color: #3e9840 !important;
 }
 
+
+
+input[type=radio] {
+  position: absolute;
+  visibility: hidden;
+  display: none;
+}
+
+label {
+  color: lighten($bg,40%);
+  display: inline-block;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 5px 20px;
+}
+
+input[type=radio]:checked + label{
+  color: #ffffff;
+  background:#989898;
+}
+
+label + input[type=radio] + label {
+  border-left: solid $borderWidth $fg;
+}
+.radio-group {
+  border: solid $borderWidth $fg;
+  display: inline-block;
+  margin: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+
+
 </style>
+
+<script type="text/javascript">
+function validate()
+{
+	console.log("hey!!");
+	var x=document.getElementById("cvv").value;
+	var y=document.getElementById("cardnumber").value;
+	  if (y.length!=16|| isNaN(y)) 
+		{
+	        text = "please enter 16 digit card number";
+	        document.getElementById("error1").innerHTML = text;
+	      
+	        return false;
+		} 
+	  else
+		  {
+		  document.getElementById("error1").innerHTML ="";
+		  }
+		
+ 	  if (x.length!=3 || isNaN(x)) 
+	 {
+        text = "please enter 3 digit cvv number";
+        document.getElementById("error2").innerHTML = text;
+        return false;
+
+	 } 
+ 	  else
+ 		  {
+ 		  
+		  document.getElementById("error1").innerHTML ="";
+
+ 		  
+ 		  }
+	
+	
+
+	 return true; 
+	 
+}
+ 
+
+
+</script>
 </head>
-<body ng-app="myApp">
+<body>
 
 	<jsp:include page="header.jsp"></jsp:include>
 
@@ -289,7 +366,7 @@ span.itemDesc {
 					<div class="row">
 						<div class="col-sm-1"></div>
 						<div class="col-sm-10">
-							<h2 style="color: green;">Choose Your Payment Method</h2>
+							<h2 style="color: #66c2ff; text-align:center;">Choose Your Payment Method</h2>
 						</div>
 						<div class="col-sm-1"></div>
 					</div>
@@ -303,37 +380,40 @@ span.itemDesc {
 					<div class="row">
 						<div class="col-sm-1"></div>
 						<div class="col-sm-10">
-							<form class="form-group" action="paynow" method="post">
+							<form id="paymentform" class="form-group" action="paynow" method="post" style="margin-top:20px;" onsubmit="return validate()">
 								<span> <input type="radio" name="mode" value="cod"
-									id="id1" /> <label for="id1">Cash On Delivery</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									<input type="radio" name="mode" value="card" id="id2" /> <label
+									id="id1" checked/> <label for="id1">Cash On Delivery</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<input type="radio" name="mode" value="card" id="id2" checked/> <label
 									for="id2">Card Payment Method</label>
 								</span> <br> <br>
-								<div id="div1">
-									<p>
-									<h3>Cash on Delivery payment method</h3>
-									</p>
-									<p>Pay with Cash When Your Order is delivered</p>
-									<input type="submit" class="btn btn-success" value="View Order And Pay" />
+								<div id="div1" style="color:gray">
+								
+									<h4>Cash On Delivery</h4>
+										<p>Pay with Cash When Your Order is delivered<br>
+									NOTE: All authorised notes are accepted, except Rs.500 (old)</p>
+									
+									<input id="codbutton" type="submit" class="btn btn-success" value="View Order And Pay" style="margin-top:20px; margin-bottom:20px;" formnovalidate/>
 								</div>
 
 								<div id="div2" style="backgroud-color: #fffffff">
-									<input class="form-control" type="text" name="cardnumber"
-										placeholder="enter your card number"><span class="err"><form:errors
-											path="payment.cardnumber"></form:errors></span><br> <input
-										class="form-control" type="text" name="nameoncard"
-										placeholder="enter your name on card">
+								     <span id="error1" style="color:red;"></span> 
+									<input class="form-control" type="text"  id="cardnumber" name="cardnumber"
+										placeholder="enter your card number" required><br>
+									<input class="form-control" type="text" name="nameoncard"
+										placeholder="enter your name on card" required><br>
 
-
+                                 
 									<div class="input-group">
-										<input class="form-control" type="text" name="cvv"
-											placeholder="CVV" style="width: 50%; margin-top: 5px;" /> <span><i
+									     <span id="error2" style="color:red;"></span>   
+										<input class="form-control" type="text" name="cvv" id="cvv"
+											placeholder="CVV" style="width: 50%; margin-top: 5px;" required/> <span><i
 											class="fa fa-credit-card-alt fa-3x" aria-hidden="true"
 											style="color: #007acc; padding-left: 20px; padding-bottom: 20px;"></i></span>
+											
 									</div>
-									<span class="err"><form:errors path="payment.cvv"></form:errors></span>
+									
 									<br> <input type="submit" class="btn btn-success"
-										value="View Order And Pay" />
+										value="View Order And Pay" id="cardbutton" />
 								</div>
 							</form>
 
@@ -361,6 +441,8 @@ span.itemDesc {
 
 	  $(document).ready(function()
 	  {
+		  
+		  
 		  $("#div1").hide();
 		  $("#div2").hide();
 		/*   $("input:radio[name=card]").click(function(){
@@ -383,10 +465,14 @@ span.itemDesc {
 			 $("#paymentHead").attr('class','active'); 
 			 $("#addressHead").attr('class','');
 		  });
+		  
+		  
+		 
+		    
+		  
 	  });
 	 
-	   
-	 
+
 </script>
 
 </body>

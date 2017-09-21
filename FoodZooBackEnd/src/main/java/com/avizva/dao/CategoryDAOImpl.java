@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.avizva.model.Categories;
-import com.avizva.service.CategoryServiceDaoImpl;
+import com.avizva.service.CategoryServiceImpl;
 
 @Repository
 public class CategoryDAOImpl implements CategoryDAO{
@@ -20,7 +20,7 @@ public class CategoryDAOImpl implements CategoryDAO{
 	 * for keeping the log of this class
 	 */
 	
-	Logger logger=Logger.getLogger(CategoryServiceDaoImpl.class);
+	Logger logger=Logger.getLogger(CategoryServiceImpl.class);
 
 	@Autowired
 	SessionFactory sessionFactory;
