@@ -49,10 +49,6 @@
 	  {
 		  $("#div1").hide();
 		  $("#div2").hide();
-		/*   $("input:radio[name=card]").click(function(){
-			   
-		      $("#div2").hide();
-		      }); */
 		  $("#id2").click(function(){
 			   
 			  $("#div1").hide();
@@ -66,16 +62,11 @@
 		      });
 		  
 	  });
-	 
-	   
-	 
 </script>
 </head>
 <body>
 <jsp:include page="header.jsp"></jsp:include>
-
-	
-     <div class="row">
+   <div class="row">
      <div class="col-sm-3"></div>
      
      <div class="col-sm-6" style="background-color:white ;">
@@ -113,30 +104,29 @@
 								      </div>
 								      
 								   <div id="div2" style="backgroud-color:#fffffff">
-								   <input class="form-control" type="text" name="cardnumber" placeholder="enter your card number"><span class="err"><form:errors
-									path="payment.cardnumber"></form:errors></span><br>
+								   <input class="form-control" type="text" name="cardnumber" placeholder="enter your card number"><span class="err">
 									<input class="form-control" type="text" name="nameoncard" placeholder="enter your name on card">
 						
 								
 								    <div class="input-group">
 									<input class="form-control" type="text" name="cvv" placeholder="CVV" style="width:50%; margin-top:5px;"/>
 									<span><i class="fa fa-credit-card-alt fa-3x" aria-hidden="true" style="color:#007acc; padding-left:20px; padding-bottom:20px;"></i></span>
-									</div><span class="err"><form:errors
-									path="payment.cvv"></form:errors></span>
+									</div>
 									<br>
 									<input type="submit" class="btn btn-success" value="Pay Now"/>
 									</div> 
 								</form> 
-			
 						</div>
-						<div class="col-sm-1"></div>
+
+						<div class=col-sm-1"></div>
+
+						
 					
+
                   </div>
-    
      	</div>	
      	<div class="col-sm-3"></div>
 		</div>
   	<jsp:include page="footer.jsp"></jsp:include>
-	
  </body>
 </html>

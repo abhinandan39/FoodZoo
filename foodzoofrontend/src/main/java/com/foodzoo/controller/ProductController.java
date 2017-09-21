@@ -1,5 +1,8 @@
 package com.foodzoo.controller;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -11,6 +14,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.avizva.model.Categories;
@@ -60,6 +66,7 @@ public class ProductController {
 	 */
 	
 	Logger logger=Logger.getLogger(MyController.class);
+	private ModelAndView image;
 	
 	
 	
@@ -107,35 +114,48 @@ public class ProductController {
 	
 	
 	
-	
-	
-	
-	@RequestMapping("/saveproduct")
-	public ModelAndView saveproducts(@Valid @ModelAttribute Products newproduct,BindingResult result)
+	@RequestMapping(value="/saveproduct", method=RequestMethod.POST)
+	 public ModelAndView saveproducts(@Valid @ModelAttribute Products newproduct,@RequestParam("file") MultipartFile image, BindingResult result)
 	{
-		logger.info("--------"+newproduct+"---------------");
-		if(result.hasErrors())
-		{
-			logger.info("---------error in binding---------");
-			return new ModelAndView("manageproducts");
-		}
-		//newproduct.getImage_file();
-		logger.info("------------inside saveproduct method-----------");
+	 logger.info("--------"+newproduct+"---------------");
+	 
+	 logger.info("----inside saveproduct------");
+	 String imgpath="/Users/Priyanshi.Tiwari/Desktop/FoodzooUp/ImageUpload/";
+	 String file_info=imgpath+newproduct.getProduct_id()+".jpg";
+	 
+	 File f=new File(file_info);
+	 if(!image.isEmpty()){
+	 try{
+	 byte buff[]=image.getBytes();
+	 BufferedOutputStream bs=new BufferedOutputStream(new FileOutputStream(f));
+	 bs.write(buff);
+	 bs.close();
+	 }
+	 catch(Exception e){
+	 logger.info("Exception");
+	 }
+	 }
+	 logger.info("--------"+newproduct+"---------------");
+	if(result.hasErrors())
+	 {
+	 logger.info("---------error in binding---------");
+	 return new ModelAndView("manageproducts");
+	 }
+	 //newproduct.getImage_file();
+	 logger.info("------------inside saveproduct method-----------");
+	 if(productServiceDao.saveProductService(newproduct))
+	 {
+	 logger.info("--------saveproduct method call complete data is saved----------");
+	 return new ModelAndView("redirect:/manageProduct");
+	 }
+	 else
+	 {
+	 logger.info("--------saveproduct method call is not completed data is not saved----------");
+	 
+	 return new ModelAndView("manageproducts").addObject("msg","data is not saved");
+	 }
+	 }
 		
-		
-		if(productServiceDao.saveProductService(newproduct))
-		{
-			logger.info("--------saveproduct method call complete data is saved----------");
-			return new ModelAndView("redirect:/manageProduct");
-		}
-		else
-		{
-			logger.info("--------saveproduct method call is not completed data is not saved----------");
-
-			return new ModelAndView("manageproducts").addObject("msg","data is not saved");
-		}
-	}
-	
 	
 	
 	/**
@@ -158,6 +178,8 @@ public class ProductController {
 		return new ModelAndView("redirect:/manageProduct");
 		
 	}
+		
+	
 	
 	/**
 	 * deleteproduct method is used to delete the product by the id obtained from manageproducts.jsp file path variable and It will be called

@@ -2,12 +2,15 @@ package com.avizva.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.UniqueConstraint;
 
 import org.springframework.stereotype.Component;
 
@@ -20,14 +23,17 @@ public class UserOrder {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int order_id;
 	
-	@OneToMany
+	@Column(unique=true)
+	private String orderNumber;
+	
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<CartItem> cartList;
 	
-	@OneToOne
+	
+	@OneToOne(cascade = CascadeType.ALL)
 	private ShippingAddress address;
 	
-	@OneToOne
-	private Payment payment;
+	private String paymentMode;
 	
 	private String username;
 
@@ -55,13 +61,6 @@ public class UserOrder {
 		this.address = address;
 	}
 
-	public Payment getPayment() {
-		return payment;
-	}
-
-	public void setPayment(Payment payment) {
-		this.payment = payment;
-	}
 
 	public String getUsername() {
 		return username;
@@ -70,6 +69,24 @@ public class UserOrder {
 	public void setUsername(String username) {
 		this.username = username;
 	}
+
+	public String getOrderNumber() {
+		return orderNumber;
+	}
+
+	public void setOrderNumber(String orderNumber) {
+		this.orderNumber = orderNumber;
+	}
+
+	public String getPaymentMode() {
+		return paymentMode;
+	}
+
+	public void setPaymentMode(String paymentMode) {
+		this.paymentMode = paymentMode;
+	}
+	
+	
 	
 	
 }

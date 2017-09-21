@@ -6,4 +6,5 @@ public interface PaymentDAO {
 	
 	public boolean savePayment(Payment newpayment);
 
+	public Payment viewPayment(String id);
 }

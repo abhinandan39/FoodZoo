@@ -5,4 +5,6 @@ import com.avizva.model.Payment;
 public interface PaymentService {
 
 	public boolean savePaymentService(Payment newpayment);
+	
+	public Payment viewPaymentService(String id);
 }

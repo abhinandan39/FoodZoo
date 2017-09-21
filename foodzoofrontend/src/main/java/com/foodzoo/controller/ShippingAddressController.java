@@ -33,7 +33,7 @@ public class ShippingAddressController {
 		String username = (String)session.getAttribute("sessionusername");
 	
 		if(shippingAddressService.existShippingAddressService(username)){
-			ShippingAddress address=shippingAddressService.viewUser(username);
+			ShippingAddress address=shippingAddressService.viewAddress(username);
 			logger.info("---user already exists-----");
 			return new ModelAndView("ship").addObject("shippingAddress", address);
 		}
@@ -49,7 +49,7 @@ public class ShippingAddressController {
 
 		HttpSession session = request.getSession();
 		String username = (String) session.getAttribute("sessionusername");
-		ShippingAddress address = shippingAddressService.viewUser(username);
+		ShippingAddress address = shippingAddressService.viewAddress(username);
 		System.out.println("Inside profile " + address);
 		return new ModelAndView("UpdateAddress", "command", address);
 	}

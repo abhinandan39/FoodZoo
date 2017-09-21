@@ -17,8 +17,6 @@ public class Payment {
 	private int paymentid;
 	private String mode;
 	private String cardnumber;
-	
-
 	private String nameoncard;
 	
 	

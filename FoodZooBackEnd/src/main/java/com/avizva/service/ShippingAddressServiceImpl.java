@@ -14,10 +14,13 @@ import com.avizva.model.ShippingAddress;
 import com.avizva.model.Users;
 
 @Service
-public class ShippingAddressServiceImpl {
+public class ShippingAddressServiceImpl implements ShippingAddressService {
 	Logger logger = Logger.getLogger(ServiceDAOImpl.class);
+	
 	@Autowired
 	SessionFactory sessionFactory;
+	@Autowired
+	ShippingAddressDAOImpl shippingAddressDAOImpl;
 
 	/**
 	 * getSession method is used to open/create a session from the auto-wired
@@ -29,8 +32,7 @@ public class ShippingAddressServiceImpl {
 		return sessionFactory.openSession();
 	}
 
-	@Autowired
-	ShippingAddressDAOImpl shippingAddressDAOImpl;
+	
 
 	public boolean saveShippingAddressService(ShippingAddress address) {
 		
@@ -56,15 +58,9 @@ public class ShippingAddressServiceImpl {
 
 	}
 
-	public ShippingAddress viewUser(String username) {
-		Session session = null;
-		Transaction transaction = null;
-		session = getSession();
-		transaction = session.beginTransaction();
-		ShippingAddress address = session.get(ShippingAddress.class, username);
-		session.close();
+	public ShippingAddress viewAddress(String username) {
+		ShippingAddress address = shippingAddressDAOImpl.viewAddress(username);
 		return address;
-
 	}
 
 	public boolean updateAddressService(ShippingAddress address) {

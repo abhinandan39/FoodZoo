@@ -9,4 +9,6 @@ public interface ShippingAddressService {
 
 	public boolean existShippingAddressService(String username);
 
+	public ShippingAddress viewAddress(String username);
+	public boolean updateAddressService(ShippingAddress address);
 }

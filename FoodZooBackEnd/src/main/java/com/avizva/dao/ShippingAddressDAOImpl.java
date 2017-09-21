@@ -14,7 +14,7 @@ import com.avizva.model.ShippingAddress;
 import com.avizva.model.Users;
 import com.avizva.service.ServiceDAOImpl;
 @Repository
-public class ShippingAddressDAOImpl {
+public class ShippingAddressDAOImpl implements ShippingAddressDAO{
 	Logger logger=Logger.getLogger(ServiceDAOImpl.class);
 	@Autowired
 	SessionFactory sessionFactory;
@@ -105,5 +105,14 @@ public class ShippingAddressDAOImpl {
 		}
 		return flag;
 	}
+	public ShippingAddress viewAddress(String username) {
 
+		Session session = null;
+		Transaction transaction = null;
+		session = getSession();
+		transaction = session.beginTransaction();
+		ShippingAddress address = session.get(ShippingAddress.class, username);
+		session.close();
+		return address;
+	}
 }

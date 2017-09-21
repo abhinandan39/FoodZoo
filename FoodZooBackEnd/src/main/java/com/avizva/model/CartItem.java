@@ -30,6 +30,8 @@ public class CartItem {
 	@NotNull
 	private int cartitem_quantity;
 	
+	private String status;
+	
 	
 		public float getPrice() {
 		return price;
@@ -69,6 +71,16 @@ public class CartItem {
 
 	public void setUser_name(String user_name) {
 		this.user_name = user_name;
+	}
+	
+	
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	@Override
