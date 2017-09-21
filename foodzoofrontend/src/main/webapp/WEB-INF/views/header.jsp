@@ -232,7 +232,7 @@
 				</div>
 				</li>
 				</c:if>
-				<li class="nav-item ${cartactive}"><a href="viewCart">
+				<li class="nav-item ${cartactive}"><a href="viewCart?checkUpdate=true">
 				Cart
 				<span class="glyphicon glyphicon-shopping-cart"></span>  </a></li>
 				<li class="nav-item"><a href="logout"><span class="glyphicons glyphicons-log-out"></span> Logout </a></li>

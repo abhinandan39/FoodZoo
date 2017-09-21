@@ -36,16 +36,6 @@ public class ShippingAddressServiceImpl {
 		
 		if (shippingAddressDAOImpl.saveShippingAddress(address)) {
 			logger.info("---user info is saved in db-----");
-			String from = "FoodZoo";
-			String to = address.getEmail();
-			String subject = "Welcome To FoodZoo";
-			String msg = "Dear, " + address.getUsername() + "\n Thankyou for registering with FoodZoo \n"
-					+ "We hope you have a nice experience with us. \n Enjoy our food and fast service. \n "
-					+ "Thanks & Regards, \n FoodZoo";
-			ApplicationContext context = new ClassPathXmlApplicationContext("application-context.xml");
-			SendEmail mail = (SendEmail) context.getBean("sendEmail");
-			mail.sendMail(from, to, subject, msg);
-			logger.info("mail is sent to registerd user: " + address.getUsername() + "from " + from + "to " + to);
 			return true;
 		} else {
 			logger.info("---user info is not saved in db-----");

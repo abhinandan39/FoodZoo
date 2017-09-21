@@ -162,55 +162,97 @@ public class MyController {
 //		String product = (String)session.getAttribute("product_id");
 //		String check_login = (String)session.getAttribute("loginCheck");
 //		String url = (String)session.getAttribute("url");
+		
 		if(session.getAttribute("loginCheck") != null){
+			
 			logger.info("-------Not yet logged in-----");
 			CartItem cartItem = (CartItem)session.getAttribute("cartItem");
-			logger.info("-------Cart Item-----"+cartItem);
-			String databaseMethod = (String)session.getAttribute("databaseMethod");
-			System.out.println("Database Method"+databaseMethod);
+			
+//			logger.info("-------Getting Product Details-----"+cartItem);
+			String product_id = (String)(session.getAttribute("product_id"));
+			Products product = productServiceDao.viewProductByIdService(product_id);
+			int quantity = (Integer) session.getAttribute("quantity");
+//			CartItem cartItem = cartItemService.viewCartItemByProductId(product_id);
+//			String databaseMethod = (String)session.getAttribute("databaseMethod");
+			
 			session.invalidate();
+			
 			logger.info("----Data Fetched from session before login-----");
 			logger.info("-------Old Session Deleted, User session created-----");
-			session = request.getSession(true);
-			String username = request.getParameter("username");
-			Users user = serviceDao.viewUserService(username);
-			logger.info("-------Getting User Role-----");
-			String role = user.getRole();
-			session.setAttribute("sessionusername", username);
-			session.setAttribute("sessionrole", role);
-			if(databaseMethod.equals("update")){
-				cartItemService.updateCartItemService(cartItem);
+			
+			if(serviceDao.loginService(request)){
+				session = request.getSession(true);
+				String username = request.getParameter("username");
+				Users user = serviceDao.viewUserService(username);
+				logger.info("-------Getting User Role-----");
+				String role = user.getRole();
+				session.setAttribute("sessionusername", username);
+				session.setAttribute("sessionrole", role);
+				logger.info("----Role and Username set into Session------");
+				logger.info("-----Fetching Cart Item for this user and product------");
+				CartItem item = cartItemService.viewCartItemByProductIdAndUser(product_id,username);
+				
+				if(item!=null){
+					cartItem.setUser_name(username);
+					cartItem.setCart_item_id(item.getCart_item_id());
+					cartItem.setCartitem_quantity(item.getCartitem_quantity()+quantity);
+					boolean checkUpdate = cartItemService.updateCartItemService(cartItem,username);
+					if(checkUpdate){
+					}
+					else{
+						String category_name = product.getCategory_name();
+						List<Products> productList = productServiceDao.productByCategoryService(category_name);
+						Gson gSon = new GsonBuilder().create();
+						logger.info(productList);
+						String products = gSon.toJson(productList);
+						return new ModelAndView("redirect:/viewCart?checkUpdate=false");
+					}
+
+					
+				}
+				else{
+					cartItem.setUser_name(username);
+					cartItem.setCartitem_quantity(quantity);
+					session.setAttribute("databaseMethod", "save");
+					cartItemService.saveCartItemService(cartItem);
+				}
+				
+				
+				return new ModelAndView("redirect:/viewCart?checkUpdate=true");
 			}
 			else{
-				cartItemService.saveCartItemService(cartItem);
+				logger.info("----login unsucessful----");
+				return new ModelAndView("login").addObject("errormsg", "Invalid Credentials").addObject("loginactive",
+						"active");
 			}
 			
-			return new ModelAndView("redirect:/viewCart");
+			
+			
 		}
 		else{
-			logger.info("----calling loginService method to check validity-----");
-		boolean check = serviceDao.loginService(request);
-		if (check) {
-
-			logger.info("----Checking the Role of the User----");
-
-			String username = request.getParameter("username");
-			Users user = serviceDao.viewUserService(username);
-			String role = user.getRole();
-
-			logger.info("---login Successful---");
-
-			logger.info("--- Storing username and role in session---");
-			session = request.getSession(true);
-			session.setAttribute("sessionusername", username);
-			session.setAttribute("sessionrole", role);
-
-			return new ModelAndView("index", "msg", "Log In Successful").addObject("homeactive", "active");
-		} else {
-			logger.info("----login unsucessful----");
-			return new ModelAndView("login").addObject("errormsg", "Invalid Credentials").addObject("loginactive",
-					"active");
-		}
+				logger.info("----calling loginService method to check validity-----");
+			boolean check = serviceDao.loginService(request);
+			if (check) {
+	
+				logger.info("----Checking the Role of the User----");
+	
+				String username = request.getParameter("username");
+				Users user = serviceDao.viewUserService(username);
+				String role = user.getRole();
+	
+				logger.info("---login Successful---");
+	
+				logger.info("--- Storing username and role in session---");
+				session = request.getSession(true);
+				session.setAttribute("sessionusername", username);
+				session.setAttribute("sessionrole", role);
+	
+				return new ModelAndView("index", "msg", "Log In Successful").addObject("homeactive", "active");
+			} else {
+				logger.info("----login unsucessful----");
+				return new ModelAndView("login").addObject("errormsg", "Invalid Credentials").addObject("loginactive",
+						"active");
+			}
 		}
 
 	}
@@ -600,6 +642,7 @@ public class MyController {
 		String products = gSon.toJson(productList);
 		logger.info("products");
 		System.out.println(products);
+		
 		return new ModelAndView("ProductsView").addObject("products", products);
 	}
 

@@ -48,10 +48,10 @@ public class CartItemServiceImpl implements CartItemService {
 	}
 	
 	
-	public boolean updateCartItemService(CartItem cartitem) {
+	public boolean updateCartItemService(CartItem cartitem, String username) {
 	    logger.info("----inside service:upadteCartItemService method------");
 		Products products=productsDAOImpl.viewProductById(cartitem.getProduct_id());
-		List<CartItem> list = cartItemDAOImpl.viewCartItemByProductId(cartitem.getProduct_id());
+		List<CartItem> list = cartItemDAOImpl.viewCartItemByProductIdAndUser(cartitem.getProduct_id(), username);
 		if(!list.isEmpty()){
 			CartItem item = list.get(0);
 			System.out.println(cartitem.getCartitem_quantity());
@@ -73,8 +73,14 @@ public class CartItemServiceImpl implements CartItemService {
 	
 			
 			}
+			else{
+				return false;
+			}
 		}
-		return true;
+		else{
+			return false;
+		}
+		
 	}
 	
 	
@@ -139,9 +145,9 @@ public class CartItemServiceImpl implements CartItemService {
 	}
 
 
-	public CartItem viewCartItemByProductId(String product_id) {
+	public CartItem viewCartItemByProductIdAndUser(String product_id, String username) {
 		
-		List<CartItem> cartList = cartItemDAOImpl.viewCartItemByProductId(product_id);
+		List<CartItem> cartList = cartItemDAOImpl.viewCartItemByProductIdAndUser(product_id, username);
 		logger.info("-----Inside ViewCartItemByProductId");
 		if(cartList.isEmpty()){
 			return null;

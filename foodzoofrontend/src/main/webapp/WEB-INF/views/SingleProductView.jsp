@@ -151,7 +151,7 @@ font-size: 20px;
 <body ng-app="myApp" ng-controller="productController">
 
 	<jsp:include page="header.jsp"></jsp:include>
-	
+
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-12">

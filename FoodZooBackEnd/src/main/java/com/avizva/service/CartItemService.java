@@ -10,13 +10,13 @@ public interface CartItemService {
 	
 	public boolean saveCartItemService(CartItem cartitem);
 	
-	public boolean updateCartItemService(CartItem cartitem);
+	public boolean updateCartItemService(CartItem cartitem, String username);
 	
 	public boolean deleteCartItemService(CartItem cartitem);
 	
 	public CartItem viewCartItemByIdService(int cart_item_id);
 	
-	public CartItem viewCartItemByProductId(String product_id);
+	public CartItem viewCartItemByProductIdAndUser(String product_id, String username);
 	
 	public List<CartItem> viewCartItemsService(CartItem cartitem);
 	

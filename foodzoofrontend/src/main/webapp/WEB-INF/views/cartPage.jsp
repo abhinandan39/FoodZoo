@@ -116,6 +116,23 @@ span.itemPrice {
 	
 	{{listQuantity}} -->
 <jsp:include page="header.jsp"></jsp:include>
+<c:if test="${checkUpdate == 'false'}">
+		<div class="row" id="displaymessage">
+			<div class="col-md-3"></div>
+			<div class="col-md-6">
+				<div class="alert alert-dismissable alert-danger">
+					 
+					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+						×
+					</button>
+					<p>
+						No more Product Available
+					</p> 
+				</div>
+			</div>
+			<div class="col-md-3"></div>
+		</div>
+	</c:if>
 	<div class="container">
 	<div class="jumbotron">
     <h2>Your Cart <span class="glyphicon glyphicon-shopping-cart"></span></h2> 
@@ -188,10 +205,12 @@ span.itemPrice {
 	
 	<jsp:include page="footer.jsp" />
 	<script type="text/javascript">
+	$("#displaymessage").delay(3000).hide('slow');
 		var app = angular.module("myApp", []);
 		app.controller('cartController', function($scope) {
 
 			$scope.listQuantity = ${quantity}
+			$scope.quant = $scope.listQuantity
 			$scope.productList = ${productList}
 			$scope.totalAmount = ${total}
 			for(i=0;i<$scope.productList.length;i++){

@@ -70,11 +70,11 @@
 						<div class="col-sm-2" style="text-align: left; margin-top: 20px">
 							<label class="form-label">Name</label>
 						</div>
-						<div class="col-sm-5" style="margin-top: 20px">
-							<form:input path="fullname" />
+						<div class="col-sm-7" style="margin-top: 20px">
+							<form:input path="fullname" class="form-control" />
 						</div>
 
-						<div class="col-sm-3" style="text-align: right; margin-top: 20px">
+						<div class="col-sm-1" style="text-align: right; margin-top: 20px">
 
 						</div>
 					 </div>
@@ -86,11 +86,27 @@
 						<div class="col-sm-2" style="text-align: left; margin-top: 20px">
 							<label class="form-label">Address</label>
 						</div>
-						<div class="col-sm-5" style="margin-top: 20px">
-							<form:input path="address1" /><form:input path="address2" />
+						<div class="col-sm-7" style="margin-top: 20px">
+							<form:input path="address1" class="form-control" />
 						</div>
 
-						<div class="col-sm-3" style="text-align: right; margin-top: 20px">
+						<div class="col-sm-1" style="text-align: right; margin-top: 20px">
+
+						</div>
+					 </div>
+					 <div class="row">
+
+						<div class="col-sm-2">
+						
+						</div>
+						<div class="col-sm-2" style="text-align: left; margin-top: 20px">
+							<label class="form-label"></label>
+						</div>
+						<div class="col-sm-7" style="margin-top: 20px">
+							<form:input path="address2" class="form-control" />
+						</div>
+
+						<div class="col-sm-1" style="text-align: right; margin-top: 20px">
 
 						</div>
 					 </div>
@@ -102,11 +118,11 @@
 						<div class="col-sm-2" style="text-align: left; margin-top: 20px">
 							<label class="form-label">city</label>
 						</div>
-						<div class="col-sm-5" style="margin-top: 20px">
-							<form:input path="city" />
+						<div class="col-sm-7" style="margin-top: 20px">
+							<form:input path="city" class="form-control" />
 						</div>
 
-						<div class="col-sm-3" style="text-align: right; margin-top: 20px">
+						<div class="col-sm-1" style="text-align: right; margin-top: 20px">
 
 						</div>
 					 </div>
@@ -118,11 +134,11 @@
 						<div class="col-sm-2" style="text-align: left; margin-top: 20px">
 							<label class="form-label">zipcode</label>
 						</div>
-						<div class="col-sm-5" style="margin-top: 20px">
-							<form:input path="zipcode" />
+						<div class="col-sm-7" style="margin-top: 20px">
+							<form:input path="zipcode" class="form-control" />
 						</div>
 
-						<div class="col-sm-3" style="text-align: right; margin-top: 20px">
+						<div class="col-sm-1" style="text-align: right; margin-top: 20px">
 
 						</div>
 					 </div>
@@ -134,11 +150,11 @@
 						<div class="col-sm-2" style="text-align: left; margin-top: 20px">
 							<label class="form-label">contact</label>
 						</div>
-						<div class="col-sm-5" style="margin-top: 20px">
-							<form:input path="contact" />
+						<div class="col-sm-7" style="margin-top: 20px">
+							<form:input path="contact" class="form-control" />
 						</div>
 
-						<div class="col-sm-3" style="text-align: right; margin-top: 20px">
+						<div class="col-sm-1" style="text-align: right; margin-top: 20px">
 
 						</div>
 					 </div>
@@ -150,11 +166,11 @@
 						<div class="col-sm-2" style="text-align: left; margin-top: 20px">
 							<label class="form-label">email</label>
 						</div>
-						<div class="col-sm-5" style="margin-top: 20px">
-							<form:input path="email" />
+						<div class="col-sm-7" style="margin-top: 20px">
+							<form:input path="email" class="form-control" />
 						</div>
 
-						<div class="col-sm-3" style="text-align: right; margin-top: 20px">
+						<div class="col-sm-1" style="text-align: right; margin-top: 20px">
 
 						</div>
 					 </div>
@@ -164,7 +180,7 @@
 					 	<div class="col-sm-2">
 						
 						</div>
-						<div class="col-sm-2" style="text-align: left; margin-top: 20px">
+						<div class="col-sm-3" style="text-align: left; margin-top: 20px">
 							
 						</div>
 						<div class="col-sm-5" style="margin-top: 20px">
@@ -172,7 +188,7 @@
 							
 						</div>
 
-						<div class="col-sm-3" style="text-align: right; margin-top: 20px">
+						<div class="col-sm-2" style="text-align: right; margin-top: 20px">
 
 						</div>
 					 </div>
