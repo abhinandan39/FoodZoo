@@ -39,8 +39,11 @@ Your Order
 ${userOrder.username}<br>
 ${userOrder.orderNumber}<br>
 ${userOrder.paymentMode}<br>
-<c:forEach var="cartItems" items="${userOrder.cartList}">
+<c:forEach var="cartItems" items="${cartList}">
 	${cartItems}
+</c:forEach> <br>
+<c:forEach var="productItems" items="${productList}">
+	${productItems}
 </c:forEach>
 
 
