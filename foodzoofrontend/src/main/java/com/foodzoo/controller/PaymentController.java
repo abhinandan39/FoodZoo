@@ -49,13 +49,7 @@ public class PaymentController {
 		else
 			return new ModelAndView("paymentmethod").addObject("msg","payment not done");
 
-		
-		
-		
-		
-		
-		
-		
+			
 	}
 	
 }
