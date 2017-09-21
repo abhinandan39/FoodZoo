@@ -121,6 +121,8 @@ public class ProductController {
 		}
 		//newproduct.getImage_file();
 		logger.info("------------inside saveproduct method-----------");
+		
+		
 		if(productServiceDao.saveProductService(newproduct))
 		{
 			logger.info("--------saveproduct method call complete data is saved----------");

@@ -45,7 +45,7 @@ public class PaymentController {
 			
 		{
 			
-			return new ModelAndView("paymentmethod").addObject("msg","payment done");
+			return new ModelAndView("orderView").addObject("msg","payment done");
 
 		}
 		else
