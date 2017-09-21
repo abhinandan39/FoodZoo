@@ -3,25 +3,44 @@ package com.avizva.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
+import javax.persistence.Id; 
 import org.springframework.stereotype.Component;
+
+/**
+ * 
+ * @author Parul.Sharma
+ * entity class for checking the payment method
+ * entity will make the table to the corresponding class
+ *
+ */
 @Entity
 @Component
 public class Payment {
+	/**
+	 * payment id is auto generated and unique
+	 */
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int paymentid;
+	/**
+	 * mode variable is for the mode of payment whether card pr cash
+	 */
 	private String mode;
+	/**
+	 * card number is the payment is done by card then this will be used
+	 * it will have the card number of the user
+	 */
 	private String cardnumber;
 	
-
+/**
+ * name on card specifies the name of the owner of the card which is present on the card
+ */
 	private String nameoncard;
 	
-	
+	/**
+	 * cvv number mentioned on the back of the card
+	 * customer will write cvv in case of card payment
+	 */
 	
 	private String cvv;
 
