@@ -89,9 +89,9 @@ public class CartItemDAOImpl implements CartItemDAO {
 		Transaction transaction =null;
 		try{
 		session = getSession();
-	transaction = session.beginTransaction();
+		transaction = session.beginTransaction();
 		session.delete(cartitem);
-	transaction.commit();
+		transaction.commit();
 		flag = true;
 	}
 		catch(Exception e){
@@ -150,12 +150,13 @@ public class CartItemDAOImpl implements CartItemDAO {
 	}
 
 
-	public List<CartItem> viewCartItemByProductId(String product_id) {
+	public List<CartItem> viewCartItemByProductIdAndUser(String product_id, String user_name) {
 
 		List<CartItem> list=new ArrayList<CartItem>();
 		Session session = getSession();
-		Query query=session.createQuery("from CartItem where product_id=:product_id");
+		Query query=session.createQuery("from CartItem where product_id=:product_id AND user_name=:user_name");
 		query.setParameter("product_id", product_id);
+		query.setParameter("user_name", user_name);
 		list=query.list();
 	    logger.info("list:"+list);
 		return list;

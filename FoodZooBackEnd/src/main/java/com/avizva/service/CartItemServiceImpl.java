@@ -48,13 +48,14 @@ public class CartItemServiceImpl implements CartItemService {
 	}
 	
 	
-	public boolean updateCartItemService(CartItem cartitem) {
+	public boolean updateCartItemService(CartItem cartitem, String username) {
 	    logger.info("----inside service:upadteCartItemService method------");
 		Products products=productsDAOImpl.viewProductById(cartitem.getProduct_id());
-		List<CartItem> list = cartItemDAOImpl.viewCartItemByProductId(cartitem.getProduct_id());
+		List<CartItem> list = cartItemDAOImpl.viewCartItemByProductIdAndUser(cartitem.getProduct_id(), username);
 		if(!list.isEmpty()){
 			CartItem item = list.get(0);
-			if(item.getCartitem_quantity() < products.getQuantity()  && products.getQuantity()>=1)
+			System.out.println(cartitem.getCartitem_quantity());
+			if(cartitem.getCartitem_quantity() <= products.getQuantity()  && products.getQuantity()>=1)
 			{
 			if(cartItemDAOImpl.updateCartItem(cartitem))
 			{
@@ -72,8 +73,14 @@ public class CartItemServiceImpl implements CartItemService {
 	
 			
 			}
+			else{
+				return false;
+			}
 		}
-		return true;
+		else{
+			return false;
+		}
+		
 	}
 	
 	
@@ -126,10 +133,10 @@ public class CartItemServiceImpl implements CartItemService {
 
 
 
-	public List<Products> getAllProductsInCart() {
+	public List<Products> getAllProductsInCart(String username) {
 
 		CartItem cartItem = null;
-		List<CartItem> listCart = cartItemDAOImpl.viewCartItems(cartItem);
+		List<CartItem> listCart = cartItemDAOImpl.viewCartItemsByUser(username);
 		List<Products> productList = new ArrayList<Products>();
 		for(CartItem c : listCart){
 			productList.add(productsDAOImpl.viewProductById((c.getProduct_id())));
@@ -138,9 +145,9 @@ public class CartItemServiceImpl implements CartItemService {
 	}
 
 
-	public CartItem viewCartItemByProductId(String product_id) {
+	public CartItem viewCartItemByProductIdAndUser(String product_id, String username) {
 		
-		List<CartItem> cartList = cartItemDAOImpl.viewCartItemByProductId(product_id);
+		List<CartItem> cartList = cartItemDAOImpl.viewCartItemByProductIdAndUser(product_id, username);
 		logger.info("-----Inside ViewCartItemByProductId");
 		if(cartList.isEmpty()){
 			return null;

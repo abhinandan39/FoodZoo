@@ -42,7 +42,9 @@ public class PaymentController {
 			logger.info("--binding has errors---");
 		}
 		if(paymentService.savePaymentService(newpayment))
+			
 		{
+			
 			return new ModelAndView("paymentmethod").addObject("msg","payment done");
 
 		}
