@@ -380,7 +380,7 @@ function validate()
 					<div class="row">
 						<div class="col-sm-1"></div>
 						<div class="col-sm-10">
-							<form id="paymentform" class="form-group" action="paynow" method="post" style="margin-top:20px;" onsubmit="return validate()">
+							<form id="paymentform" class="form-group" action="paynow" method="post" style="margin-top:20px;">
 								<span> <input type="radio" name="mode" value="cod"
 									id="id1" checked/> <label for="id1">Cash On Delivery</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 									<input type="radio" name="mode" value="card" id="id2" checked/> <label
@@ -465,7 +465,11 @@ function validate()
 			 $("#paymentHead").attr('class','active'); 
 			 $("#addressHead").attr('class','');
 		  });
-		  
+		  $("#cardbutton").click(function(){
+			   
+			  $("#paymentform").attr('onsubmit',"return validate()"); 
+		      
+		      });
 		  
 		 
 		    
