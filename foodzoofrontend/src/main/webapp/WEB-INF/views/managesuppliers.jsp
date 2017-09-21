@@ -160,7 +160,7 @@
 		document.getElementById('supplier_button').setAttribute("value","update");
 		document.getElementById('supplier_form').setAttribute("action","supplierupdate");
 		document.getElementById('supplier_id').setAttribute('value',id);
-		document.getElementById('supplier_id').setAttribute("disabled","true");
+		document.getElementById('supplier_id').setAttribute('readonly',"readonly");
 		document.getElementById('supplier_name').setAttribute('value',name);
 		document.getElementById('supplier_description').setAttribute('value',supplier);
 		
