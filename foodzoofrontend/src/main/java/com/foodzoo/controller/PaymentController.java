@@ -14,7 +14,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.avizva.model.Payment;
 import com.avizva.service.CategoryServiceImpl;
 import com.avizva.service.PaymentService;
+/**
+ * @author Priyanshi.Tiwari
+ * @Controller it indicates that the class that is annotated is a controller.
 
+ */
 @Controller
 public class PaymentController {
 	
