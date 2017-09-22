@@ -108,6 +108,7 @@ public class ProductController {
 	 * on the action saveproduct.On successful completion of this method Product data will be saved into database
 	 * In this method saveProductService method  of class ProductServiceDAO will be called which will further call save
 	 * method of ProductDAO class.
+	 * fecthes the images from the path
 	 * @param newproduct is an object of class Products.This Object is binded with data sent by the form.
 	 * @param result is an object of class BindingResult which is used to check errors in the binding of form data to the object.
 	 * @return ModelAndView Object 

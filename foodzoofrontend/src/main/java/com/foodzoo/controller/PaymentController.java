@@ -29,17 +29,23 @@ import com.avizva.service.ProductService;
 import com.avizva.service.ShippingAddressService;
 import com.avizva.service.UserOrderService;
 /**
- * @author Priyanshi.Tiwari
- * @Controller it indicates that the class that is annotated is a controller.
-
+ * 
+ * @author Parul.Sharma
+ * controller annotation for making class as controller class
+ *
  */
 @Controller
 public class PaymentController {
-	
+	/**
+	 * for keeping track of all transactions happened or happening
+	 */
 	Logger logger=Logger.getLogger(PaymentController.class);
-	
+	/**
+	 * auotwired annotation for makig use of already existing bean instead of creating new object
+	 */
 	@Autowired
 	PaymentService paymentService;
+
 	@Autowired
 	UserOrderService userOrderService;
 	@Autowired
@@ -50,6 +56,10 @@ public class PaymentController {
 	ProductService productService; 
 	
 	
+	/**
+	 * paymentmode action to redirect the user to paymentmethod page
+	 * @return ModelAndView object with  jsp page
+	 */
 	@RequestMapping("/paymentMode")
 	public ModelAndView callPaymentMethod()
 	{
@@ -57,7 +67,13 @@ public class PaymentController {
 		return new ModelAndView("paymentmethod");
 		
 	}
-
+	/**
+	 * paynow action that calls callpaynow method 
+	 * save the payment mode selected by the user and its related information
+	 * @param newpayment
+	 * @param result
+	 * @return
+	 */
 	
 	@RequestMapping("/paynow")
 	public ModelAndView callpaynow(@Valid @ModelAttribute Payment newpayment

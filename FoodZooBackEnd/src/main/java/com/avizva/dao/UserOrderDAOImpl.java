@@ -81,6 +81,10 @@ public class UserOrderDAOImpl implements UserOrderDAO {
 
 	}
 
+	/**
+	 * viewOrderByUsername fetches all the orders corresponding to that username
+	 * returns orderlist
+	 */
 	public List<UserOrder> viewOrdersByUsername(String username) {
 		logger.info("------inside UserOrderDAOImpl : viewOrderByUsername  method------");
 		boolean flag = false;

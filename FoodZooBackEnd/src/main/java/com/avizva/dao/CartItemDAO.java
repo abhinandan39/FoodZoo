@@ -46,12 +46,26 @@ public interface CartItemDAO {
 	 */
 	public List<CartItem> viewCartItems();
 	
-	
+	/**
+	 * viewCartItemsByUser method for viewing the cart item corresponding to the username
+	 * @param user_name
+	 * @return list of cart item
+	 */
 	public List<CartItem> viewCartItemsByUser(String user_name);
-	
+	/**
+	 * getTotalPrice method for getting the total price 
+	 * @param cartitems
+	 * @param user_name
+	 * @return total price
+	 */
 	public float getTotalPrice(List<CartItem> cartitems,String user_name);
 	
-
+/**
+ * viewCartItemByProductIdAndUser method for showing the cartitem corresponding to the product id and username
+ * @param product_id
+ * @param username
+ * @return list of cartitem
+ */
 	public List<CartItem> viewCartItemByProductIdAndUser(String product_id, String username);
 	
 
