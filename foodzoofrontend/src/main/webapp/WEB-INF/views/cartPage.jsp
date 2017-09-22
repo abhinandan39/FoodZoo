@@ -155,7 +155,7 @@ span.itemPrice {
 						
 						<div class="col-md-12 panelTop">
 							<div class="col-md-12 img-hover">
-								<img src="${images}/productOne.jpg" class="img img-rounded"
+								<img src="download?productId={{product.product_id}}" class="img img-rounded"
 									width="100%" height="100px" alt="Food" />
 								
 							</div>
@@ -197,7 +197,7 @@ span.itemPrice {
 			</div>
 			<div class="col-sm-2" >
 				<a href="checkout">
-				<button class="btn btn-success"> Check Out <span class="glyphicon glyphicon-shopping-cart"></span> </button>
+				<button id="checkButton" class="btn btn-success"> Check Out <span class="glyphicon glyphicon-shopping-cart"></span> </button>
 				</a>
 			</div>
 		</div>
@@ -218,6 +218,12 @@ span.itemPrice {
 				}
 			
 		});
+		
+		if(${total} == 0){
+			$("#checkButton").attr('disabled','disabled');
+		};
+		
+		
 	</script>
 </body>
 </html>

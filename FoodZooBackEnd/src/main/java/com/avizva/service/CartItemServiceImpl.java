@@ -45,20 +45,25 @@ public class CartItemServiceImpl implements CartItemService {
 		
 		logger.info("----inside service:saveCartItemService method------");
 
-		
-			if(cartItemDAOImpl.saveCartItem(cartitem))
-			{
-				//products.setQuantity(products.getQuantity()-1);
-				//productsDAOImpl.updateProduct(products);
-				logger.info("---cartitem info is saved in db-----");
-				return true;
-			}
-			
-			else{
+			Products products=productsDAOImpl.viewProductById(cartitem.getProduct_id());
+			if(cartitem.getCartitem_quantity() <= products.getQuantity()  && products.getQuantity()>=1){
+				if(cartItemDAOImpl.saveCartItem(cartitem))
+				{
+					
+					logger.info("---cartitem info is saved in db-----");
+					return true;
+				}
 				
-				logger.info("---cartitem info is not saved in db-----");
+				else{
+					
+					logger.info("---cartitem info is not saved in db-----");
+					return false;
+				}
+			}
+			else{
 				return false;
 			}
+			
 		
 		
 		
@@ -219,10 +224,6 @@ public class CartItemServiceImpl implements CartItemService {
 		Float total = cartItemDAOImpl.getTotalPrice(cartItems, user_name);
 		return total;
 	}
-
-
-	
-
 	  
 	 
 }

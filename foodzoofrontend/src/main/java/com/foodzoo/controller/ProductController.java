@@ -101,44 +101,26 @@ public class ProductController {
 	}
 	
 	
-	/**
-	 * productupdate method is used to update the product object obtained from manageproducts.jsp file and It will be called
-	 * on the action updateproduct.On successful completion of this method Product data will be updated into database
-	 * In this method updateProductService method  of class ProductServiceDAO will be called which will further call update
-	 * method of ProductDAO class.
-	 * @param newproduct is an object of class Products.This Object is binded with data sent by the form.
-	 * @param result is an object of class BindingResult which is used to check errors in the binding of form data to the object.
-	 * @return ModelAndView Object 
-	 */
-	
-		
-	@RequestMapping("/updateproduct")
-	public ModelAndView productupdate(@ModelAttribute Products newproduct)
-	{
-		logger.info("-----inside productupdate--------");
-		productServiceDao.updateProductService(newproduct);
-		logger.info("-------product updated successfully------");
-		return new ModelAndView("redirect:/manageProduct");
-		
-	}
+
+
 	/**
 	 * saveproducts method is used to save the product object obtained from manageproducts.jsp file and It will be called
 	 * on the action saveproduct.On successful completion of this method Product data will be saved into database
 	 * In this method saveProductService method  of class ProductServiceDAO will be called which will further call save
 	 * method of ProductDAO class.
+	 * fecthes the images from the path
 	 * @param newproduct is an object of class Products.This Object is binded with data sent by the form.
 	 * @param result is an object of class BindingResult which is used to check errors in the binding of form data to the object.
 	 * @return ModelAndView Object 
 	 */
 	
-		
 	@RequestMapping(value="/saveproduct", method=RequestMethod.POST)
 	 public ModelAndView saveproducts(@Valid @ModelAttribute Products newproduct,@RequestParam("file") MultipartFile image, BindingResult result)
 	{
 	 logger.info("--------"+newproduct+"---------------");
 	 
 	 logger.info("----inside saveproduct------");
-	 String imgpath="/Users/Priyanshi.Tiwari/Desktop/FoodzooUp/ImageUpload/";
+	 String imgpath="/Users/Abhinandan.Gupta/Desktop/Projects/FoodProducts/";
 	 String file_info=imgpath+newproduct.getProduct_id()+".jpg";
 	 
 	 File f=new File(file_info);
@@ -173,6 +155,31 @@ public class ProductController {
 	 return new ModelAndView("manageproducts").addObject("msg","data is not saved");
 	 }
 	 }
+		
+	
+	
+	/**
+	 * productupdate method is used to update the product object obtained from manageproducts.jsp file and It will be called
+	 * on the action updateproduct.On successful completion of this method Product data will be updated into database
+	 * In this method updateProductService method  of class ProductServiceDAO will be called which will further call update
+	 * method of ProductDAO class.
+	 * @param newproduct is an object of class Products.This Object is binded with data sent by the form.
+	 * @param result is an object of class BindingResult which is used to check errors in the binding of form data to the object.
+	 * @return ModelAndView Object 
+	 */
+	
+		
+	@RequestMapping("/updateproduct")
+	public ModelAndView productupdate(@ModelAttribute Products newproduct)
+	{
+		logger.info("-----inside productupdate--------");
+		productServiceDao.updateProductService(newproduct);
+		logger.info("-------product updated successfully------");
+		return new ModelAndView("redirect:/manageProduct");
+		
+	}
+		
+	
 	
 	/**
 	 * deleteproduct method is used to delete the product by the id obtained from manageproducts.jsp file path variable and It will be called

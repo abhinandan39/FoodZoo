@@ -1,6 +1,7 @@
 package com.avizva.dao;
 
 import org.apache.log4j.Logger;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -61,6 +62,14 @@ public class PaymentDAOImpl implements PaymentDAO {
 				}
 
 				return flag;
+	}
+
+	public Payment viewPayment(String id) {
+		boolean flag = false;
+		Session session = null;
+		session = getSession();
+		Payment payment = session.get(Payment.class, id);
+		return payment;
 	}
 
 }

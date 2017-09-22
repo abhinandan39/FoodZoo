@@ -159,7 +159,7 @@ font-size: 20px;
 					<div class="panel-body">
 						<div class="col-md-8 panelTop">
 							<div class="col-md-12 ">
-								<img src="${images}/productOne.jpg" class="img img-rounded" width="100%" height="500px"
+								<img src="download?productId=${product.product_id}" class="img img-rounded" width="100%" height="500px"
 									alt="Food" />
 							</div>
 							
@@ -177,7 +177,7 @@ font-size: 20px;
 								<form action="singleCartClick">
 									 <div class="count-input space-bottom">
    										<input type="hidden" name="id" value="${product.product_id}" />
-		                                <a class="incr-btn" data-action="decrease" href="#">–</a>
+		                                <a class="incr-btn" data-action="decrease" href="#">-</a>
 		                                <input class="quantity" type="text" name="quantity" value="1"/>
 		                                <a class="incr-btn" data-action="increase" href="#">&plus;</a>
                           			 </div>

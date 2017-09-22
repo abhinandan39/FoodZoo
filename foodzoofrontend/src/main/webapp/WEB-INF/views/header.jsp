@@ -243,6 +243,7 @@
 						 	 <div class="dropdown-content">
 						     <a class="dynamicCategories" href="profile">Profile</a>
 					     	 <a class="dynamicCategories"href="deactivate">Deactivate</a>
+					     	 <a class="dynamicCategories"href="myOrders">My Orders</a>
 			   		 		 </div>
 				</div>
 				</li>
@@ -254,6 +255,7 @@
 						 	 <div class="dropdown-content">
 						     <a class="dynamicCategories" href="profile">Profile</a>
 					     	 <a class="dynamicCategories" href="deactivate">Deactivate</a>
+					     	 <a class="dynamicCategories" href="myOrders">My Orders</a>
 					     	 <a class="dynamicCategories" href="adminPanel">Admin Panel</a>
 			   		 		 </div>
 				</div>

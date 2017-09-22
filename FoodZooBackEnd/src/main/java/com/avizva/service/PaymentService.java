@@ -14,4 +14,6 @@ public interface PaymentService {
  * @return true or false
  */
 	public boolean savePaymentService(Payment newpayment);
+	
+	public Payment viewPaymentService(String id);
 }

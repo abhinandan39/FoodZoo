@@ -1,5 +1,10 @@
 package com.foodzoo.controller;
 
+import java.util.List;
+import java.util.Random;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
@@ -11,22 +16,50 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.avizva.model.CartItem;
 import com.avizva.model.Payment;
+import com.avizva.model.Products;
+import com.avizva.model.ShippingAddress;
+import com.avizva.model.UserOrder;
+import com.avizva.service.CartItemService;
+
 import com.avizva.service.CategoryServiceImpl;
 import com.avizva.service.PaymentService;
+import com.avizva.service.ProductService;
+import com.avizva.service.ShippingAddressService;
+import com.avizva.service.UserOrderService;
 /**
- * @author Priyanshi.Tiwari
- * @Controller it indicates that the class that is annotated is a controller.
-
+ * 
+ * @author Parul.Sharma
+ * controller annotation for making class as controller class
+ *
  */
 @Controller
 public class PaymentController {
-	
+	/**
+	 * for keeping track of all transactions happened or happening
+	 */
 	Logger logger=Logger.getLogger(PaymentController.class);
-	
+	/**
+	 * auotwired annotation for makig use of already existing bean instead of creating new object
+	 */
 	@Autowired
 	PaymentService paymentService;
+
+	@Autowired
+	UserOrderService userOrderService;
+	@Autowired
+	CartItemService cartItemService;
+	@Autowired
+	ShippingAddressService addressService;
+	@Autowired
+	ProductService productService; 
 	
+	
+	/**
+	 * paymentmode action to redirect the user to paymentmethod page
+	 * @return ModelAndView object with  jsp page
+	 */
 	@RequestMapping("/paymentMode")
 	public ModelAndView callPaymentMethod()
 	{
@@ -34,13 +67,20 @@ public class PaymentController {
 		return new ModelAndView("paymentmethod");
 		
 	}
-
+	/**
+	 * paynow action that calls callpaynow method 
+	 * save the payment mode selected by the user and its related information
+	 * @param newpayment
+	 * @param result
+	 * @return
+	 */
 	
 	@RequestMapping("/paynow")
-	public ModelAndView callpaynow(@Valid @ModelAttribute Payment newpayment, BindingResult result)
+	public ModelAndView callpaynow(@Valid @ModelAttribute Payment newpayment
+			, BindingResult result, HttpServletRequest request)
 	{
-		
 		logger.info("----calling paynowmethod-----");
+		
 		if(result.hasErrors())
 		{
 			logger.info("--binding has errors---");
@@ -48,8 +88,59 @@ public class PaymentController {
 		if(paymentService.savePaymentService(newpayment))
 			
 		{
+			logger.info("----Getting Username from session-----");
+			HttpSession session = request.getSession();
+			String username = (String)session.getAttribute("sessionusername");
+			String orderName = username;
 			
-			return new ModelAndView("paymentmethod").addObject("msg","payment done");
+			
+			logger.info("----Generating A random orderName-----");
+			
+			Random randomGenerator = new Random();
+			for(int i=0;i <10;i++){
+				orderName +=  randomGenerator.nextInt(10);
+			}
+			logger.info("----Generated A random orderName-----"+orderName);
+			logger.info("----Getting Address-----"+orderName);
+			
+			ShippingAddress address = addressService.viewAddress(username);
+			UserOrder userOrder = new UserOrder();
+			
+			logger.info("----Getting List Of CartItems for that user-----");
+			List<CartItem> cartList = cartItemService.viewCartItemsByUserService(username);
+			
+			logger.info("----Getting order Total-----");
+			Float total = cartItemService.totalPriceService(username);
+			
+			logger.info("----Setting Data to UserOrder-----");
+			userOrder.setOrderNumber(orderName);
+			userOrder.setUsername(username);
+			userOrder.setAddress(address);
+			userOrder.setPaymentMode(newpayment.getMode());
+			userOrder.setCartList(cartList);
+			userOrder.setTotal(total);
+			logger.info("----Saving User Order-----");
+			userOrderService.saveOrderService(userOrder);
+			logger.info("----Saved User Order-----");
+			
+			
+			logger.info("----Deleting Items From user's cart-----");
+			for(CartItem c : cartList){
+				c.setStatus("false");
+				cartItemService.updateCartItemService(c, username);
+				
+			}
+			logger.info("----Updating total product quantity-----");
+			
+			for(CartItem c: cartList){
+				Products product = productService.viewProductByIdService(c.getProduct_id());
+				product.setQuantity(product.getQuantity()-c.getCartitem_quantity());
+				productService.updateProductService(product);
+				
+			}
+			logger.info("----Product quantity updated-----");
+			
+			return new ModelAndView("redirect:/orderView?ordername="+orderName+"&total="+total+"&msg=success");
 
 		}
 		else

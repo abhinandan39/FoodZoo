@@ -138,7 +138,7 @@ span.itemPrice {
 					<div class="panel-body">
 						<div class="col-md-12 panelTop">
 							<div class="col-md-12 img-hover">
-								<img src="${images}/productOne.jpg" class="img img-rounded" width="100%" height="200px"
+								<img src="download?productId={{product.product_id}}" class="img img-rounded" width="100%" height="200px"
 									alt="Food" />
 							</div>
 							
@@ -182,7 +182,6 @@ span.itemPrice {
 	 var app = angular.module("myApp",[]);
 	 app.controller('productController',function($scope){
 		 
-		
 		 $scope.productList = ${products}
 		 
 	 });
