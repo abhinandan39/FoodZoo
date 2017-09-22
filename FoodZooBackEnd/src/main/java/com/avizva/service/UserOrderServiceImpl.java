@@ -1,5 +1,7 @@
 package com.avizva.service;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,6 +36,12 @@ public class UserOrderServiceImpl implements UserOrderService {
 		UserOrder userOrder = userOrderDaoImpl.viewOrderByOrderName(orderName);
 		
 		return userOrder;
+	}
+
+	public List<UserOrder> viewOrdersByUsernameService(String username) {
+		logger.info("----inside viewOrdersByUsername Service-----");
+		List<UserOrder> userOrders = userOrderDaoImpl.viewOrdersByUsername(username);
+		return userOrders;
 	}
 
 }

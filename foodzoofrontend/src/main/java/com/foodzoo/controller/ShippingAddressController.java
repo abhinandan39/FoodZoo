@@ -97,7 +97,7 @@ public class ShippingAddressController {
 					session1.setAttribute("sessionusername", address.getUsername());
 				
 					logger.info("---registration success-------");
-					return new ModelAndView("paymentmethod", "msg", "Your shipping address saved  Successfully");
+					return new ModelAndView("ship", "msg", "Your shipping address saved  Successfully");
 				} else {
 					logger.info("-----registration failed------");
 					return new ModelAndView("cartPage").addObject("msg", "some error occured ");

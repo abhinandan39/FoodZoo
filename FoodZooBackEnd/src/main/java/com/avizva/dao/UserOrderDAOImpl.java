@@ -11,8 +11,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.avizva.model.UserOrder;
-import com.avizva.service.ServiceDAOImpl;
 
+
+/**
+ * 
+ * @author Abhinandan.Gupta
+ * UserOrderDAOImmpl is the implementation of UserOrderDAO
+ * It defines what the given methods will perform
+ * @Repository is used to create a bean of this class.
+ *
+ */
 @Repository
 public class UserOrderDAOImpl implements UserOrderDAO {
 	Logger logger=Logger.getLogger(UserOrderDAOImpl.class);
@@ -27,9 +35,14 @@ public class UserOrderDAOImpl implements UserOrderDAO {
 	public Session getSession() {
 		return sessionFactory.openSession();
 	}
-	
+	 
+	/**
+	 * saveOrder method Saves the Order in UserOrder table.
+	 * @param UserOrder. Takes UserOrder object as input and saves it to the database
+	 * @return true if Order is saved, else false
+	 */
 	public boolean saveOrder(UserOrder userOrder) {
-		logger.info("------inside OrderDAOImpl:saveuser method------");
+		logger.info("------inside UserOrderDAOImpl : saveOrder method------");
 		boolean flag = false;
 		Session session = null;
 		Transaction transaction = null;
@@ -51,7 +64,7 @@ public class UserOrderDAOImpl implements UserOrderDAO {
 	}
 
 	public UserOrder viewOrderByOrderName(String orderNumber) {
-		logger.info("------inside OrderDAOImpl:viewOrder method------");
+		logger.info("------inside UserOrderDAOImpl : viewOrder method------");
 		boolean flag = false;
 		Session session = null;
 			session = getSession();
@@ -63,6 +76,17 @@ public class UserOrderDAOImpl implements UserOrderDAO {
 			
 
 
+	}
+
+	public List<UserOrder> viewOrdersByUsername(String username) {
+		logger.info("------inside UserOrderDAOImpl : viewOrderByUsername  method------");
+		boolean flag = false;
+		Session session = null;
+		session = getSession();
+		Query query = session.createQuery("from UserOrder where username=:username");
+		query.setParameter("username", username);
+		List<UserOrder> orderList = query.list();
+		return orderList;
 	}
 
 }

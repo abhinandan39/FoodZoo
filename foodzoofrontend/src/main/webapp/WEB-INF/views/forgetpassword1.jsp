@@ -42,103 +42,11 @@
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
 
-	<%-- <div class="container-fluid">
-	<div class="jumbotron container" style="text-align: center; " >
-			<h2>Forgot Your Password?</h2>	
-			<p><h6>Please enter the  answer of security question that you used when you created your account and reset your password
-			</h6></p>
 
-	<div class="row">
-	<div class="col-sm-3"></div>
-		<div class="col-sm-5">
-		
-		</div>
-	<div class="col-sm-4"></div>
-	</div>
-	<div class="row">
-    <form class="form from-control" id="forgetpass" action="forgetvalid" onsubmit="return check()" method="post">
-    <input type="hidden" name="username" value="${param.username}" />
-    <div class="col-sm-3">
-				</div>
-				<div class="col-sm-6" style="background: #ffffff; padding: 5px; border-radius: 10px;">
-					<div class="row">
-			
-					 	<div class="col-sm-2" style="text-align: left; margin-top: 20px">
-					 		
-					 	</div>
-					 	
-					 	<div class="col-sm-7" style="margin-top: 20px">
-					 	   <i> <h6 style="color:green;">${securityque}</h6></i>
-					 	   <h6 style="color:red;">${msg}</h6>
-					 		<input type="text" class="form-control"  name="securityans" placeholder="<spring:message code='label.answer'></spring:message>" required="true" />
-					 		
-					 	</div>
-					 	
-					 	<div class="col-sm-3" style="text-align: right; margin-top: 20px">
-					 		
-					 	</div>
-			 		</div>
-			 		<div class="row">
-			
-					 	<div class="col-sm-2" style="text-align: left; margin-top: 10px">
-					 		
-					 	</div>
-					 	<div class="col-sm-7" style="margin-top: 10px">
-					 		<input type="password" class="form-control" name="password" placeholder="<spring:message code='label.password'></spring:message>"  required="true"/>
-					 		
-					 	</div>
-					 	
-					 	<div class="col-sm-3" style="text-align: right; margin-top: 10px">
-					 		
-					 	</div>
-			 		</div>
-			 		<div class="row">
-						<div class="col-sm-2" style="margin-top: 20px">
-					 		
-					 	</div>
-					 	
-					 	<div class="col-sm-7" >
-					 		<input type="password" class="form-control" name="repassword" placeholder="<spring:message code='label.repassword'></spring:message>"  style="margin-top: 10px;  " required>
-					 		
-					 	</div>
-					 		<div class="col-sm-3" style="text-align: left; margin-top: 20px">
-					 		
-					 	</div>
-					 	  
-					</div>
-					<div class="row">
-						<div class="col-sm-2" style="margin-top: 20px">
-					 		
-					 	</div>
-					 	
-					 	<div class="col-sm-7" >
-					 		<input class="btn btn-success" type="submit" value="reset" style="margin-bottom: 10px; margin-top: 20px;"></input>
-					 		
-					 	</div>
-					 		<div class="col-sm-3" style="text-align: left; margin-top: 20px">
-					 		
-					 	</div>
-					 	  
-					</div>
-					
-					
-			</div>
-			<div class="col-sm-3" >
-				</div>
-		</form>
-			</div>
-</div>
-</div>	
-
-<div style="text-align:center;">Still have an issue? Please <a href="contact" style="color:blue">click here</a> to submit an inquiry for further assistance.</div> --%>
 	<div class="backgroundimage">
-		<!-- <div class="jumbotron container" style="text-align: center; " >
-			<h1>Sign Up</h1>
-			<p>Sign Up with us to get the latest updates and offers </p>
-		</div> -->
+		
 		<form id="loginform" action="forgetvalid" method="post">
 		 <input type="hidden" name="username" value="${param.username}" />
-  y
 			<div class="row">
 				<div class="col-sm-3"></div>
 

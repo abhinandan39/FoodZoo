@@ -120,7 +120,7 @@ public class ProductController {
 	 logger.info("--------"+newproduct+"---------------");
 	 
 	 logger.info("----inside saveproduct------");
-	 String imgpath="/Users/Priyanshi.Tiwari/Desktop/FoodzooUp/ImageUpload/";
+	 String imgpath="/Users/Abhinandan.Gupta/Desktop/Projects/FoodProducts/";
 	 String file_info=imgpath+newproduct.getProduct_id()+".jpg";
 	 
 	 File f=new File(file_info);

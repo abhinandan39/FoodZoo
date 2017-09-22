@@ -30,10 +30,15 @@ public class UserOrder {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int order_id;
 	
+	/**
+	 *  Order Number will uniquely defind the order. The order can be fetched using this Order Number
+	 */
 	@Column(unique=true)
 	private String orderNumber;
 	
-	
+	/**
+	 * We need to save the method that was used to pay for future references.
+	 */
 	private String paymentMode;
 	
 	/**
@@ -56,6 +61,11 @@ public class UserOrder {
 	 */
 	private String username;
 
+	/**
+	 * add the Total Amount of that order
+	 */
+	private Float total;
+	
 	public int getOrder_id() {
 		return order_id;
 	}
@@ -104,6 +114,30 @@ public class UserOrder {
 	public void setPaymentMode(String paymentMode) {
 		this.paymentMode = paymentMode;
 	}
+
+	public Payment getPayment() {
+		return payment;
+	}
+
+	public void setPayment(Payment payment) {
+		this.payment = payment;
+	}
+
+	public Float getTotal() {
+		return total;
+	}
+
+	public void setTotal(Float total) {
+		this.total = total;
+	}
+
+	@Override
+	public String toString() {
+		return "UserOrder [order_id=" + order_id + ", orderNumber=" + orderNumber + ", paymentMode=" + paymentMode
+				+ ", cartList=" + cartList + ", address=" + address + ", payment=" + payment + ", username=" + username
+				+ ", total=" + total + "]";
+	}
+	
 	
 	
 	

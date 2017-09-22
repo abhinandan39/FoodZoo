@@ -18,12 +18,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.avizva.model.CartItem;
 import com.avizva.model.Payment;
+import com.avizva.model.Products;
 import com.avizva.model.ShippingAddress;
 import com.avizva.model.UserOrder;
 import com.avizva.service.CartItemService;
 
 import com.avizva.service.CategoryServiceImpl;
 import com.avizva.service.PaymentService;
+import com.avizva.service.ProductService;
 import com.avizva.service.ShippingAddressService;
 import com.avizva.service.UserOrderService;
 
@@ -40,6 +42,9 @@ public class PaymentController {
 	CartItemService cartItemService;
 	@Autowired
 	ShippingAddressService addressService;
+	@Autowired
+	ProductService productService; 
+	
 	
 	@RequestMapping("/paymentMode")
 	public ModelAndView callPaymentMethod()
@@ -84,6 +89,8 @@ public class PaymentController {
 			logger.info("----Getting List Of CartItems for that user-----");
 			List<CartItem> cartList = cartItemService.viewCartItemsByUserService(username);
 			
+			logger.info("----Getting order Total-----");
+			Float total = cartItemService.totalPriceService(username);
 			
 			logger.info("----Setting Data to UserOrder-----");
 			userOrder.setOrderNumber(orderName);
@@ -91,17 +98,29 @@ public class PaymentController {
 			userOrder.setAddress(address);
 			userOrder.setPaymentMode(newpayment.getMode());
 			userOrder.setCartList(cartList);
+			userOrder.setTotal(total);
 			logger.info("----Saving User Order-----");
 			userOrderService.saveOrderService(userOrder);
 			logger.info("----Saved User Order-----");
+			
+			
 			logger.info("----Deleting Items From user's cart-----");
 			for(CartItem c : cartList){
 				c.setStatus("false");
 				cartItemService.updateCartItemService(c, username);
+				
 			}
+			logger.info("----Updating total product quantity-----");
 			
+			for(CartItem c: cartList){
+				Products product = productService.viewProductByIdService(c.getProduct_id());
+				product.setQuantity(product.getQuantity()-c.getCartitem_quantity());
+				productService.updateProductService(product);
+				
+			}
+			logger.info("----Product quantity updated-----");
 			
-			return new ModelAndView("redirect:/orderView?ordername="+orderName);
+			return new ModelAndView("redirect:/orderView?ordername="+orderName+"&total="+total+"&msg=success");
 
 		}
 		else

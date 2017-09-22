@@ -362,7 +362,7 @@ function validate()
 				<div class="col-sm-1"></div>
 
 				<div class="col-sm-10 middleRow" style="background-color: white;">
-					${msg}
+					
 					<div class="row">
 						<div class="col-sm-1"></div>
 						<div class="col-sm-10">
@@ -381,9 +381,9 @@ function validate()
 						<div class="col-sm-1"></div>
 						<div class="col-sm-10">
 							<form id="paymentform" class="form-group" action="paynow" method="post" style="margin-top:20px;">
-								<span> <input type="radio" name="mode" value="cod"
+								<span> <input type="radio" name="mode" value="COD"
 									id="id1" checked/> <label for="id1">Cash On Delivery</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									<input type="radio" name="mode" value="card" id="id2" checked/> <label
+									<input type="radio" name="mode" value="Card" id="id2" checked/> <label
 									for="id2">Card Payment Method</label>
 								</span> <br> <br>
 								<div id="div1" style="color:gray">
@@ -392,7 +392,7 @@ function validate()
 										<p>Pay with Cash When Your Order is delivered<br>
 									NOTE: All authorised notes are accepted, except Rs.500 (old)</p>
 									
-									<input id="codbutton" type="submit" class="btn btn-success" value="View Order And Pay" style="margin-top:20px; margin-bottom:20px;" formnovalidate/>
+									<input id="codbutton" type="submit" class="btn btn-success" value="Place Order" style="margin-top:20px; margin-bottom:20px;" formnovalidate/>
 								</div>
 
 								<div id="div2" style="backgroud-color: #fffffff">
@@ -413,7 +413,7 @@ function validate()
 									</div>
 									
 									<br> <input type="submit" class="btn btn-success"
-										value="View Order And Pay" id="cardbutton" />
+										value="Place Order" id="cardbutton" />
 								</div>
 							</form>
 
