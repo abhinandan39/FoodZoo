@@ -121,6 +121,7 @@ marigin-left:-100px;
 
 						</div>
 					</div>
+					
 					<div class="row">
 
 						<div class="col-sm-2" style="text-align: left; margin-top: 10px">
@@ -136,6 +137,7 @@ marigin-left:-100px;
 						<div class="col-sm-3" style="text-align: right; margin-top: 10px">
 
 						</div>
+						
 					</div>
 					<div class="row">
 						<div class="col-sm-2" style="margin-top: 20px"></div>
@@ -226,7 +228,7 @@ marigin-left:-100px;
 						<div class="col-sm-3" style="margin-top: 20px"></div>
 
 					</div>
-				
+				<div class="row">
 			<div class="col-sm-2" style="text-align: right;">
 						</div>
 						<div class="col-sm-5">
@@ -244,7 +246,7 @@ marigin-left:-100px;
 					 	<div class="col-sm-3" style="margin-top: 20px">
 					 		
 					 	</div>
-					 	  
+					 	  </div>
 					
 					
 
@@ -262,13 +264,13 @@ marigin-left:-100px;
 					</div>
 					</div>
 				</div>
-				
+				</form>
 			</div>
-		</form>
+		
 
 
 
-	</div>
+	
 	<jsp:include page="footer.jsp"></jsp:include>
 	<script>
 			

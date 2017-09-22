@@ -14,15 +14,27 @@ import org.springframework.web.servlet.ModelAndView;
 import com.avizva.model.Payment;
 import com.avizva.service.CategoryServiceImpl;
 import com.avizva.service.PaymentService;
-
+/**
+ * 
+ * @author Parul.Sharma
+ * controller annotation for making class as controller class
+ *
+ */
 @Controller
 public class PaymentController {
-	
+	/**
+	 * for keeping track of all transactions happened or happening
+	 */
 	Logger logger=Logger.getLogger(PaymentController.class);
-	
+	/**
+	 * auotwired annotation for makig use of already existing bean instead of creating new object
+	 */
 	@Autowired
 	PaymentService paymentService;
-	
+	/**
+	 * paymentmode action to redirect the user to paymentmethod page
+	 * @return ModelAndView object with  jsp page
+	 */
 	@RequestMapping("/paymentMode")
 	public ModelAndView callPaymentMethod()
 	{
@@ -30,7 +42,13 @@ public class PaymentController {
 		return new ModelAndView("paymentmethod");
 		
 	}
-
+	/**
+	 * paynow action that calls callpaynow method 
+	 * save the payment mode selected by the user and its related information
+	 * @param newpayment
+	 * @param result
+	 * @return
+	 */
 	
 	@RequestMapping("/paynow")
 	public ModelAndView callpaynow(@Valid @ModelAttribute Payment newpayment, BindingResult result)

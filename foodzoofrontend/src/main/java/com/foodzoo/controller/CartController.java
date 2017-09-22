@@ -59,7 +59,24 @@ public class CartController {
 	 */
 	
 	Logger logger=Logger.getLogger(CartController.class);
-	
+	/**
+	 * cartclick action from the productview page along with the product id as a parameter
+	 * that means if the user have directly cliked on the cart button then this action will be performed
+	 * takes the username from the session and calls viewProductByIdservice method taking id as parameter
+	 * that returns the product related to that id 
+	 * save the price of that product
+	 * intialises the quantity as one by defualt
+	 * created empty object of cart item classs and set its product_id and price 
+	 * checks if the username if not nulll then calls the viewCartByProductIdAndUser method taking id and username as parameter
+	 * that returns the complete item corresponding to that id and usernmae and if that item is not null it set the username,cartitemid and quantity
+	 * and calls the update method of cartItemService taking cartitem and usernmae as parameter if that returns false that means quantity have exceeded
+	 * makes the chekupdate false and redirect it to viewCart page else if the item is not there it just saves that item into the cart and return to viewcart page with checkupdate true
+	 * even if the user is not logged in then it redirects to userlogin page with login check as false
+	 * login check if not null then it means it have come from view cart page and will redirect to same page after login
+	 * @param id
+	 * @param request
+	 * @return modelandview object according to the satisfactory condition
+	 */
 	@RequestMapping("/cartClick")
 	public ModelAndView clickCart(@RequestParam(value= "id", required = false) String id, HttpServletRequest request){
 		
@@ -121,7 +138,17 @@ public class CartController {
 		
 		
 	}
-	
+	/**
+	 * singeCartClick action from the productview page indicates that this method have come from the link on the product card
+	 * gets the product id and quantity using request and set the sessionusername
+	 * takes the price and parse quantity into int and makes the cartitem empty object and sets its product id and price
+	 * checks if the usernmae is not null then call the viewProductByIDService method taking the product id as parameter
+	 * that returns the product related to that id
+	 * if the item is not null then it sets the username cart_item_id a	nd quantity and calls the updateCartItemService method
+	 * if that returns false that means some error has occured or the quantity may exceeded
+	 * @param request
+	 * @return modelandview object with redirecting page according to the contition
+	 */
 	@RequestMapping("/singleCartClick")
 	public ModelAndView singleProductClick(HttpServletRequest request){
 		String product_id = request.getParameter("id");
@@ -178,7 +205,12 @@ public class CartController {
 		
 		
 	}
-	
+	/**
+	 * viewCart action for checking all the items present in the user cart with associated price and quantity
+	 * @param checkUpdate
+	 * @param request
+	 * @return modelandview object with redirecting page according to condition
+	 */
 	@RequestMapping("/viewCart")
 	public ModelAndView viewCart(@RequestParam(value="checkUpdate",required=false) String checkUpdate , HttpServletRequest request){
 			
@@ -201,7 +233,15 @@ public class CartController {
 					.addObject("productList", productItems).addObject("total",totalAmount)
 					.addObject("checkUpdate",checkUpdate);
 	}
-	
+	/**
+	 * deleteItem action from  cartPage for deleting the items from the cart
+	 * takes the username from the session 
+	 * calls viewCartItemByProductAndUser taking id and username as parameter that returns the item related to that id and usernmae
+	 * and then calls deleteCartItemService method taking that cartitem as paramter
+	 * @param id
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping("/deleteItem")
 	public ModelAndView delete(@RequestParam("id") String id, HttpServletRequest request){
 		HttpSession session = request.getSession();
@@ -210,7 +250,17 @@ public class CartController {
 		cartItemService.deleteCartItemService(cartItem);
 		return new ModelAndView("redirect:/viewCart");
 	}
-	
+	/**
+	 * updateItem action from cartPage for updating the cart item being its quantity or the price
+	 * takes the username from the session calls viewCartItemByProductIdAndUser method taking id and username as parameter
+	 * calls  updateCartItemService and check whether updated properlu
+	 * if returns true then redirect to viewCart page with checkupdate true
+	 * else redirect to viewCart page with checkupdate false
+	 * @param id
+	 * @param updated
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping("/updateItem")
 	public ModelAndView updateCart(@RequestParam("id") String id
 			, @RequestParam("updatedValue") String updated, HttpServletRequest request){

@@ -21,31 +21,34 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.avizva.model.CartItem;
 import com.avizva.model.Categories;
 import com.avizva.model.Products;
-import com.avizva.model.ShippingAddress;
 import com.avizva.model.Suppliers;
 import com.avizva.model.Users;
 import com.avizva.service.CartItemServiceImpl;
 import com.avizva.service.CategoryService;
 import com.avizva.service.ProductService;
-import com.avizva.service.UserService;
 import com.avizva.service.SupplierService;
+import com.avizva.service.UserService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
+/**
+ * 
+ * @author Parul.Sharma
+ * controller annotation for making class as controller class
+ *
+ */
 @Controller
 public class MyController {
+
+	Logger logger = Logger.getLogger(MyController.class);
 
 	/**
 	 * for creating object of ServiceDAO using annotation
 	 */
-
-	Logger logger = Logger.getLogger(MyController.class);
 
 	@Autowired
 	UserService serviceDao;
@@ -490,7 +493,7 @@ public class MyController {
 	public ModelAndView send(HttpServletRequest request) {
 
 		serviceDao.mailService(request);
-		return new ModelAndView("success");
+		return new ModelAndView("index","msg","request sent successfully");
 
 	}
 
@@ -588,7 +591,13 @@ public class MyController {
 
 
 
-	
+	/**
+	 * this method calls the viewSupplierService method that returns the list of the suppliers
+	 * if that list is empty then it returns to managesuppliers page with new supplier object
+	 * else returns to managesupplierpage with list of the suppliers
+	 * @param suppliers
+	 * @return
+	 */
 	 @RequestMapping("/manageSupplier")
 	   public ModelAndView callsupplier(@ModelAttribute Suppliers suppliers)
 	   {
@@ -600,6 +609,13 @@ public class MyController {
 		     else
 		    	 return new ModelAndView("managesuppliers","command",new Suppliers());
 	   }
+	 /**
+	  * this method calls the saveSupplierService method of the supplierServiceDao if that returns true
+	  * then redirected to managesupplier page with msg data saved successfully
+	  * else redirect to managesupplierpage with message data is not saved
+	  * @param suppliers
+	  * @return modelandview object  with page corresponding the condition
+	  */
 	 @RequestMapping("/savesupplier")
 		public ModelAndView saveSupplier(@ModelAttribute Suppliers suppliers)
 		{
@@ -609,7 +625,13 @@ public class MyController {
 				     return new ModelAndView("redirect:/manageSupplier").addObject("msg","data is not saved");
 	 
 	    }
-
+	 /**
+	  * deletesup method will delete the supplier with corresponding supplier id
+	  * calls dleteSupplierService method if that returns true that means supplier delete and redirect to manage supplier page
+	  * else redirect to managesupplierpage with message datanot deleted
+	  * @param id
+	  * @return
+	  */
 		@RequestMapping("/supplierdelete/{id}")
 		public ModelAndView deletesup(@PathVariable String id) {
 		     Suppliers suppliers=supplierServiceDao.viewSupplierByIdService(id);
@@ -623,7 +645,11 @@ public class MyController {
 	}
 
 
-
+/**
+ * supplierupdate method for updating supplier if success return to managesupplier page
+ * @param suppliers
+ * @return
+ */
 	@RequestMapping("/supplierupdate")
 	public ModelAndView supplierupdate(@ModelAttribute Suppliers suppliers) {
 		supplierServiceDao.updateSupplierService(suppliers);
@@ -632,6 +658,11 @@ public class MyController {
 	}
 
 	// For all products
+	/**
+	 * viewCategory method from action viewProducts will return all the products with corresponding category
+	 * calls viewProductService method fetch the list of the product and returns to productview page with products
+	 * @return
+	 */
 	@RequestMapping("/viewProducts")
 	public ModelAndView viewCategory() {
 		logger.info("Inside Json method");
@@ -647,6 +678,14 @@ public class MyController {
 	}
 
 	//For particular Category
+	/**
+	 * viewProductsInCategory method fro taking the product according to the category id
+	 * calls viewCategoryByIdService method that takes id as parameter
+	 * and category calls productByCategoryService method according to the category name and returns
+	 * 
+	 * @param id
+	 * @return modelandview object with productsview and product info
+	 */
 	@RequestMapping("/product")
 	public ModelAndView viewProductsInCategory(@RequestParam(value = "cat", required = false) String id) {
 		Categories category = categoryServiceDao.viewCategoryByIdService(id);
@@ -659,6 +698,12 @@ public class MyController {
 	}
 
 	// Single Product View
+	/**
+	 * viewSingleProduct method that takes the product id and calls viewProductByIdService method that returns the product
+	 * 
+	 * @param id
+	 * @return modelandview object redirecting to singleproductview page with product as object
+	 */
 	@RequestMapping("/singleProduct")
 	public ModelAndView viewSignleProduct(@RequestParam(value= "id", required = false) String id){
 		Products product = productServiceDao.viewProductByIdService(id);

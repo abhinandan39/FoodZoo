@@ -177,7 +177,7 @@ font-size: 20px;
 								<form action="singleCartClick">
 									 <div class="count-input space-bottom">
    										<input type="hidden" name="id" value="${product.product_id}" />
-		                                <a class="incr-btn" data-action="decrease" href="#">–</a>
+		                                <a class="incr-btn" data-action="decrease" href="#">-</a>
 		                                <input class="quantity" type="text" name="quantity" value="1"/>
 		                                <a class="incr-btn" data-action="increase" href="#">&plus;</a>
                           			 </div>
