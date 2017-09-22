@@ -589,48 +589,7 @@ public class MyController {
 
 
 	
-	 @RequestMapping("/manageSupplier")
-	   public ModelAndView callsupplier(@ModelAttribute Suppliers suppliers)
-	   {
-		   List<Suppliers> list=new ArrayList<Suppliers>();
-
-		     list= supplierServiceDao.viewSupplierService(suppliers);
-		     if(!list.isEmpty())
-		     return new ModelAndView("managesuppliers","command",new Suppliers()).addObject("list",list);
-		     else
-		    	 return new ModelAndView("managesuppliers","command",new Suppliers());
-	   }
-	 @RequestMapping("/savesupplier")
-		public ModelAndView saveSupplier(@ModelAttribute Suppliers suppliers)
-		{
-			     if(supplierServiceDao.saveSupplierService(suppliers))
-			     return new ModelAndView("redirect:/manageSupplier").addObject("msg","data is saved");
-			     else
-				     return new ModelAndView("redirect:/manageSupplier").addObject("msg","data is not saved");
-	 
-	    }
-
-		@RequestMapping("/supplierdelete/{id}")
-		public ModelAndView deletesup(@PathVariable String id) {
-		     Suppliers suppliers=supplierServiceDao.viewSupplierByIdService(id);
-			if (supplierServiceDao.deleteSupplierService(suppliers)) {
-				return new ModelAndView("redirect:/manageSupplier");
-			} else {
-
-				return new ModelAndView("manageSupplier", "msg", "data not deleted");
-			}
-
-	}
-
-
-
-	@RequestMapping("/supplierupdate")
-	public ModelAndView supplierupdate(@ModelAttribute Suppliers suppliers) {
-		supplierServiceDao.updateSupplierService(suppliers);
-		return new ModelAndView("redirect:/manageSupplier");
-
-	}
-
+	
 	// For all products
 	@RequestMapping("/viewProducts")
 	public ModelAndView viewCategory() {

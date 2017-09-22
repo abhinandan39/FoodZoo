@@ -160,7 +160,8 @@
 		document.getElementById('category_button').setAttribute("value","update");
 		document.getElementById('category_form').setAttribute("action","categoryupdate");
 		document.getElementById('category_id').setAttribute('value',id);
-		document.getElementById('category_id').setAttribute("disabled","true");
+		//document.getElementById('category_id').setAttribute("disabled","true");
+		document.getElementById('category_id').setAttribute('readonly',"readonly");
 		document.getElementById('category_name').setAttribute('value',name);
 		document.getElementById('category_description').setAttribute('value',category);
 		
