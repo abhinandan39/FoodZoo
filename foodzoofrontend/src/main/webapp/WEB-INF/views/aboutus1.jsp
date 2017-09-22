@@ -51,15 +51,15 @@
 
 		<p
 			style="text-align: justify; margin-top: 10px; margin-bottom: 80px; margin-left: 20px; margin-right: 20px;">
-			Foodzoo was founded in April 2015, by serial entrepreneurs Rajesh
-			Sawhney, Sanjeev Singhal and Bal DiGhent. InnerChef is one of the
+			Foodzoo was founded in August 2017, by serial entrepreneurs Abhinandan Gupta,
+		    Priyanshi Tiwari and Parul Sharma. Foodzoo is one of the
 			fastest growing food experience companies in the country. Not only
 			are we obsessed with our customers, but we are also passionate about
-			our food and our technology. InnerChef is bringing good food to the
+			our food and our technology. Foodzoo is bringing good food to the
 			hands of many and creating culinary experiences worth remembering.
 			With a wonderful balance between the cuisines of modern Indian,
 			authentic European, delicious Mediterranean and flavourful Asian,
-			InnerChef is a truly global brand, reaching for the skies while still
+			Foodzoo is a truly global brand, reaching for the skies while still
 			deeply rooted in India.</p>
 		<div class="container">
 
