@@ -63,6 +63,9 @@ public class UserOrderDAOImpl implements UserOrderDAO {
 		return flag;
 	}
 
+	/**
+	 * viewOrderByOrderName method shows the current Order placed for the user
+	 */
 	public UserOrder viewOrderByOrderName(String orderNumber) {
 		logger.info("------inside UserOrderDAOImpl : viewOrder method------");
 		boolean flag = false;

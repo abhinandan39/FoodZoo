@@ -61,7 +61,7 @@
 				<div class="item active">
 					<img src="${images}/food1.jpg" class="tales">
 					<div class="carousel-caption">
-						<h1>foodzoo</h1>
+						<h2>Enjoy The Delicious Pizza</h2>
 						<p>welcome to fooodzoo.</p>
 					</div>
 				</div>
@@ -69,7 +69,7 @@
 				<div class="item">
 					<img src="${images}/food2.jpg" class="tales">
 					<div class="carousel-caption">
-						<h1>Today's special</h1>
+						<h2>Today's special</h2>
 						<p>welcome to fooodzoo.</p>
 					</div>
 
@@ -78,14 +78,14 @@
 				<div class="item">
 					<img src="${images}/food3.jpg" class="tales">
 					<div class="carousel-caption">
-						<h1>foodzoo</h1>
+						<h2>Tasty Desserts at Your place</h2>
 						<p>welcome to fooodzoo.</p>
 					</div>
 				</div>
 				<div class="item">
 					<img src="${images}/food4.jpg" class="tales">
 					<div class="carousel-caption">
-						<h1>foodzoo</h1>
+						<h1>Amazing Flavours</h1>
 						<p>welcome to fooodzoo.</p>
 					</div>
 				</div>
@@ -128,7 +128,7 @@
 			</a>
 			<a href="product?cat=south">
 			<div class="col-sm-4 img-hover" style="text-align: center;">
-				<img src="${images}/southindian.jpg" class="img-rounded"
+				<img src="${images}/southindiannew.jpg" class="img-rounded"
 					style="width: 250px; height: 250px">
 
 				<div class="middle">

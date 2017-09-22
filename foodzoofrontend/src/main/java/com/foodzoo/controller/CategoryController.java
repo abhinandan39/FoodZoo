@@ -22,10 +22,10 @@ import com.avizva.service.SupplierService;
 /**
  * @author Priyanshi.Tiwari
  * @Controller it indicates that the class that is annotated is a controller.
- *             ProductController class is a controller which is used for
- *             managing the actions regarding manageproduct.jsp. It is used to
- *             call the service methods of ProductServiceDAO which will be
- *             further connected to ProductDAO.
+ *             CategoryController class is a controller which is used for
+ *             managing the actions regarding managecategory.jsp. It is used to
+ *             call the service methods of CategoryService which will be
+ *             further connected to CategoryDAO.
  * 
  */
 @Controller
@@ -128,7 +128,7 @@ public class CategoryController {
 	/**
 	 * delete method is used to delete the Category by the id obtained from
 	 * managecategory.jsp file path variable and It will be called on the action
-	 * /categorydelete/{id}.On successful completion of this method Product data
+	 * /categorydelete/{id}.On successful completion of this method Category data
 	 * will be deleted from database In this method viewCategoryByIdService
 	 * method of class CategoryServiceDAO will be called.which will further call
 	 * viewCategoryById method of CategoryDAO class.It will return the

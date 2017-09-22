@@ -167,7 +167,7 @@
 		document.getElementById('product_button').setAttribute("value","Update Product");
 		document.getElementById('product_form').setAttribute("action","updateproduct");
 		document.getElementById('product_id').setAttribute('value',id);
-		document.getElementById('product_id').setAttribute("disabled","true");
+		document.getElementById('product_id').setAttribute('readonly',"readonly");
 	
 		document.getElementById('product_name').setAttribute('value',name);
 		document.getElementById('price').setAttribute('value',price);

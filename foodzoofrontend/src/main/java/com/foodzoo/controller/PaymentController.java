@@ -28,7 +28,11 @@ import com.avizva.service.PaymentService;
 import com.avizva.service.ProductService;
 import com.avizva.service.ShippingAddressService;
 import com.avizva.service.UserOrderService;
+/**
+ * @author Priyanshi.Tiwari
+ * @Controller it indicates that the class that is annotated is a controller.
 
+ */
 @Controller
 public class PaymentController {
 	

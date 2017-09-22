@@ -31,7 +31,7 @@ import com.avizva.service.SupplierService;
  * @author Priyanshi.Tiwari
  * @Controller it indicates that the class that is annotated is a controller.
  * ProductController class is a controller which is used for managing the actions
- * regarding manageproduct.jsp. It is used to call the service methods of ProductServiceDAO
+ * regarding manageproduct.jsp. It is used to call the service methods of ProductService
  * which will be further connected to ProductDAO.
  * 
  */
@@ -101,7 +101,8 @@ public class ProductController {
 	}
 	
 	
-	
+
+
 	/**
 	 * saveproducts method is used to save the product object obtained from manageproducts.jsp file and It will be called
 	 * on the action saveproduct.On successful completion of this method Product data will be saved into database
@@ -111,8 +112,6 @@ public class ProductController {
 	 * @param result is an object of class BindingResult which is used to check errors in the binding of form data to the object.
 	 * @return ModelAndView Object 
 	 */
-	
-	
 	
 	@RequestMapping(value="/saveproduct", method=RequestMethod.POST)
 	 public ModelAndView saveproducts(@Valid @ModelAttribute Products newproduct,@RequestParam("file") MultipartFile image, BindingResult result)
