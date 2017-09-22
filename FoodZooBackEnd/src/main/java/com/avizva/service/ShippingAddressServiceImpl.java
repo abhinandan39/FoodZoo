@@ -20,7 +20,6 @@ import com.avizva.model.Users;
  */
 @Service
 public class ShippingAddressServiceImpl implements ShippingAddressService {
-
 	
 	/**
 	 * keeps track of all transactions
@@ -29,6 +28,7 @@ public class ShippingAddressServiceImpl implements ShippingAddressService {
 
 	@Autowired
 	SessionFactory sessionFactory;
+
 
 	/**
 	 * getSession method is used to open/create a session from the auto-wired
@@ -39,6 +39,7 @@ public class ShippingAddressServiceImpl implements ShippingAddressService {
 	public Session getSession() {
 		return sessionFactory.openSession();
 	}
+
 /**
  * autowired annotation for making use of existing bean instead of creating a new object
  */
@@ -80,21 +81,19 @@ public class ShippingAddressServiceImpl implements ShippingAddressService {
 		}
 
 	}
+
 /**
  * viewUser for getting all the details ofthe address related to the usernmae
  * uses session to get all the data of the class through username
  * @param username
  * @return  address
  */
-	public ShippingAddress viewUser(String username) {
+	public ShippingAddress viewAddress(String username) {
 		Session session = null;
-		Transaction transaction = null;
 		session = getSession();
-		transaction = session.beginTransaction();
 		ShippingAddress address = session.get(ShippingAddress.class, username);
 		session.close();
 		return address;
-
 	}
 /**
  * updateAddressService method for updating existing address of the user
@@ -115,5 +114,6 @@ public class ShippingAddressServiceImpl implements ShippingAddressService {
 			}
 			
 		}
+
 	}
 

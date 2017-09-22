@@ -83,8 +83,11 @@ public class CartController {
 		HttpSession session = request.getSession();
 		//Getting Username
 		String username = (String)session.getAttribute("sessionusername");
+		
+		
 		// Getting All Product Data  
 		Products product = productServiceDao.viewProductByIdService(id);
+		
 		Float price = product.getPrice();
 		int quantity =1;
 		
@@ -99,12 +102,13 @@ public class CartController {
 		if(username != null){				
 			CartItem item = cartItemService.viewCartItemByProductIdAndUser(id,username);
 			if(item!=null){
-				cartItem.setUser_name(username);
-				cartItem.setCart_item_id(item.getCart_item_id());
-				cartItem.setCartitem_quantity(item.getCartitem_quantity()+1);
-				boolean checkUpdate = cartItemService.updateCartItemService(cartItem,username);
+//				cartItem.setUser_name(username);
+//				cartItem.setCart_item_id(item.getCart_item_id());
+				item.setCartitem_quantity(item.getCartitem_quantity()+1);
+				boolean checkUpdate = cartItemService.updateCartItemService(item,username);
 				if(checkUpdate){
 					
+					return new ModelAndView("redirect:/viewCart?checkUpdate=true");
 					
 				}
 				else{
@@ -121,10 +125,20 @@ public class CartController {
 			else{
 				cartItem.setUser_name(username);
 				cartItem.setCartitem_quantity(quantity);
-				cartItemService.saveCartItemService(cartItem);
+				boolean checkSave = cartItemService.saveCartItemService(cartItem);
+				if(checkSave){
+					return new ModelAndView("redirect:/viewCart?checkUpdate=true");
+				}
+				else{
+					String category_name = product.getCategory_name();
+					List<Products> productList = productServiceDao.productByCategoryService(category_name);
+					Gson gSon = new GsonBuilder().create();
+					logger.info(productList);
+					return new ModelAndView("redirect:/viewCart?checkUpdate=false");
+				}
 			}
 			
-			return new ModelAndView("redirect:/viewCart?checkUpdate=true");
+			
 		}
 		else{
 			
@@ -153,6 +167,7 @@ public class CartController {
 	public ModelAndView singleProductClick(HttpServletRequest request){
 		String product_id = request.getParameter("id");
 		String product_quantity = request.getParameter("quantity");
+		logger.info("Quantity is: "+product_quantity);
 		HttpSession session = request.getSession();
 		//Getting Username
 		String username = (String)session.getAttribute("sessionusername");
@@ -170,11 +185,28 @@ public class CartController {
 		if(username != null){				
 			CartItem item = cartItemService.viewCartItemByProductIdAndUser(product_id,username);
 			if(item!=null){
-				cartItem.setUser_name(username);
-				cartItem.setCart_item_id(item.getCart_item_id());
-				cartItem.setCartitem_quantity(item.getCartitem_quantity()+quantity);
-				boolean checkUpdate = cartItemService.updateCartItemService(cartItem,username);
+				
+//				cartItem.setUser_name(username);
+//				cartItem.setCart_item_id(item.getCart_item_id());
+				item.setCartitem_quantity(item.getCartitem_quantity()+quantity);
+				boolean checkUpdate = cartItemService.updateCartItemService(item,username);
 				if(checkUpdate){
+					return new ModelAndView("redirect:/viewCart?checkUpdate=true");
+				}
+				else{
+					String category_name = product.getCategory_name();
+					List<Products> productList = productServiceDao.productByCategoryService(category_name);
+					Gson gSon = new GsonBuilder().create();
+					logger.info(productList);
+					return new ModelAndView("redirect:/viewCart?checkUpdate=false");
+				}
+			}
+			else{
+				cartItem.setUser_name(username);
+				cartItem.setCartitem_quantity(quantity);
+				boolean checkSave = cartItemService.saveCartItemService(cartItem);
+				if(checkSave){
+					return new ModelAndView("redirect:/viewCart?checkUpdate=true");
 				}
 				else{
 					String category_name = product.getCategory_name();
@@ -185,13 +217,8 @@ public class CartController {
 					return new ModelAndView("redirect:/viewCart?checkUpdate=false");
 				}
 			}
-			else{
-				cartItem.setUser_name(username);
-				cartItem.setCartitem_quantity(quantity);
-				cartItemService.saveCartItemService(cartItem);
-			}
 			
-			return new ModelAndView("redirect:/viewCart?checkUpdate=true");
+			
 		}
 		else{
 			
@@ -278,7 +305,6 @@ public class CartController {
 			return new ModelAndView("redirect:/viewCart?checkUpdate=true");
 		}
 		else{
-			session.setAttribute("checkUpdate", "false");
 			return new ModelAndView("redirect:/viewCart?checkUpdate=false");
 		}
 		

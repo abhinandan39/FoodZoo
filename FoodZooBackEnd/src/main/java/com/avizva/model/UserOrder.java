@@ -2,12 +2,15 @@ package com.avizva.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.UniqueConstraint;
 
 import org.springframework.stereotype.Component;
 
@@ -26,15 +29,27 @@ public class UserOrder {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int order_id;
+	
+	/**
+	 *  Order Number will uniquely defind the order. The order can be fetched using this Order Number
+	 */
+	@Column(unique=true)
+	private String orderNumber;
+	
+	/**
+	 * We need to save the method that was used to pay for future references.
+	 */
+	private String paymentMode;
+	
 	/**
 	 * cartList takes the cart item beloging to the particular customer
 	 */
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<CartItem> cartList;
 	/**
 	 * ShippingAddress object for taking the address of the corresponding customer
 	 */
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)	
 	private ShippingAddress address;
 	/**
 	 * payment method that customer opted for
@@ -46,6 +61,11 @@ public class UserOrder {
 	 */
 	private String username;
 
+	/**
+	 * add the Total Amount of that order
+	 */
+	private Float total;
+	
 	public int getOrder_id() {
 		return order_id;
 	}
@@ -70,13 +90,6 @@ public class UserOrder {
 		this.address = address;
 	}
 
-	public Payment getPayment() {
-		return payment;
-	}
-
-	public void setPayment(Payment payment) {
-		this.payment = payment;
-	}
 
 	public String getUsername() {
 		return username;
@@ -85,6 +98,48 @@ public class UserOrder {
 	public void setUsername(String username) {
 		this.username = username;
 	}
+
+	public String getOrderNumber() {
+		return orderNumber;
+	}
+
+	public void setOrderNumber(String orderNumber) {
+		this.orderNumber = orderNumber;
+	}
+
+	public String getPaymentMode() {
+		return paymentMode;
+	}
+
+	public void setPaymentMode(String paymentMode) {
+		this.paymentMode = paymentMode;
+	}
+
+	public Payment getPayment() {
+		return payment;
+	}
+
+	public void setPayment(Payment payment) {
+		this.payment = payment;
+	}
+
+	public Float getTotal() {
+		return total;
+	}
+
+	public void setTotal(Float total) {
+		this.total = total;
+	}
+
+	@Override
+	public String toString() {
+		return "UserOrder [order_id=" + order_id + ", orderNumber=" + orderNumber + ", paymentMode=" + paymentMode
+				+ ", cartList=" + cartList + ", address=" + address + ", payment=" + payment + ", username=" + username
+				+ ", total=" + total + "]";
+	}
+	
+	
+	
 	
 	
 }

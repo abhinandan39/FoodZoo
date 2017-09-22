@@ -43,4 +43,10 @@ public class PaymentServiceImpl implements PaymentService {
 		
 	}
 
+	public Payment viewPaymentService(String id) {
+
+		Payment payment = paymentDaoImpl.viewPayment(id);
+		return payment;
+	}
+
 }

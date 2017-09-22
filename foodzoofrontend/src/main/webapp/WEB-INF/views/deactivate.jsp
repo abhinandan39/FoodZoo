@@ -199,7 +199,7 @@
 	</div>
 	<div id="id01" class="modal">
 
-		<form class="modal-content" action="question">
+		<form class="modal-content" action="question" method="post">
 			<span onclick="document.getElementById('id01').style.display='none'"
 				id="close" title="Close Modal">×</span>
 			<div class="container">
@@ -213,106 +213,12 @@
 					<button id="button2" type="submit"
 						class="deactivate btn btn-danger">Deactivate</button>
 				</div>
-				<%-- <span>${deactivateerror}</span> --%>
 			</div>
 		</form>
 	</div>
 
 
-	<%-- 			
-	 sample
-	
-	
-	
-	<div class="backgroundimage">
-		
-		
-		<form id="loginform" action="login" method="post">
-			<div class="row">
-				<div class="col-sm-3">
-					
-				</div>
 
-				<div class="col-sm-6"
-					style="background: #ffffff; padding: 5px; margin-top: 100px; margin-bottom: 100px; border-radius: 10px;">
-					<div class="row">
-						<div class="" style="text-align: center; " >
-						<span style="color:green;">${passwordreset}</span>
-						<h1>Log In</h1>
-						<p>Get back to your account and enjoy tasty food </p>
-						</div>
-					</div>
-				
-					<div class="row">
-
-						<div class="col-sm-2" style="text-align: left; margin-top: 20px">
-							
-						</div>
-						<div class="col-sm-7" style="margin-top: 20px">
-							<input type="text" class="form-control" name="username" id="username"
-								placeholder="<spring:message code='label.username'></spring:message>"
-								required="true" /> <span class="err"><form:errors
-									path="users.username"></form:errors></span>
-						</div>
-
-						<div class="col-sm-3" style="text-align: right; margin-top: 20px">
-
-						</div>
-					</div>
-					<div class="row">
-
-						<div class="col-sm-2" style="text-align: left; margin-top: 10px">
-
-						</div>
-						<div class="col-sm-7" style="margin-top: 10px">
-							<input type="password" class="form-control" name="password"
-								placeholder="<spring:message code='label.password'></spring:message>"
-								required="true" /> <span class="err"><form:errors
-									path="users.password"></form:errors></span>
-						</div>
-
-						<div class="col-sm-3" style="text-align: right; margin-top: 10px">
-
-						</div>
-					</div>
-					<div class="row" style="margin-top: 30px">
-
-						<div class="col-sm-5" style="text-align: right;">
-						</div>
-						<div class="col-sm-3">
-		
-							<input type="submit" value="Log In" name="submit" id="submit"
-								class="btn btn-success" style="margin-bottom: 10px;">
-						</div>
-						<div class="col-sm-4" style="margin-top: 20px">
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-2" style="margin-top: 20px"></div>
-
-						<div class="col-sm-7">
-							<a href="forgot"> Forgot Password ? Click Here</a>
-						</div>
-						<div class="col-sm-3" style="text-align: left; margin-top: 20px">
-
-						</div>
-
-					</div>
-					
-					
-				</div>
-				<div class="col-sm-3">
-					
-				</div>
-				
-			</div>
-		</form>
-
-</div>
-	
-	
-			
-	// Sampleended --%>
 
 	<jsp:include page="footer.jsp"></jsp:include>
 	<script>

@@ -27,6 +27,7 @@ import com.avizva.service.CategoryServiceImpl;
 @Repository
 public class ProductsDAOImpl implements ProductsDAO {
 
+	
 	/**
 	 * for keeping the log of this class
 	 */
@@ -36,6 +37,7 @@ public class ProductsDAOImpl implements ProductsDAO {
 	@Autowired
 	SessionFactory sessionFactory;
 	
+    
 	/**
 	 * getSession method is used to open/create a session from the auto-wired object of sessionFactory.
 	 * @return Session

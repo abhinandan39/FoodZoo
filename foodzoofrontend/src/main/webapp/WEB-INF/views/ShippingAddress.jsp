@@ -228,25 +228,7 @@ marigin-left:-100px;
 						<div class="col-sm-3" style="margin-top: 20px"></div>
 
 					</div>
-				<div class="row">
-			<div class="col-sm-2" style="text-align: right;">
-						</div>
-						<div class="col-sm-5">
-							
-					 		<select class="form-control" name="state" id="state" placeholder= "<spring:message code='label.state'></spring:message>" style="margin-top: 10px" required><span class="err"><form:errors
-									path="shippingAddress.state"></form:errors></span>
-								<option>Haryana</option>
-					 	        <option>haryana</option>
-					 	        <option>hharyana</option>
-					 	        <option>haryana</option>
-					 	        <option>haryana</option>
-					 	      
-					 	    </select>
-					 	</div>
-					 	<div class="col-sm-3" style="margin-top: 20px">
-					 		
-					 	</div>
-					 	  </div>
+
 					
 					
 
@@ -264,9 +246,9 @@ marigin-left:-100px;
 					</div>
 					</div>
 				</div>
-				</form>
-			</div>
-		
+				
+			
+		</form>
 
 
 

@@ -18,7 +18,7 @@ import com.avizva.model.Users;
  *
  */
 @Repository
-public class ShippingAddressDAOImpl {
+public class ShippingAddressDAOImpl implements ShippingAddressDAO{
 	/**
 	 * keeps the log of all the transactions or things executed
 	 */
@@ -130,5 +130,14 @@ public class ShippingAddressDAOImpl {
 		}
 		return flag;
 	}
+	public ShippingAddress viewAddress(String username) {
 
+		Session session = null;
+		Transaction transaction = null;
+		session = getSession();
+		transaction = session.beginTransaction();
+		ShippingAddress address = session.get(ShippingAddress.class, username);
+		session.close();
+		return address;
+	}
 }

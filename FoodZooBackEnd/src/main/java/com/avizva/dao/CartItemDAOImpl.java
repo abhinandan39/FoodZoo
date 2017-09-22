@@ -45,9 +45,11 @@ public class CartItemDAOImpl implements CartItemDAO {
 		boolean flag = false;
 		Session session = null;
 		Transaction transaction = null;
+		String status = "true";
 		try {
 			session = getSession();
 			transaction = session.beginTransaction();
+			cartitem.setStatus(status);
 			session.save(cartitem);
 			transaction.commit();
 			flag = true;		
@@ -76,7 +78,6 @@ public class CartItemDAOImpl implements CartItemDAO {
 		try {
 			session = getSession();
 			transaction = session.beginTransaction();
-
 			session.update(cartitem);
 			transaction.commit();
 			flag = true;
@@ -146,13 +147,13 @@ public class CartItemDAOImpl implements CartItemDAO {
 	 * returns the list of item related to particular username
 	 */
 	
-	
 	public List<CartItem> viewCartItemsByUser(String user_name)
 	{
 		List<CartItem> list=new ArrayList<CartItem>();
 		Session session = getSession();
-		Query query=session.createQuery("from CartItem where user_name=:user_name");
+		Query query=session.createQuery("from CartItem where user_name=:user_name AND status=:status");
 		query.setParameter("user_name", user_name);
+		query.setParameter("status", "true");
 		list=query.list();
 	    logger.info("list:"+list);
 		return list;
@@ -186,9 +187,10 @@ public class CartItemDAOImpl implements CartItemDAO {
 
 		List<CartItem> list=new ArrayList<CartItem>();
 		Session session = getSession();
-		Query query=session.createQuery("from CartItem where product_id=:product_id AND user_name=:user_name");
+		Query query=session.createQuery("from CartItem where product_id=:product_id AND user_name=:user_name AND status=:status");
 		query.setParameter("product_id", product_id);
 		query.setParameter("user_name", user_name);
+		query.setParameter("status", "true");
 		list=query.list();
 	    logger.info("list:"+list);
 		return list;

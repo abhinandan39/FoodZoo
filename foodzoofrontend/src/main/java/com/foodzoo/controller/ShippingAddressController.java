@@ -52,7 +52,7 @@ public class ShippingAddressController {
 		String username = (String)session.getAttribute("sessionusername");
 	
 		if(shippingAddressService.existShippingAddressService(username)){
-			ShippingAddress address=shippingAddressService.viewUser(username);
+			ShippingAddress address=shippingAddressService.viewAddress(username);
 			logger.info("---user already exists-----");
 			return new ModelAndView("ship").addObject("shippingAddress", address);
 		}
@@ -74,7 +74,7 @@ public class ShippingAddressController {
 
 		HttpSession session = request.getSession();
 		String username = (String) session.getAttribute("sessionusername");
-		ShippingAddress address = shippingAddressService.viewUser(username);
+		ShippingAddress address = shippingAddressService.viewAddress(username);
 		System.out.println("Inside profile " + address);
 		return new ModelAndView("UpdateAddress", "command", address);
 	}
@@ -135,7 +135,7 @@ public class ShippingAddressController {
 					session1.setAttribute("sessionusername", address.getUsername());
 				
 					logger.info("---registration success-------");
-					return new ModelAndView("paymentmethod", "msg", "Your shipping address saved  Successfully");
+					return new ModelAndView("ship", "msg", "Your shipping address saved  Successfully");
 				} else {
 					logger.info("-----registration failed------");
 					return new ModelAndView("cartPage").addObject("msg", "some error occured ");
